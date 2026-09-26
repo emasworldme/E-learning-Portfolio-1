@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case 1 · Autismus & Erwachsenenbildung – Reflective Writing</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --purple:#5B4DB8;--purple-l:#EEF0FF;--purple-m:#9B8EE8;
+  --coral:#C84B2F;--coral-l:#FEF0EC;
+  --teal:#1A7A5E;--teal-l:#E6F5F0;
+  --gray:#5A5A5A;--gray-l:#F5F5F3;--border:#E0DDD8;--text:#1C1C1C;
+  --hint:#FFFBF0;--hint-b:#D4A820;
+}
+body{font-family:'Inter',sans-serif;background:#F7F6F3;color:var(--text);font-size:15px;line-height:1.72}
+.topnav{background:#fff;border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'Lora',serif;font-size:14px;color:var(--gray);padding:14px 0;margin-right:24px;white-space:nowrap}
+.nav-tabs{display:flex;overflow-x:auto}
+.nav-tab{padding:14px 18px;font-size:12.5px;font-weight:500;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
+.nav-tab:hover{color:var(--text)}
+.nav-tab.active{color:var(--purple);border-bottom-color:var(--purple)}
+.hero{background:linear-gradient(140deg,#1E1060 0%,#3D30A0 55%,#6050CC 100%);color:#fff;padding:52px 48px 44px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Lora',serif;font-size:32px;font-weight:600;line-height:1.22;margin-bottom:12px;position:relative;z-index:1;max-width:600px}
+.hero-sub{font-size:15px;opacity:.78;font-weight:300;max-width:540px;position:relative;z-index:1}
+.hero-meta{margin-top:28px;display:flex;flex-wrap:wrap;gap:20px;font-size:12px;opacity:.6;position:relative;z-index:1}
+.main{max-width:860px;margin:0 auto;padding:36px 32px 72px}
+.section-title{font-family:'Lora',serif;font-size:20px;font-weight:600;color:var(--text);margin-bottom:6px}
+.section-sub{font-size:13px;color:var(--gray);margin-bottom:24px}
+.panel{display:none}.panel.active{display:block}
+.char-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.char-card{border-radius:14px;padding:22px;border:1px solid}
+.char-card.young{background:var(--purple-l);border-color:#C0B8F0}
+.char-card.old{background:var(--teal-l);border-color:#8FD0BF}
+.char-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.char-card.young .char-tag{color:var(--purple)}
+.char-card.old .char-tag{color:var(--teal)}
+.char-name{font-family:'Lora',serif;font-size:18px;font-weight:600;margin-bottom:12px}
+.char-text{font-size:13px;line-height:1.7;color:#333}
+.char-text em{color:#555;font-style:italic}
+.char-text strong{color:#111;font-style:normal}
+.scenario-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:28px}
+.scenario-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:10px}
+.scenario-text{font-size:13.5px;line-height:1.75;color:#2A2A2A;font-style:italic;border-left:3px solid var(--purple-m);padding-left:14px}
+.diff-table{width:100%;border-collapse:collapse;margin-bottom:28px;font-size:13px}
+.diff-table th{padding:10px 14px;background:var(--gray-l);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-align:left;border-bottom:2px solid var(--border)}
+.diff-table th:first-child{width:22%}
+.diff-table td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+.diff-table tr:last-child td{border-bottom:none}
+.diff-table tr:hover td{background:#FAFAF8}
+.asp-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px}
+.asp-k{background:var(--purple-l);color:var(--purple)}
+.asp-a{background:var(--coral-l);color:var(--coral)}
+.asp-m{background:var(--teal-l);color:var(--teal)}
+.col-young{color:#3A30A0}
+.col-old{color:#0F6B50}
+.hint-box{background:var(--hint);border:1px solid var(--hint-b);border-radius:12px;overflow:hidden;margin-bottom:32px}
+.hint-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
+.hint-icon{width:28px;height:28px;border-radius:50%;background:var(--hint-b);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hint-title{font-size:13.5px;font-weight:600;color:#7A5500;flex:1}
+.hint-chevron{font-size:12px;color:#9A7000}
+.hint-body{padding:0 20px 20px;display:none;border-top:1px solid #F0D860}
+.hint-body.open{display:block;padding-top:16px}
+.res-item{display:flex;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #F5E890}
+.res-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.res-badge{background:#7A5500;color:#fff;font-size:9px;padding:3px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:3px;letter-spacing:.05em}
+.res-info strong{font-size:13px;display:block;margin-bottom:3px;color:#3A2800}
+.res-info span{font-size:12px;color:#7A5500;line-height:1.55}
+.res-url{font-size:11px;color:#3A80D0;margin-top:4px;word-break:break-all}
+.aspect-block{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.asp-head{display:flex;align-items:center;gap:12px;padding:15px 20px;cursor:pointer;user-select:none;transition:background .15s}
+.asp-head:hover{background:var(--gray-l)}
+.asp-head.kog{border-left:4px solid var(--purple)}
+.asp-head.aff{border-left:4px solid var(--coral)}
+.asp-head.mot{border-left:4px solid var(--teal)}
+.asp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.asp-head.kog .asp-dot{background:var(--purple)}
+.asp-head.aff .asp-dot{background:var(--coral)}
+.asp-head.mot .asp-dot{background:var(--teal)}
+.asp-title{font-size:14px;font-weight:600}
+.asp-head.kog .asp-title{color:var(--purple)}
+.asp-head.aff .asp-title{color:var(--coral)}
+.asp-head.mot .asp-title{color:var(--teal)}
+.asp-sub{font-size:12px;color:var(--gray);flex:1}
+.asp-chev{font-size:12px;color:var(--gray)}
+.asp-body{padding:20px 24px;display:none}
+.asp-body.open{display:block}
+.phase{margin-bottom:22px}.phase:last-child{margin-bottom:0}
+.phase-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.p-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.p-dot.w{background:#7060D0}.p-dot.s{background:#C84030}.p-dot.n{background:#1A8060}
+.phase-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray)}
+.q-item{background:var(--gray-l);border-radius:8px;padding:13px 16px 13px 30px;margin-bottom:10px;font-size:13.5px;line-height:1.65;position:relative}
+.q-item::before{content:'›';position:absolute;left:14px;top:13px;color:#AAA;font-size:16px;font-weight:700}
+.write-area{width:100%;min-height:72px;margin-top:8px;padding:11px 13px;border:1.5px dashed #D0CEC8;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text);background:#fff;resize:vertical;outline:none;line-height:1.65;transition:border-color .15s}
+.write-area:focus{border-color:var(--purple-m);border-style:solid}
+.write-area::placeholder{color:#C0BDB8}
+footer{background:#fff;border-top:1px solid var(--border);padding:20px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#AAA;flex-wrap:wrap;gap:10px}
+@media(max-width:640px){.char-grid{grid-template-columns:1fr}.hero{padding:36px 20px 30px}.hero h1{font-size:24px}.main{padding:24px 16px 60px}.topnav{padding:0 12px}}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <span class="nav-brand">Reflective Writing</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('case')">📋 Case</button>
+    <button class="nav-tab" onclick="switchTab('kog')">🧠 Kognitiv</button>
+    <button class="nav-tab" onclick="switchTab('aff')">💛 Affektiv</button>
+    <button class="nav-tab" onclick="switchTab('mot')">🎯 Motivational</button>
+  </div>
+</nav>
+<div class="hero">
+  <a href="bildung_index.html" style="display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;font-size:12px;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-weight:500;position:relative;z-index:2;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.13)'">← Ana sayfaya dön</a>
+  <div class="hero-badge">Case 1 von 3 · Autismus &amp; Erwachsenenbildung</div>
+  <h1>Zwei Menschen. Eine Diagnose.<br>Welten von Unterschied.</h1>
+  <p class="hero-sub">Bildungsunterschiede zwischen autistischen jungen und älteren Erwachsenen</p>
+  <div class="hero-meta"><span>🧠 Kognitive Aspekte</span><span>💛 Affektive Aspekte</span><span>🎯 Motivationale Aspekte</span><span>·</span><span>What / So What / Now What</span></div>
+</div>
+<div class="main">
+
+<div id="tab-case" class="panel active">
+  <div class="section-title">Die Personen</div>
+  <p class="section-sub">Lesen Sie beide Porträts vollständig, bevor Sie zu den Reflexionsfragen übergehen.</p>
+  <div class="char-grid">
+    <div class="char-card young">
+      <div class="char-tag">Junger Erwachsener · 23 Jahre</div>
+      <div class="char-name">Emre K.</div>
+      <div class="char-text">Emre wurde mit 17 Jahren mit Autismus-Spektrum-Störung (Level 1) diagnostiziert. Er studiert im 4. Semester Informatik und nimmt an einem berufsbegleitenden Kommunikationstraining teil. <strong>Er lernt blitzschnell, wenn Inhalte strukturiert präsentiert werden</strong> – lineare Folien, klare Schritt-für-Schritt-Aufgaben. Sobald die Trainerin vom Skript abweicht und „frei diskutiert", zieht er sich zurück. Er öffnet dann sein Notebook und beginnt zu tippen. Auf die Frage, warum er nicht mitmache: <em>„Ich brauche erst den Rahmen, dann kann ich sprechen."</em> Er ist hochmotiviert bei Themen, die er als „logisch und lösbar" bewertet. Soziale Rollenspiele meidet er aktiv.</div>
+    </div>
+    <div class="char-card old">
+      <div class="char-tag">Ältere Erwachsene · 61 Jahre</div>
+      <div class="char-name">Hannelore W.</div>
+      <div class="char-text">Hannelore erhielt erst mit 58 Jahren eine Autismus-Diagnose – nach einem Leben voller „Missverständnisse". Sie nimmt an einem Weiterbildungskurs für Rentner teil: digitale Kompetenzen. <strong>Jahrzehntelang hat sie gelernt, sich anzupassen</strong> – manchmal zu ihrem Schaden. Im Kurs fällt auf: Sie stellt kaum Fragen, beobachtet aber alles genau. Wenn etwas nicht ihrer inneren Logik entspricht, blockiert sie still – ohne es zu benennen. Die Kursleiterin nimmt an, Hannelore „hat alles verstanden". Hannelore fühlt sich jedoch überwältigt, wenn mehrere Browser-Fenster geöffnet sind. <em>„Früher habe ich es einfach ausgehalten, wenn es zu viel wurde. Das tue ich immer noch."</em></div>
+    </div>
+  </div>
+  <div class="scenario-box">
+    <div class="scenario-label">Gemeinsame Situation</div>
+    <p class="scenario-text">Beide nehmen in derselben Woche an einem Einführungsworkshop „Digitale Kommunikation im Alltag" teil – in getrennten Gruppen, aber mit identischem Format: 3-stündiger Präsenz-Workshop, Gruppenaufgaben, kurze Videoclips, anschließendes Feedback in der Großgruppe. Emre und Hannelore kommen mit unterschiedlichen Biografien, aber ähnlichen neurokognitiven Profilen in denselben pädagogischen Raum.</p>
+  </div>
+  <div class="section-title" style="margin-bottom:12px">Auffällige Unterschiede im Lernverhalten</div>
+  <table class="diff-table">
+    <tr><th>Aspekt</th><th>Emre (23) – Frühe Diagnose</th><th>Hannelore (61) – Späte Diagnose</th></tr>
+    <tr><td><span class="asp-badge asp-k">Kognitiv</span></td><td class="col-young">Schnelle Verarbeitung bei klaren Strukturen. Hyperfokus bei Interessensthemen. Weiß, was er braucht.</td><td class="col-old">Verlangsamte Verarbeitung bei Multitasking. Dekompensiert still bei Informationsüberflutung.</td></tr>
+    <tr><td><span class="asp-badge asp-a">Affektiv</span></td><td class="col-young">Zeigt Rückzug sichtbar (Laptop, Blick weg). Stress ist für Lehrende erkennbar.</td><td class="col-old">Maskiert jahrzehntelang. Stress bleibt völlig unsichtbar. Kursleitung bemerkt nichts.</td></tr>
+    <tr><td><span class="asp-badge asp-m">Motivational</span></td><td class="col-young">Intrinsisch motiviert für klar definierte Ziele. Soziale Belohnung ist kein Antrieb.</td><td class="col-old">Motivation durch Autonomieerhalt. Lernt, um nicht abhängig zu werden – aber kaum sichtbar.</td></tr>
+    <tr><td><span class="asp-badge" style="background:#F0F0EC;color:#555">Diagnose</span></td><td class="col-young">Frühe Diagnose → Selbstwissen, Strategien, Selbstadvocacy. Hat Vokabular für eigene Bedürfnisse.</td><td class="col-old">Späte Diagnose → Jahrzehnte ohne Erklärung. Strategie = Aushalten. Kein Vokabular für eigene Bedürfnisse.</td></tr>
+  </table>
+  <div class="hint-box">
+    <div class="hint-head" onclick="toggleHint(this)">
+      <div class="hint-icon">💡</div>
+      <div class="hint-title">Theorie-Hinweise &amp; Lernressourcen – zum besseren Verstehen des Cases</div>
+      <div class="hint-chevron">▼</div>
+    </div>
+    <div class="hint-body">
+      <div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Camouflaging &amp; Masking bei Autismus (Lai et al., 2017)</strong><span>Erklärt, warum autistische Erwachsene – besonders Frauen und spät Diagnostizierte wie Hannelore – sozialen Stress über Jahrzehnte verbergen, was zu Erschöpfung und Late-Burnout führt.</span><div class="res-url">Lai, M.-C. et al. (2017). Quantifying and exploring camouflaging in men and women with autism. Autism, 21(6), 690–702.</div></div></div>
+      <div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Doppeltes Empathieproblem (Milton, 2012)</strong><span>Das „Problem" liegt nicht allein beim autistischen Lernenden – auch neurotypische Lehrende verstehen autistische Kommunikation oft falsch. Hannelore wird als „ruhig und verständig" gelesen, obwohl sie überfordert ist.</span><div class="res-url">Milton, D. E. M. (2012). On the ontological status of autism. Disability &amp; Society, 27(6), 883–887.</div></div></div>
+      <div class="res-item"><span class="res-badge">VIDEO</span><div class="res-info"><strong>„What is Autistic Masking?" – Autism from the Inside (YouTube)</strong><span>Paul Micallef erklärt Masking aus Betroffenenperspektive – ideal, um Hannelores Verhalten im Kurs zu verstehen.</span><div class="res-url"><a href="https://www.youtube.com/watch?v=Ye0WRHAqb3Q" target="_blank">youtube.com/watch?v=Ye0WRHAqb3Q</a></div></div></div>
+      <div class="res-item"><span class="res-badge">VIDEO</span><div class="res-info"><strong>„Late Autism Diagnosis in Adults" – Kati Morton (YouTube)</strong><span>Erklärt emotionale und biografische Konsequenzen einer Spätdiagnose – relevant für Hannelores Lernbiografie.</span><div class="res-url"><a href="https://www.youtube.com/watch?v=C0bCfmEOmig" target="_blank">youtube.com/watch?v=C0bCfmEOmig</a></div></div></div>
+      <div class="res-item"><span class="res-badge">KONZEPT</span><div class="res-info"><strong>Universal Design for Learning (UDL) – cast.org</strong><span>UDL bietet Rahmenprinzipien für neurodivergente Lernende aller Altersstufen.</span><div class="res-url"><a href="https://cast.org/impact/universal-design-for-learning-udl" target="_blank">cast.org/impact/universal-design-for-learning-udl</a></div></div></div>
+    </div>
+  </div>
+  <div style="text-align:center;padding:8px 0"><button onclick="switchTab('kog')" style="background:var(--purple);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer">Weiter zu den Reflexionsfragen →</button></div>
+</div>
+
+<div id="tab-kog" class="panel">
+  <div class="section-title">Kognitive Aspekte</div>
+  <p class="section-sub">Informationsverarbeitung · Hyperfokus · Struktur · Spätdiagnose</p>
+  <div class="aspect-block">
+    <div class="asp-head kog" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Kognitive Aspekte · Emre &amp; Hannelore</span><span class="asp-sub">Strukturbedarf, Verarbeitungstiefe, frühe vs. späte Diagnose</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open">
+      <div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / gelesen?</span></div>
+        <div class="q-item">Beschreiben Sie, wie Emre und Hannelore auf unstrukturierte Lernmomente reagieren. Was tun sie konkret – welche Verhaltensweisen zeigen sie?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Welche kognitiven Unterschiede zwischen einem früh und einem spät diagnostizierten autistischen Lernenden werden im Case deutlich? Nennen Sie mindestens drei.<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+        <div class="q-item">Was bedeutet es für die Kursgestaltung, wenn ein Lernender wie Hannelore seine kognitiven Grenzen jahrzehntelang unsichtbar gemacht hat – und dies auch in Ihrem Kurs so weiterführt?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Emre „braucht erst den Rahmen". Inwiefern ist dieses Bedürfnis nicht nur autismusspezifisch, sondern für alle Lernenden relevant – und was bedeutet das für Ihr Curriculum-Design?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+        <div class="q-item">Wie würden Sie die drei Stunden des Workshops strukturieren, damit sowohl Emre als auch Hannelore kognitiv teilhaben können – ohne die Gruppe zu verlangsamen?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Welche eine Veränderung in Ihrer aktuellen Lehrpraxis würden Sie als ersten Schritt umsetzen – und bis wann?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-aff" class="panel">
+  <div class="section-title">Affektive Aspekte</div>
+  <p class="section-sub">Masking · emotionale Sichtbarkeit · Lernklima · Würde</p>
+  <div class="aspect-block">
+    <div class="asp-head aff" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Affektive Aspekte · Emre &amp; Hannelore</span><span class="asp-sub">Emotionaler Stress, Masking, doppeltes Empathieproblem</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open">
+      <div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / gelesen?</span></div>
+        <div class="q-item">Wie kommunizieren Emre und Hannelore emotionalen Stress – explizit oder implizit? Beschreiben Sie den Unterschied so konkret wie möglich.<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Hannelore sagt: „Das tue ich immer noch." Was sagt dieser Satz über ihr affektives Lernmuster aus?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+        <div class="q-item">Die Kursleiterin „nimmt an, Hannelore hat alles verstanden". Welche pädagogische Verantwortung liegt in dieser Fehlwahrnehmung? Was hat das mit Miltons Doppeltem Empathieproblem zu tun?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Inwiefern ist emotionale Sichtbarkeit (wie bei Emre) eher ein Vorteil im Lernkontext als eine Schwäche – obwohl sie oft als Störung wahrgenommen wird?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+        <div class="q-item">Entwickeln Sie ein kurzes Check-in-Ritual (max. 3 Minuten) zu Beginn jeder Einheit, das für Hannelore sicher und für Emre strukturiert ist. Wie sieht es aus?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Was werden Sie persönlich daran arbeiten, Masking-Verhalten bei Lernenden frühzeitig zu erkennen – anstatt Stille mit Verständnis gleichzusetzen?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-mot" class="panel">
+  <div class="section-title">Motivationale Aspekte</div>
+  <p class="section-sub">Intrinsische Ziele · Autonomie · Sinnhaftigkeit · Selbstbestimmung</p>
+  <div class="aspect-block">
+    <div class="asp-head mot" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Motivationale Aspekte · Emre &amp; Hannelore</span><span class="asp-sub">Lernziele, Antrieb, Sonderinteressen, Autonomie</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open">
+      <div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / gelesen?</span></div>
+        <div class="q-item">Was treibt Emre an – und was treibt Hannelore an? Beschreiben Sie die Motivationsquellen beider Personen in eigenen Worten.<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Hannelore lernt, um nicht abhängig zu werden. Emre lernt, um logische Probleme zu lösen. Wie macht sich diese unterschiedliche Motivationsstruktur im Lernverhalten bemerkbar?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+        <div class="q-item">Beide haben intrinsische Motivation – aber sie ist für neurotypische Lehrende kaum sichtbar, weil sie sich nicht in Mitarbeit oder Feedback-Hunger übersetzt. Was bedeutet das für die Art, wie Engagement gemessen wird?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Was riskieren Sie, wenn Sie autistische Lernende nach konventionellen Kriterien (Mitarbeit, Gruppenarbeit, mündliche Beteiligung) beurteilen?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+        <div class="q-item">Wie gestalten Sie eine Aufgabe, die sowohl Emres Sonderinteresse (Informatik/Logik) als auch Hannelores Ziel (Alltagsautonomie) als Motivationsanker nutzt?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Welche Annahmen über „normale" Lernmotivation möchten Sie nach dieser Reflexion überdenken?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+    </div>
+  </div>
+  <div style="background:#fff;border-top:1px solid var(--border);border-radius:0 0 14px 14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:4px">
+    <span style="font-size:12px;color:#888">Alle drei Aspekte ausgefüllt? Dann einreichen.</span>
+    <button onclick="openSubmitModal()" style="background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px">📧 An Dozentin senden</button>
+  </div>
+</div>
+
+</div>
+<footer><span>Case 1 von 3 · Emre K. &amp; Hannelore W. · Autismus &amp; Erwachsenenbildung</span><span>What / So What / Now What</span></footer>
+
+<!-- SUBMIT MODAL -->
+<div id="submit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:32px 28px;max-width:440px;width:100%;position:relative">
+    <button onclick="closeSubmitModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1">×</button>
+    <div style="font-family:'Lora',serif;font-size:19px;font-weight:600;margin-bottom:6px">Antworten einreichen</div>
+    <p style="font-size:12.5px;color:#777;margin-bottom:22px;line-height:1.55">Ihre ausgefüllten Reflexionsantworten werden als E-Mail an die Lehrperson gesendet.</p>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Vorname</label><input id="s-name" type="text" placeholder="z. B. Anna" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Nachname</label><input id="s-surname" type="text" placeholder="z. B. Müller" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:20px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Matrikelnummer</label><input id="s-matrikel" type="text" placeholder="z. B. 123456" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div id="submit-error" style="display:none;background:#FEF0EC;border:1px solid #F5C0B0;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#B84020;margin-bottom:14px">Bitte alle Felder ausfüllen.</div>
+    <button onclick="sendToInstructor()" style="width:100%;background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer">📧 An Dozentin senden</button>
+    <p style="font-size:11px;color:#AAA;text-align:center;margin-top:12px;line-height:1.5">Es öffnet sich Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht.</p>
+  </div>
+</div>
+
+<script>
+function switchTab(id){
+  const ids=['case','kog','aff','mot'];
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleHint(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.hint-chevron');
+  body.classList.toggle('open');
+  chev.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function toggleAsp(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.asp-chev');
+  const open=body.classList.toggle('open');
+  chev.textContent=open?'▲':'▼';
+}
+function openSubmitModal(){document.getElementById('submit-modal').style.display='flex';}
+function closeSubmitModal(){document.getElementById('submit-modal').style.display='none';}
+function sendToInstructor(){
+  const name=document.getElementById('s-name').value.trim();
+  const surname=document.getElementById('s-surname').value.trim();
+  const matrikel=document.getElementById('s-matrikel').value.trim();
+  if(!name||!surname||!matrikel){document.getElementById('submit-error').style.display='block';return;}
+  document.getElementById('submit-error').style.display='none';
+  const tabs=['Kognitiv','Affektiv','Motivational'];
+  const tabIds=['tab-kog','tab-aff','tab-mot'];
+  const phases=['WHAT','SO WHAT','NOW WHAT'];
+  let answers='';
+  tabIds.forEach((tid,tIdx)=>{
+    answers+='\n'+'='.repeat(50)+'\n'+tabs[tIdx].toUpperCase()+'\n'+'='.repeat(50)+'\n';
+    document.querySelectorAll('#'+tid+' .write-area').forEach((ta,i)=>{
+      answers+='\n['+phases[Math.floor(i/2)]+' · Frage '+(i%2+1)+']\n'+(ta.value.trim()||'[keine Antwort]')+'\n';
+    });
+  });
+  const subject=encodeURIComponent('Reflective Writing – Case 1 – '+surname+', '+name+' – Matrikel: '+matrikel);
+  const body=encodeURIComponent('Eingereicht von:\nName: '+name+' '+surname+'\nMatrikelnummer: '+matrikel+'\nCase: Autismus & Erwachsenenbildung\n\n'+answers);
+  window.location.href='mailto:amine.merve.ercan@uni-jena.de?subject='+subject+'&body='+body;
+  closeSubmitModal();
+}
+</script>
+</body>
+</html>

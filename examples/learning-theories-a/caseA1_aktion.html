@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case A1 · Aktionsorientiertes Lernen</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#F7F6F3;color:#1C1C1C;font-size:15px;line-height:1.72}
+.topnav{background:#fff;border-bottom:1px solid #E0DDD8;padding:0 32px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'Lora',serif;font-size:14px;color:#5A5A5A;padding:14px 0;margin-right:24px;white-space:nowrap}
+.nav-tabs{display:flex;overflow-x:auto}
+.nav-tab{padding:14px 18px;font-size:12.5px;font-weight:500;color:#5A5A5A;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
+.nav-tab:hover{color:#1C1C1C}
+.main{max-width:860px;margin:0 auto;padding:36px 32px 72px}
+.section-title{font-family:'Lora',serif;font-size:20px;font-weight:600;color:#1C1C1C;margin-bottom:6px}
+.section-sub{font-size:13px;color:#5A5A5A;margin-bottom:24px}
+.panel{display:none}.panel.active{display:block}
+.scenario-box{background:#fff;border:1px solid #E0DDD8;border-radius:12px;padding:20px 22px;margin-bottom:28px}
+.scenario-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5A5A5A;margin-bottom:10px}
+.diff-table{width:100%;border-collapse:collapse;margin-bottom:28px;font-size:13px}
+.diff-table th{padding:10px 14px;background:#F5F5F3;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-align:left;border-bottom:2px solid #E0DDD8}
+.diff-table td{padding:12px 14px;border-bottom:1px solid #E0DDD8;vertical-align:top;line-height:1.6}
+.diff-table tr:last-child td{border-bottom:none}
+.diff-table tr:hover td{background:#FAFAF8}
+.hint-box{background:#FFFBF0;border:1px solid #D4A820;border-radius:12px;overflow:hidden;margin-bottom:32px}
+.hint-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
+.hint-icon{width:28px;height:28px;border-radius:50%;background:#D4A820;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hint-title{font-size:13.5px;font-weight:600;color:#7A5500;flex:1}
+.hint-chevron{font-size:12px;color:#9A7000}
+.hint-body{padding:0 20px 20px;display:none;border-top:1px solid #F0D860}
+.hint-body.open{display:block;padding-top:16px}
+.res-item{display:flex;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #F5E890}
+.res-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.res-badge{background:#7A5500;color:#fff;font-size:9px;padding:3px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:3px;letter-spacing:.05em}
+.res-info strong{font-size:13px;display:block;margin-bottom:3px;color:#3A2800}
+.res-info span{font-size:12px;color:#7A5500;line-height:1.55}
+.res-url{font-size:11px;color:#3A80D0;margin-top:4px;word-break:break-all}
+.aspect-block{background:#fff;border:1px solid #E0DDD8;border-radius:14px;overflow:hidden;margin-bottom:16px}
+.asp-head{display:flex;align-items:center;gap:12px;padding:15px 20px;cursor:pointer;user-select:none;transition:background .15s}
+.asp-head:hover{background:#F5F5F3}
+.asp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.asp-title{font-size:14px;font-weight:600}
+.asp-sub{font-size:12px;color:#5A5A5A;flex:1}
+.asp-chev{font-size:12px;color:#5A5A5A}
+.asp-body{padding:20px 24px;display:none}
+.asp-body.open{display:block}
+.phase{margin-bottom:22px}.phase:last-child{margin-bottom:0}
+.phase-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #E0DDD8}
+.p-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.p-dot.w{background:#7060D0}.p-dot.s{background:#C84030}.p-dot.n{background:#1A8060}
+.phase-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5A5A5A}
+.q-item{background:#F5F5F3;border-radius:8px;padding:13px 16px 13px 30px;margin-bottom:10px;font-size:13.5px;line-height:1.65;position:relative}
+.q-item::before{content:'›';position:absolute;left:14px;top:13px;color:#AAA;font-size:16px;font-weight:700}
+.write-area{width:100%;min-height:72px;margin-top:8px;padding:11px 13px;border:1.5px dashed #D0CEC8;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:#1C1C1C;background:#fff;resize:vertical;outline:none;line-height:1.65;transition:border-color .15s}
+.write-area::placeholder{color:#C0BDB8}
+.char-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.char-card{border-radius:14px;padding:22px;border:1px solid}
+.char-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.char-name{font-family:'Lora',serif;font-size:18px;font-weight:600;margin-bottom:12px}
+.char-text{font-size:13px;line-height:1.7;color:#333}
+.char-text em{color:#555;font-style:italic}
+.char-text strong{color:#111;font-style:normal}
+footer{background:#fff;border-top:1px solid #E0DDD8;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#AAA;flex-wrap:wrap;gap:10px}
+@media(max-width:640px){.char-grid{grid-template-columns:1fr}.main{padding:24px 16px 60px}.topnav{padding:0 12px}}
+
+.nav-tab.active{color:#8B4010;border-bottom-color:#8B4010}
+.write-area:focus{border-color:#8B4010;border-style:solid}
+.asp-head.kog{border-left:4px solid #8B4010}
+.asp-head.aff{border-left:4px solid #C84030}
+.asp-head.mot{border-left:4px solid #1A7050}
+.asp-head.kog .asp-dot{background:#8B4010}
+.asp-head.aff .asp-dot{background:#C84030}
+.asp-head.mot .asp-dot{background:#1A7050}
+.asp-head.kog .asp-title{color:#8B4010}
+.asp-head.aff .asp-title{color:#C84030}
+.asp-head.mot .asp-title{color:#1A7050}
+.char-card.p1{background:#FEF3EC;border-color:#F0C080}
+.char-card.p1 .char-tag{color:#8B4010}
+.char-card.p2{background:#FEF3EC;border-color:#F0C0A0}
+.char-card.p2 .char-tag{color:#B85A10}
+.case-cta{background:#FEF3EC;color:#8B4010;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600}
+.hero{background:linear-gradient(140deg,#3A1A00 0%,#8B4010 55%,#C46020 100%);color:#fff;padding:52px 48px 44px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-family:'Lora',serif;font-size:30px;font-weight:600;line-height:1.22;margin-bottom:10px;position:relative;z-index:1;max-width:600px}
+.hero-sub{font-size:15px;opacity:.78;font-weight:300;max-width:540px;position:relative;z-index:1}
+.hero-meta{margin-top:24px;display:flex;flex-wrap:wrap;gap:16px;font-size:12px;opacity:.6;position:relative;z-index:1}
+.scenario-text{font-size:13.5px;line-height:1.75;color:#2A2A2A;font-style:italic;border-left:3px solid #8B4010;padding-left:14px}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <span class="nav-brand">Reflective Writing</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('case')">📋 Case</button>
+    <button class="nav-tab" onclick="switchTab('kog')">🧠 Kognitiv</button>
+    <button class="nav-tab" onclick="switchTab('aff')">💛 Affektiv</button>
+    <button class="nav-tab" onclick="switchTab('mot')">🎯 Motivational</button>
+  </div>
+</nav>
+<div class="hero">
+  <a href="set_a_index.html" style="display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;font-size:12px;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-weight:500;position:relative;z-index:2;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.13)'">← Ana sayfaya dön</a>
+  <div class="hero-badge">Set A · Case 1 von 5 · Aktionsorientiertes Lernen</div>
+  <h1>Lernen durch Handeln:<br>Wann reicht Zuschauen nicht mehr?</h1>
+  <p class="hero-sub">Aktionsorientiertes Lernen im Vergleich – zwei Erwachsene, zwei Lernkulturen</p>
+  <div class="hero-meta"><span>🧠 Kognitiv</span><span>💛 Affektiv</span><span>🎯 Motivational</span></div>
+</div>
+<div class="main">
+
+<div id="tab-case" class="panel active">
+  <div class="section-title">Die Personen</div>
+  <p class="section-sub">Lesen Sie beide Porträts vollständig, bevor Sie zu den Reflexionsfragen übergehen.</p>
+  <div class="char-grid">
+    <div class="char-card p1">
+      <div class="char-tag">Lernende · 34 Jahre · Berufsbegleitend</div>
+      <div class="char-name">Miriam F.</div>
+      <div class="char-text">Miriam ist Grundschullehrerin und absolviert eine Weiterbildung zu inklusivem Unterricht. Sie sitzt still in Seminaren, macht penible Notizen und versteht die Inhalte theoretisch sehr gut. Aber wenn die Dozentin sie bittet, ein Rollenspiel zu leiten, zieht sie sich zurück: <em>"Ich muss es erst richtig verstanden haben, bevor ich es ausprobiere."</em> In der Praxis-Erprobungsphase des Kurses blüht sie auf – sie gestaltet eine Unterrichtssequenz und sagt hinterher: <strong>"Jetzt habe ich es wirklich begriffen."</strong> Passives Lernen reicht ihr nicht, aber sie traut sich nicht, es zuzugeben.</div>
+    </div>
+    <div class="char-card p2">
+      <div class="char-tag">Lernender · 41 Jahre · Quereinsteiger</div>
+      <div class="char-name">Jonas B.</div>
+      <div class="char-text">Jonas wechselt aus der IT-Branche in den Sozialbereich und nimmt an einem Kommunikationstraining teil. Er langweilt sich bei langen Inputphasen sichtbar – wippt mit dem Stuhl, schaut auf sein Handy. Wenn aber Übungen anstehen, ist er sofort dabei. <strong>Er lernt ausschließlich durch Ausprobieren, Scheitern und Korrigieren.</strong> Einen Fehler in einer Übung macht er nie zweimal. Auf Feedback reagiert er sofort mit einer neuen Handlung: <em>Zeig mir nochmal, dann mach ich's.</em> Theorie ohne direkte Anwendung empfindet er als Zeitverschwendung.</div>
+    </div>
+  </div>
+  <div class="scenario-box">
+    <div class="scenario-label">Gemeinsame Lernsituation</div>
+    <p class="scenario-text">Beide nehmen an einem dreitägigen Weiterbildungsseminar teil: Kommunikation und Konflikt im pädagogischen Alltag. Tag 1: theoretischer Input. Tag 2: Rollenspiele und Simulationen. Tag 3: eigene Praxisprojekte entwickeln. Am Ende von Tag 1 bewertet Jonas seine Zufriedenheit mit 3/10. Miriam gibt 8/10 – obwohl sie zugeben würde, dass sie das Gelernte noch nicht anwenden kann. Am Ende von Tag 2 kehren sich die Werte um.</p>
+  </div>
+  <div class="section-title" style="margin-bottom:12px">Auffällige Unterschiede im Lernverhalten</div>
+<table class="diff-table">
+<tr><th>Aspekt</th><th>Miriam F.</th><th>Jonas B.</th></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#FEF3EC;color:#8B4010">Kognitiv</span></td><td style="color:#8B4010">Versteht Theorie gut, Transfer gelingt erst durch eigenes Handeln. Kognition und Praxis sind getrennt.</td><td style="color:#555">Verarbeitet Inhalte ausschließlich handelnd. Kognition entsteht durch Aktion, nicht vor ihr.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#FEF0EC;color:#C84030">Affektiv</span></td><td style="color:#8B4010">Angst vor Fehlern hemmt das Handeln. Sicherheit durch Wissen, nicht durch Erfahrung.</td><td style="color:#555">Emotionaler Antrieb durch Handlung. Fehler aktivieren statt blockieren. Langeweile als echter Stress.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#E6F5EF;color:#1A7050">Motivational</span></td><td style="color:#8B4010">Motivation durch Verstehen und Kompetenzgefühl. Handeln als Bestätigung, nicht als Lernmodus.</td><td style="color:#555">Motivation ausschließlich durch Handeln und sichtbare Wirkung. Theorie ohne Praxis = keine Motivation.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#F0F0EC;color:#555">Lernstil</span></td><td style="color:#8B4010">Reflektierend-theoretisch (Kolb). Braucht Sicherheit vor dem Schritt.</td><td style="color:#555">Aktiv-experimentierend (Kolb). Lernt im Sprung, nicht vor dem Sprung.</td></tr>
+</table>
+
+  <div class="hint-box">
+    <div class="hint-head" onclick="toggleHint(this)">
+      <div class="hint-icon">💡</div>
+      <div class="hint-title">Theorie-Hinweise &amp; Lernressourcen – zum besseren Verstehen des Cases</div>
+      <div class="hint-chevron">▼</div>
+    </div>
+    <div class="hint-body"><div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Aktionsorientiertes Lernen (Frey, 1982)</strong><span>Der Lernende wird zum Handelnden – Lernen entsteht durch zielgerichtetes, selbstorganisiertes Tun. Erklärt, warum Jonas erst in Übungen auflebt und Miriam erst in der Praxisphase begreift.</span><div class="res-url">Frey, K. (1982). Die Projektmethode. Beltz.</div></div></div>
+<div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Erfahrungslernen nach Kolb (1984) – Lernstilmodell</strong><span>Kolbs Zyklus: Erfahrung → Reflexion → Konzeptualisierung → Experiment. Miriam und Jonas starten an verschiedenen Punkten im Zyklus.</span><div class="res-url">Kolb, D. A. (1984). Experiential Learning. Prentice Hall.</div></div></div>
+<div class="res-item"><span class="res-badge">VIDEO</span><div class="res-info"><strong>Action Learning Explained – Mike Pedler (YouTube)</strong><span>Erklärt das Prinzip des Lernens durch reales Handeln in Gruppen – direkt auf Jonas Lernmodus anwendbar.</span><div class="res-url"><a href="https://www.youtube.com/watch?v=5U2DRpZMh5E" target="_blank">https://www.youtube.com/watch?v=5U2DRpZMh5E</a></div></div></div>
+<div class="res-item"><span class="res-badge">KONZEPT</span><div class="res-info"><strong>Zone der nächsten Entwicklung (Vygotsky)</strong><span>Lernen geschieht am produktivsten an der Grenze des Könnens – mit Unterstützung. Erklärt, warum Miriams erst verstehen sie manchmal unter ihren Möglichkeiten hält.</span><div class="res-url">Vygotsky, L. S. (1978). Mind in Society. Harvard University Press.</div></div></div>
+</div>
+  </div>
+  <div style="text-align:center;padding:8px 0">
+    <button onclick="switchTab('kog')" style="background:#8B4010;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer">Weiter zu den Reflexionsfragen →</button>
+  </div>
+</div>
+
+<div id="tab-kog" class="panel">
+  <div class="section-title">Kognitive Aspekte</div>
+  <p class="section-sub">Wissenstransfer · Handlungslernen · Kognition durch Praxis</p>
+  <div class="aspect-block">
+    <div class="asp-head kog" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Kognitive Aspekte</span><span class="asp-sub">Wissenstransfer · Handlungslernen · Kognition durch Praxis</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Beschreiben Sie, wie Miriam und Jonas denselben Lerninhalt kognitiv verarbeiten. Was fällt Ihnen an den unterschiedlichen Wegen auf?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#8B4010"></textarea></div>
+<div class="q-item">Jonas macht in Übungen nie denselben Fehler zweimal. Was passiert kognitiv in diesem Moment – und warum gelingt das nicht durch Zuhören?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#8B4010"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was bedeutet es pädagogisch, wenn ein Lernender wie Miriam Theorie und Praxis als getrennte kognitive Prozesse erlebt? Was geht dabei verloren?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#8B4010"></textarea></div>
+<div class="q-item">Inwiefern verändert aktionsorientiertes Lernen den Ort, an dem Kognition stattfindet – und was bedeutet das für Lernsequenzen?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#8B4010"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie würden Sie Tag 1 des Seminars umstrukturieren, damit auch Jonas kognitiv erreicht wird, ohne Miriam zu überfordern?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#8B4010"></textarea></div>
+<div class="q-item">Welche eine kognitive Aktivierungsstrategie möchten Sie in Ihrer nächsten Lehreinheit einsetzen – und warum genau diese?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#8B4010"></textarea></div>
+</div>
+</div>
+  </div>
+</div>
+
+<div id="tab-aff" class="panel">
+  <div class="section-title">Affektive Aspekte</div>
+  <p class="section-sub">Fehlerangst · Langeweile als Signal · emotionale Lernbedingungen</p>
+  <div class="aspect-block">
+    <div class="asp-head aff" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Affektive Aspekte</span><span class="asp-sub">Fehlerangst · Langeweile als Signal · emotionale Lernbedingungen</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Jonas bewertet Tag 1 mit 3/10, Miriam mit 8/10 – obwohl keiner das Gelernte noch anwenden kann. Was sagt das über die emotionale Funktion von Lernen für jeden aus?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Miriam sagt: Ich muss es erst richtig verstanden haben. Was steckt emotional dahinter – und was hat das mit Fehlerangst zu tun?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was bedeutet es für das Lernklima, wenn ein Lernender wie Jonas sichtbar gelangweilt ist – und ein anderer wie Miriam das Gegenteil signalisiert?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Inwiefern ist Langeweile bei Jonas eine affektive Lernaussage – und wie ernst nehmen Lehrende sie normalerweise?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie gestalten Sie eine Übungsphase, die für Miriam emotionale Sicherheit bietet und Jonas trotzdem in Bewegung hält?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Was nehmen Sie für Ihren eigenen Umgang mit Lernenden mit, die ihre Unzufriedenheit offen zeigen?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+</div>
+  </div>
+</div>
+
+<div id="tab-mot" class="panel">
+  <div class="section-title">Motivationale Aspekte</div>
+  <p class="section-sub">Handlungsantrieb · Kompetenzerleben · intrinsische vs. aktivitätsbezogene Motivation</p>
+  <div class="aspect-block">
+    <div class="asp-head mot" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Motivationale Aspekte</span><span class="asp-sub">Handlungsantrieb · Kompetenzerleben · intrinsische vs. aktivitätsbezogene Motivation</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Was motiviert Miriam – und was motiviert Jonas? Beschreiben Sie den Kern des Unterschieds in einem Satz.<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Jonas sagt: Zeig mir nochmal, dann mach ich's. Was sagt das über seinen motivationalen Lernmechanismus aus?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was passiert mit Jonas Motivation, wenn ein Seminar ausschließlich aus Inputphasen besteht? Und was mit Miriams, wenn es ausschließlich aus Aktionen besteht?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Inwiefern spiegelt der Unterschied zwischen Miriam und Jonas das Spannungsfeld zwischen Kompetenzgefühl (Deci & Ryan) und Handlungsorientierung wider?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie bauen Sie in einem gemischten Seminar motivationale Anker für beide Lerntypen ein – ohne die Struktur zu zerstören?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Welche Veränderung in Ihrer eigenen Lehrplanung nehmen Sie nach dieser Reflexion vor?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+</div>
+  </div>
+  <div style="background:#fff;border-top:1px solid #E0DDD8;border-radius:0 0 14px 14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:4px">
+    <span style="font-size:12px;color:#888">Alle drei Aspekte ausgefüllt? Dann einreichen.</span>
+    <button onclick="openSubmitModal()" style="background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px">📧 An Dozentin senden</button>
+  </div>
+</div>
+
+</div>
+<footer><span>Case A1 · Aktionsorientiertes Lernen</span><span>What / So What / Now What</span></footer>
+<div id="submit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:32px 28px;max-width:440px;width:100%;position:relative">
+    <button onclick="closeSubmitModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1">×</button>
+    <div style="font-family:'Lora',serif;font-size:19px;font-weight:600;margin-bottom:6px">Antworten einreichen</div>
+    <p style="font-size:12.5px;color:#777;margin-bottom:22px;line-height:1.55">Ihre Reflexionsantworten werden als E-Mail an die Dozentin gesendet.</p>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Vorname</label><input id="s-name" type="text" placeholder="z. B. Anna" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Nachname</label><input id="s-surname" type="text" placeholder="z. B. Müller" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:20px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Matrikelnummer</label><input id="s-matrikel" type="text" placeholder="z. B. 123456" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div id="submit-error" style="display:none;background:#FEF0EC;border:1px solid #F5C0B0;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#B84020;margin-bottom:14px">Bitte alle Felder ausfüllen.</div>
+    <button onclick="sendToInstructor('Case A1 – Aktionsorientiertes Lernen')" style="width:100%;background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer">📧 An Dozentin senden</button>
+    <p style="font-size:11px;color:#AAA;text-align:center;margin-top:12px;line-height:1.5">Es öffnet sich Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht.</p>
+  </div>
+</div>
+<script>
+function switchTab(id){
+  const ids=['case','kog','aff','mot'];
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleHint(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.hint-chevron');
+  body.classList.toggle('open');
+  chev.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function toggleAsp(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.asp-chev');
+  const open=body.classList.toggle('open');
+  chev.textContent=open?'▲':'▼';
+}
+function openSubmitModal(){document.getElementById('submit-modal').style.display='flex';}
+function closeSubmitModal(){document.getElementById('submit-modal').style.display='none';}
+function sendToInstructor(caseLabel){
+  const name=document.getElementById('s-name').value.trim();
+  const surname=document.getElementById('s-surname').value.trim();
+  const matrikel=document.getElementById('s-matrikel').value.trim();
+  if(!name||!surname||!matrikel){document.getElementById('submit-error').style.display='block';return;}
+  document.getElementById('submit-error').style.display='none';
+  const tabs=['Kognitiv','Affektiv','Motivational'];
+  const tabIds=['tab-kog','tab-aff','tab-mot'];
+  const phases=['WHAT','SO WHAT','NOW WHAT'];
+  let answers='';
+  tabIds.forEach((tid,tIdx)=>{
+    answers+='\n'+'='.repeat(50)+'\n'+tabs[tIdx].toUpperCase()+'\n'+'='.repeat(50)+'\n';
+    document.querySelectorAll('#'+tid+' .write-area').forEach((ta,i)=>{
+      answers+='\n['+phases[Math.floor(i/2)]+' · Frage '+(i%2+1)+']\n'+(ta.value.trim()||'[keine Antwort]')+'\n';
+    });
+  });
+  const subject=encodeURIComponent('Reflective Writing – '+caseLabel+' – '+surname+', '+name+' – Matrikel: '+matrikel);
+  const body=encodeURIComponent('Eingereicht von:\nName: '+name+' '+surname+'\nMatrikelnummer: '+matrikel+'\nCase: '+caseLabel+'\n\n'+answers);
+  window.location.href='mailto:amine.merve.ercan@uni-jena.de?subject='+subject+'&body='+body;
+  closeSubmitModal();
+}
+
+</script>
+</body>
+</html>

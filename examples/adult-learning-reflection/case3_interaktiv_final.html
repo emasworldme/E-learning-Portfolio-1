@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case 3 · Digitales Lernen im Generationenvergleich – Reflective Writing</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#0F6B5A;--teal-l:#E4F5F1;--teal-m:#4AAAA0;
+  --pink:#A83060;--pink-l:#FCE8F0;
+  --green:#2A7040;--green-l:#E8F5EC;
+  --gray:#5A5A5A;--gray-l:#F5F5F3;--border:#E0DDD8;--text:#1C1C1C;
+  --hint:#FFFBF0;--hint-b:#D4A820;
+}
+body{font-family:'Inter',sans-serif;background:#F7F6F3;color:var(--text);font-size:15px;line-height:1.72}
+
+.topnav{background:#fff;border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'Lora',serif;font-size:14px;color:var(--gray);padding:14px 0;margin-right:24px;white-space:nowrap}
+.nav-tabs{display:flex;overflow-x:auto}
+.nav-tab{padding:14px 18px;font-size:12.5px;font-weight:500;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
+.nav-tab:hover{color:var(--text)}
+.nav-tab.active{color:var(--teal);border-bottom-color:var(--teal)}
+
+.hero{background:linear-gradient(140deg,#052820 0%,#0F5A48 55%,#1A8870 100%);color:#fff;padding:52px 48px 44px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Lora',serif;font-size:32px;font-weight:600;line-height:1.22;margin-bottom:12px;position:relative;z-index:1;max-width:600px}
+.hero-sub{font-size:15px;opacity:.78;font-weight:300;max-width:540px;position:relative;z-index:1}
+.hero-meta{margin-top:28px;display:flex;flex-wrap:wrap;gap:20px;font-size:12px;opacity:.6;position:relative;z-index:1}
+
+.main{max-width:860px;margin:0 auto;padding:36px 32px 72px}
+.section-title{font-family:'Lora',serif;font-size:20px;font-weight:600;color:var(--text);margin-bottom:6px}
+.section-sub{font-size:13px;color:var(--gray);margin-bottom:24px}
+.panel{display:none}.panel.active{display:block}
+
+.char-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.char-card{border-radius:14px;padding:22px;border:1px solid}
+.char-card.young{background:var(--teal-l);border-color:#90CFC8}
+.char-card.old{background:var(--pink-l);border-color:#E0A0C0}
+.char-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.char-card.young .char-tag{color:var(--teal)}
+.char-card.old .char-tag{color:var(--pink)}
+.char-name{font-family:'Lora',serif;font-size:18px;font-weight:600;margin-bottom:12px}
+.char-text{font-size:13px;line-height:1.7;color:#333}
+.char-text em{color:#555;font-style:italic}
+.char-text strong{color:#111;font-style:normal}
+
+.scenario-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:28px}
+.scenario-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:10px}
+.scenario-text{font-size:13.5px;line-height:1.75;color:#2A2A2A;font-style:italic;border-left:3px solid var(--teal-m);padding-left:14px}
+
+.diff-table{width:100%;border-collapse:collapse;margin-bottom:28px;font-size:13px}
+.diff-table th{padding:10px 14px;background:var(--gray-l);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-align:left;border-bottom:2px solid var(--border)}
+.diff-table th:first-child{width:22%}
+.diff-table td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+.diff-table tr:last-child td{border-bottom:none}
+.diff-table tr:hover td{background:#FAFAF8}
+.asp-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px}
+.asp-k{background:var(--teal-l);color:var(--teal)}
+.asp-a{background:var(--pink-l);color:var(--pink)}
+.asp-m{background:var(--green-l);color:var(--green)}
+.col-young{color:#0D5A48}
+.col-old{color:#982858}
+
+.hint-box{background:var(--hint);border:1px solid var(--hint-b);border-radius:12px;overflow:hidden;margin-bottom:32px}
+.hint-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
+.hint-icon{width:28px;height:28px;border-radius:50%;background:var(--hint-b);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hint-title{font-size:13.5px;font-weight:600;color:#7A5500;flex:1}
+.hint-chevron{font-size:12px;color:#9A7000}
+.hint-body{padding:0 20px 20px;display:none;border-top:1px solid #F0D860}
+.hint-body.open{display:block;padding-top:16px}
+.res-item{display:flex;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #F5E890}
+.res-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.res-badge{background:#7A5500;color:#fff;font-size:9px;padding:3px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:3px;letter-spacing:.05em}
+.res-info strong{font-size:13px;display:block;margin-bottom:3px;color:#3A2800}
+.res-info span{font-size:12px;color:#7A5500;line-height:1.55}
+.res-url{font-size:11px;color:#3A80D0;margin-top:4px;word-break:break-all}
+
+.aspect-block{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.asp-head{display:flex;align-items:center;gap:12px;padding:15px 20px;cursor:pointer;user-select:none;transition:background .15s}
+.asp-head:hover{background:var(--gray-l)}
+.asp-head.kog{border-left:4px solid var(--teal)}
+.asp-head.aff{border-left:4px solid var(--pink)}
+.asp-head.mot{border-left:4px solid var(--green)}
+.asp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.asp-head.kog .asp-dot{background:var(--teal)}
+.asp-head.aff .asp-dot{background:var(--pink)}
+.asp-head.mot .asp-dot{background:var(--green)}
+.asp-title{font-size:14px;font-weight:600}
+.asp-head.kog .asp-title{color:var(--teal)}
+.asp-head.aff .asp-title{color:var(--pink)}
+.asp-head.mot .asp-title{color:var(--green)}
+.asp-sub{font-size:12px;color:var(--gray);flex:1}
+.asp-chev{font-size:12px;color:var(--gray)}
+.asp-body{padding:20px 24px;display:none}
+.asp-body.open{display:block}
+
+.phase{margin-bottom:22px}.phase:last-child{margin-bottom:0}
+.phase-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.p-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.p-dot.w{background:#7060D0}.p-dot.s{background:#C84030}.p-dot.n{background:#1A8060}
+.phase-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray)}
+.q-item{background:var(--gray-l);border-radius:8px;padding:13px 16px 13px 30px;margin-bottom:10px;font-size:13.5px;line-height:1.65;position:relative}
+.q-item::before{content:'›';position:absolute;left:14px;top:13px;color:#AAA;font-size:16px;font-weight:700}
+.write-area{width:100%;min-height:72px;margin-top:8px;padding:11px 13px;border:1.5px dashed #D0CEC8;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text);background:#fff;resize:vertical;outline:none;line-height:1.65;transition:border-color .15s}
+.write-area:focus{border-color:var(--teal-m);border-style:solid}
+.write-area::placeholder{color:#C0BDB8}
+
+footer{background:#fff;border-top:1px solid var(--border);padding:20px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#AAA;flex-wrap:wrap;gap:10px}
+@media(max-width:640px){
+  .char-grid{grid-template-columns:1fr}
+  .hero{padding:36px 20px 30px}
+  .hero h1{font-size:24px}
+  .main{padding:24px 16px 60px}
+  .topnav{padding:0 12px}
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="nav-brand">Reflective Writing</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('case')">📋 Case</button>
+    <button class="nav-tab" onclick="switchTab('kog')">🧠 Kognitiv</button>
+    <button class="nav-tab" onclick="switchTab('aff')">💛 Affektiv</button>
+    <button class="nav-tab" onclick="switchTab('mot')">🎯 Motivational</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <a href="bildung_index.html" style="display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;font-size:12px;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-weight:500;position:relative;z-index:2;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.13)'">← Ana sayfaya dön</a>
+  <div class="hero-badge">Case 3 von 3 · Digitales Lernen</div>
+  <h1>Klick, Zoom, verloren:<br>Wer lernt wie im Netz?</h1>
+  <p class="hero-sub">Digitale Lernumgebungen im Generationenvergleich – jung vs. älter</p>
+  <div class="hero-meta">
+    <span>🧠 Cognitive Load &amp; Navigation</span>
+    <span>💛 Technikangst &amp; digitales Selbstbild</span>
+    <span>🎯 Autonomieziele &amp; Selbstregulation</span>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- CASE TAB -->
+<div id="tab-case" class="panel active">
+  <div class="section-title">Die Personen</div>
+  <p class="section-sub">Lesen Sie beide Porträts vollständig, bevor Sie zu den Reflexionsfragen übergehen.</p>
+
+  <div class="char-grid">
+    <div class="char-card young">
+      <div class="char-tag">Junge Erwachsene · 29 Jahre</div>
+      <div class="char-name">Selin A.</div>
+      <div class="char-text">Selin nimmt an einem asynchronen Online-Kurs zur Buchführung teil – freiwillig, um sich für eine Beförderung zu qualifizieren. Sie <strong>bearbeitet Lernvideos auf 1,5-facher Geschwindigkeit</strong>, öffnet parallel Tabs, springt bei Kapiteln, die sie „schon kennt", einfach weiter. Sie kommentiert im Diskussionsforum – meist spät abends. Ihr Lernfortschritt ist unregelmäßig: intensive Wochen wechseln sich mit inaktiven ab. Auf die Frage, wie sie sich organisiert: <em>„Ich merke irgendwann, wenn ich hinterherhinke. Das regelt sich."</em> Sie hat das Kursende bereits zweimal um je eine Woche verschoben.</div>
+    </div>
+    <div class="char-card old">
+      <div class="char-tag">Älterer Erwachsener · 66 Jahre</div>
+      <div class="char-name">Werner O.</div>
+      <div class="char-text">Werner ist pensionierter Ingenieur und nimmt denselben Kurs teil – empfohlen von seiner Tochter, damit er die Buchführung seines kleinen Nebenprojekts selbst übernehmen kann. Er <strong>schreibt sich jeden Inhalt in einem Heft mit</strong>, schaut Videos dreimal, macht nach je 20 Minuten eine Pause. Er meldet sich nicht im Forum an – die Anmeldeprozedur hat ihn 45 Minuten gekostet und er hat aufgegeben. <em>„Ich weiß nicht, ob ich das richtig mache – der Button war gestern woanders."</em> Seine inhaltlichen Leistungen in den Quiz-Tests sind besser als Selins. Aber er kämpft täglich mit der Navigation und zweifelt an sich selbst.</div>
+    </div>
+  </div>
+
+  <div class="scenario-box">
+    <div class="scenario-label">Gemeinsame Situation</div>
+    <p class="scenario-text">Beide nutzen dieselbe Lernplattform, dasselbe Kursmaterial, denselben Zeitraum. Die Plattform wurde nicht für Werner konzipiert – aber auch nicht gegen ihn. Sie wurde einfach nicht mit ihm mitgedacht. Das Ergebnis: Selin hat eine Lernstruktur, die äußerlich chaotisch ist, aber für sie funktioniert. Werner hat eine innere Lernstruktur, die hocheffektiv ist – aber extern täglich blockiert wird. Zwei inkompatible Systeme im selben Kurs.</p>
+  </div>
+
+  <div class="section-title" style="margin-bottom:12px">Auffällige Unterschiede im digitalen Lernverhalten</div>
+  <table class="diff-table">
+    <tr>
+      <th>Aspekt</th><th>Selin (29)</th><th>Werner (66)</th>
+    </tr>
+    <tr>
+      <td><span class="asp-badge asp-k">Kognitiv</span></td>
+      <td class="col-young">Hohe digitale Navigation – Plattform ist transparent. Kognitiver Fokus liegt auf Inhalten, nicht auf Bedienung.</td>
+      <td class="col-old">Navigation erzeugt extraneous cognitive load. Kognitive Kapazität wird durch Bedienung absorbiert, bevor der Lerninhalt erreicht wird.</td>
+    </tr>
+    <tr>
+      <td><span class="asp-badge asp-a">Affektiv</span></td>
+      <td class="col-young">Technische Misserfolge werden kaum wahrgenommen oder sofort umgangen. Emotionaler Aufwand minimal.</td>
+      <td class="col-old">Jeder Klickfehler löst Selbstzweifel aus. Obwohl er inhaltlich besser ist, glaubt er, schlechter zu sein.</td>
+    </tr>
+    <tr>
+      <td><span class="asp-badge asp-m">Motivational</span></td>
+      <td class="col-young">Motivation: Karriere. Lernstruktur flexibel/chaotisch. Ziel klar, Weg beliebig. Deadline-Prokrastination.</td>
+      <td class="col-old">Motivation: Autonomie (selbst Buchführung machen). Technologische Hürden untergraben täglich die Zielerreichung.</td>
+    </tr>
+    <tr>
+      <td><span class="asp-badge" style="background:#F0F0EC;color:#555">Selbstorg.</span></td>
+      <td class="col-young">Scheinbar unorganisiert – aber digital eingebettet. Notifications, Reminders, Deadlines kommen automatisch von außen.</td>
+      <td class="col-old">Hochorganisiert durch Heft + Pausen – aber dieses analoge System kollidiert mit der digitalen Plattformlogik.</td>
+    </tr>
+  </table>
+
+  <div class="hint-box">
+    <div class="hint-head" onclick="toggleHint(this)">
+      <div class="hint-icon">💡</div>
+      <div class="hint-title">Theorie-Hinweise &amp; Lernressourcen – zum besseren Verstehen des Cases</div>
+      <div class="hint-chevron">▼</div>
+    </div>
+    <div class="hint-body">
+      <div class="res-item">
+        <span class="res-badge">THEORIE</span>
+        <div class="res-info">
+          <strong>Cognitive Load Theory (Sweller, 1988)</strong>
+          <span>Unterscheidet intrinsic load (Komplexität des Stoffs), germane load (Lernprozess) und extraneous load (unnötige Belastung durch schlechtes Design). Werners Problem ist fast ausschließlich extraneous load – erzeugt durch die Plattform, nicht den Inhalt.</span>
+          <div class="res-url">Sweller, J. (1988). Cognitive load during problem solving. Cognitive Science, 12(2), 257–285.</div>
+        </div>
+      </div>
+      <div class="res-item">
+        <span class="res-badge">THEORIE</span>
+        <div class="res-info">
+          <strong>Digital Natives vs. Digital Immigrants (Prensky, 2001) – und seine Kritik</strong>
+          <span>Prensky prägte diese Unterscheidung, die heute als zu vereinfachend gilt. Wichtiger als das Geburtsjahr sind Erfahrung, Kontext und Motivation. Werner ist kein „Immigrant" – er ist ein Experte mit einem anderen Einstiegspunkt.</span>
+          <div class="res-url">Prensky, M. (2001). Digital Natives, Digital Immigrants. On the Horizon, 9(5).</div>
+        </div>
+      </div>
+      <div class="res-item">
+        <span class="res-badge">THEORIE</span>
+        <div class="res-info">
+          <strong>Self-Regulated Learning (Zimmerman, 2000)</strong>
+          <span>Selbstreguliertes Lernen umfasst Zielsetzung, Selbstüberwachung und Reflexion. Selin zeigt niedrige metakognitive Kontrolle. Werner dagegen hat hochentwickelte Selbstregulation – die digital nicht gespiegelt wird.</span>
+          <div class="res-url">Zimmerman, B. J. (2000). Attaining self-regulation. In Boekaerts et al. (Eds.), Handbook of self-regulation.</div>
+        </div>
+      </div>
+      <div class="res-item">
+        <span class="res-badge">VIDEO</span>
+        <div class="res-info">
+          <strong>„Cognitive Load Theory" – The Learning Scientists (YouTube)</strong>
+          <span>Erklärt das Konzept mit anschaulichen Beispielen – direkt anwendbar auf Werners Situation.</span>
+          <div class="res-url"><a href="https://www.youtube.com/watch?v=UpA6RdFy5KM" target="_blank">youtube.com/watch?v=UpA6RdFy5KM</a></div>
+        </div>
+      </div>
+      <div class="res-item">
+        <span class="res-badge">VIDEO</span>
+        <div class="res-info">
+          <strong>„Designing for Older Adults" – Nielsen Norman Group (YouTube)</strong>
+          <span>Evidenzbasierte UX-Empfehlungen für digitale Lernumgebungen älterer Nutzer.</span>
+          <div class="res-url"><a href="https://www.youtube.com/watch?v=ScHGxlpZH14" target="_blank">youtube.com/watch?v=ScHGxlpZH14</a></div>
+        </div>
+      </div>
+      <div class="res-item">
+        <span class="res-badge">KONZEPT</span>
+        <div class="res-info">
+          <strong>Accessibility ≠ Usability</strong>
+          <span>Eine barrierefreie Plattform ist nicht automatisch nutzbar für ältere Lernende. Werners Problem ist kein Barrierefreiheitsproblem – es ist ein Usability-Problem.</span>
+          <div class="res-url"><a href="https://webaim.org/articles/usability" target="_blank">webaim.org/articles/usability</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:8px 0">
+    <button onclick="switchTab('kog')" style="background:var(--teal);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer">Weiter zu den Reflexionsfragen →</button>
+  </div>
+</div>
+
+<!-- KOGNITIV TAB -->
+<div id="tab-kog" class="panel">
+  <div class="section-title">Kognitive Aspekte</div>
+  <p class="section-sub">Cognitive Load · Navigation · Selbstorganisation · Effizienz vs. Tiefe</p>
+  <div class="aspect-block">
+    <div class="asp-head kog" onclick="toggleAsp(this)">
+      <span class="asp-dot"></span>
+      <span class="asp-title">Kognitive Aspekte · Selin &amp; Werner</span>
+      <span class="asp-sub">Extraneous Load, Plattformdesign, kognitive Kapazität</span>
+      <span class="asp-chev open">▲</span>
+    </div>
+    <div class="asp-body open">
+      <div class="phase">
+        <div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / gelesen?</span></div>
+        <div class="q-item">Werner ist fachlich besser als Selin – aber er glaubt das Gegenteil. Was genau erzeugt diesen Widerspruch zwischen tatsächlicher und wahrgenommener Kompetenz in der Plattformumgebung?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Selin springt vor, öffnet Paralleltabs, lernt spät abends. Beschreiben Sie diese Strategie: Ist das effizientes oder riskantes Lernverhalten – und woran erkennen Sie den Unterschied?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase">
+        <div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+        <div class="q-item">Werners kognitive Kapazität wird durch Plattformnavigation aufgebraucht, bevor er mit dem Lerninhalt in Kontakt kommt. Was sagt das über die Verantwortung von Plattformdesignern und Kursverantwortlichen aus?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Selins Lernstil funktioniert für sie – aber produziert er echtes Verstehen oder nur digitale Aktivität? Was ist der Unterschied in einem Online-Kurs?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase">
+        <div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+        <div class="q-item">Wenn Sie eine Onboarding-Einheit (erste 20 Minuten auf der Plattform) designen – was würden Sie einbauen, damit Werner kognitiv entlastet wird, bevor er mit Inhalten beginnt?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Welche Maßnahme können Sie sofort in Ihrem nächsten Online-Kurs umsetzen, um extraneous cognitive load für ältere Lernende zu reduzieren?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AFFEKTIV TAB -->
+<div id="tab-aff" class="panel">
+  <div class="section-title">Affektive Aspekte</div>
+  <p class="section-sub">Technikangst · digitales Selbstbild · Unsichtbarkeit im Forum · Würde</p>
+  <div class="aspect-block">
+    <div class="asp-head aff" onclick="toggleAsp(this)">
+      <span class="asp-dot"></span>
+      <span class="asp-title">Affektive Aspekte · Selin &amp; Werner</span>
+      <span class="asp-sub">Selbstzweifel, emotionaler Aufwand, Ausschluss aus sozialen Lernräumen</span>
+      <span class="asp-chev open">▲</span>
+    </div>
+    <div class="asp-body open">
+      <div class="phase">
+        <div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / gelesen?</span></div>
+        <div class="q-item">Werner sagt: „Der Button war gestern woanders." Was löst das emotional bei ihm aus – und warum ist das mehr als nur ein technisches Problem?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Selin ist kaum emotional involviert bei technischen Problemen. Werner ist es stark. Woher kommt dieser Unterschied – und was hat er mit digitalem Selbstbild zu tun?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase">
+        <div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+        <div class="q-item">Werner gibt im Forum auf – nicht weil er nicht möchte, sondern weil die Anmeldung zu viel kostet. Was geht dem Kurs verloren, wenn Lernende wie Werner aus sozialen Lernräumen ausgeschlossen bleiben?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Was bedeutet es affektiv, wenn man inhaltlich kompetenter ist als andere, sich aber inkompetenter fühlt? Welche Langzeitfolgen kann das für Werners Lernbereitschaft haben?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase">
+        <div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+        <div class="q-item">Entwickeln Sie einen „digitalen Würde-Check": Welche drei Fragen würden Sie sich als Kursdesigner/in stellen, bevor Sie eine digitale Lernumgebung für altersgemischte Gruppen freischalten?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Wie würden Sie Werner am Ende von Woche 1 eine Rückmeldung geben, die sein tatsächliches Können sichtbar macht – ohne die technischen Probleme zu ignorieren?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOTIVATIONAL TAB -->
+<div id="tab-mot" class="panel">
+  <div class="section-title">Motivationale Aspekte</div>
+  <p class="section-sub">Autonomieziele · technologische Hürden · Selbstregulation · Persistenz</p>
+  <div class="aspect-block">
+    <div class="asp-head mot" onclick="toggleAsp(this)">
+      <span class="asp-dot"></span>
+      <span class="asp-title">Motivationale Aspekte · Selin &amp; Werner</span>
+      <span class="asp-sub">Lernziele, externe vs. innere Struktur, Motivationserhalt</span>
+      <span class="asp-chev open">▲</span>
+    </div>
+    <div class="asp-body open">
+      <div class="phase">
+        <div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / gelesen?</span></div>
+        <div class="q-item">Beschreiben Sie die Lernziele von Selin und Werner in eigenen Worten. Was treibt jede Person an – und was würde diese Motivation gefährden oder stärken?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Selin schiebt Deadlines, Werner kämpft täglich mit der Plattform. Welches der beiden Lernprobleme ist motivationaler Natur – und welches ist strukturell?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase">
+        <div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+        <div class="q-item">Werner möchte die Buchführung selbst übernehmen – ein zutiefst autonomiebezogenes Ziel. Was passiert mit Motivation, wenn die Erreichung dieses Ziels täglich durch Technik behindert wird? Welche Theorie erklärt das?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Selin reguliert sich kaum selbst – die Plattformstruktur übernimmt das für sie. Was bedeutet das für ihre langfristige Fähigkeit zum selbstregulierten Lernen?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase">
+        <div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+        <div class="q-item">Wie könnten Sie für Werners Situation einen „Motivationsanker" einbauen, der seine Fortschritte sichtbar macht – unabhängig von seiner Plattformkompetenz?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Was würden Sie Selin empfehlen, um von externer Struktur zu echter Selbstregulation zu gelangen – und wie fördern Sie das im Kursdesign?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+    </div>
+  <div style="background:#fff;border-top:1px solid var(--border);border-radius:0 0 14px 14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:4px">
+    <span style="font-size:12px;color:#888">Alle drei Aspekte ausgefüllt? Dann einreichen.</span>
+    <button onclick="openSubmitModal()" style="background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px">📧 An Dozentin senden</button>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<footer>
+  <span>Case 3 von 3 · Selin A. &amp; Werner O. · Digitales Lernen</span>
+  <span>What / So What / Now What</span>
+</footer>
+
+<script>
+function openSubmitModal(){document.getElementById('submit-modal').style.display='flex';}
+function closeSubmitModal(){document.getElementById('submit-modal').style.display='none';}
+function sendToInstructor(){
+  const name=document.getElementById('s-name').value.trim();
+  const surname=document.getElementById('s-surname').value.trim();
+  const matrikel=document.getElementById('s-matrikel').value.trim();
+  if(!name||!surname||!matrikel){document.getElementById('submit-error').style.display='block';return;}
+  document.getElementById('submit-error').style.display='none';
+  const tabs=['Kognitiv','Affektiv','Motivational'];
+  const tabIds=['tab-kog','tab-aff','tab-mot'];
+  const phases=['WHAT','SO WHAT','NOW WHAT'];
+  let answers='';
+  tabIds.forEach((tid,tIdx)=>{
+    answers+='\n'+'='.repeat(50)+'\n'+tabs[tIdx].toUpperCase()+'\n'+'='.repeat(50)+'\n';
+    document.querySelectorAll('#'+tid+' .write-area').forEach((ta,i)=>{
+      answers+='\n['+phases[Math.floor(i/2)]+' · Frage '+(i%2+1)+']\n'+(ta.value.trim()||'[keine Antwort]')+'\n';
+    });
+  });
+  const subject=encodeURIComponent('Reflective Writing – Case 3 – '+surname+', '+name+' – Matrikel: '+matrikel);
+  const body=encodeURIComponent('Eingereicht von:\nName: '+name+' '+surname+'\nMatrikelnummer: '+matrikel+'\nCase: Digitales Lernen im Generationenvergleich\n\n'+answers);
+  window.location.href='mailto:amine.merve.ercan@uni-jena.de?subject='+subject+'&body='+body;
+  closeSubmitModal();
+}
+
+function switchTab(id){
+  const ids=['case','kog','aff','mot'];
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleHint(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.hint-chevron');
+  body.classList.toggle('open');
+  chev.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function toggleAsp(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.asp-chev');
+  const open=body.classList.toggle('open');
+  chev.textContent=open?'▲':'▼';
+}
+</script>
+<div id="submit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:32px 28px;max-width:440px;width:100%;position:relative">
+    <button onclick="closeSubmitModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1">×</button>
+    <div style="font-family:'Lora',serif;font-size:19px;font-weight:600;margin-bottom:6px">Antworten einreichen</div>
+    <p style="font-size:12.5px;color:#777;margin-bottom:22px;line-height:1.55">Ihre ausgefüllten Reflexionsantworten werden als E-Mail an die Lehrperson gesendet.</p>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Vorname</label><input id="s-name" type="text" placeholder="z. B. Anna" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Nachname</label><input id="s-surname" type="text" placeholder="z. B. Müller" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:20px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Matrikelnummer</label><input id="s-matrikel" type="text" placeholder="z. B. 123456" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div id="submit-error" style="display:none;background:#FEF0EC;border:1px solid #F5C0B0;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#B84020;margin-bottom:14px">Bitte alle Felder ausfüllen.</div>
+    <button onclick="sendToInstructor()" style="width:100%;background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer">📧 An Dozentin senden</button>
+    <p style="font-size:11px;color:#AAA;text-align:center;margin-top:12px;line-height:1.5">Es öffnet sich Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht.</p>
+  </div>
+</div>
+
+</body>
+</html>

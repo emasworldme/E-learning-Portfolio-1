@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case A5 - Konflikt, Kontroversitat & Diskurskompetenz</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#F7F6F3;color:#1C1C1C;font-size:15px;line-height:1.72}
+.topnav{background:#fff;border-bottom:1px solid #E0DDD8;padding:0 32px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'Lora',serif;font-size:14px;color:#5A5A5A;padding:14px 0;margin-right:24px;white-space:nowrap}
+.nav-tabs{display:flex;overflow-x:auto}
+.nav-tab{padding:14px 18px;font-size:12.5px;font-weight:500;color:#5A5A5A;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
+.nav-tab:hover{color:#1C1C1C}
+.main{max-width:860px;margin:0 auto;padding:36px 32px 72px}
+.section-title{font-family:'Lora',serif;font-size:20px;font-weight:600;color:#1C1C1C;margin-bottom:6px}
+.section-sub{font-size:13px;color:#5A5A5A;margin-bottom:24px}
+.panel{display:none}.panel.active{display:block}
+.scenario-box{background:#fff;border:1px solid #E0DDD8;border-radius:12px;padding:20px 22px;margin-bottom:28px}
+.scenario-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5A5A5A;margin-bottom:10px}
+.diff-table{width:100%;border-collapse:collapse;margin-bottom:28px;font-size:13px}
+.diff-table th{padding:10px 14px;background:#F5F5F3;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-align:left;border-bottom:2px solid #E0DDD8}
+.diff-table td{padding:12px 14px;border-bottom:1px solid #E0DDD8;vertical-align:top;line-height:1.6}
+.diff-table tr:last-child td{border-bottom:none}
+.diff-table tr:hover td{background:#FAFAF8}
+.hint-box{background:#FFFBF0;border:1px solid #D4A820;border-radius:12px;overflow:hidden;margin-bottom:32px}
+.hint-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
+.hint-icon{width:28px;height:28px;border-radius:50%;background:#D4A820;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hint-title{font-size:13.5px;font-weight:600;color:#7A5500;flex:1}
+.hint-chevron{font-size:12px;color:#9A7000}
+.hint-body{padding:0 20px 20px;display:none;border-top:1px solid #F0D860}
+.hint-body.open{display:block;padding-top:16px}
+.res-item{display:flex;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #F5E890}
+.res-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.res-badge{background:#7A5500;color:#fff;font-size:9px;padding:3px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:3px;letter-spacing:.05em}
+.res-info strong{font-size:13px;display:block;margin-bottom:3px;color:#3A2800}
+.res-info span{font-size:12px;color:#7A5500;line-height:1.55}
+.res-url{font-size:11px;color:#3A80D0;margin-top:4px;word-break:break-all}
+.aspect-block{background:#fff;border:1px solid #E0DDD8;border-radius:14px;overflow:hidden;margin-bottom:16px}
+.asp-head{display:flex;align-items:center;gap:12px;padding:15px 20px;cursor:pointer;user-select:none;transition:background .15s}
+.asp-head:hover{background:#F5F5F3}
+.asp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.asp-title{font-size:14px;font-weight:600}
+.asp-sub{font-size:12px;color:#5A5A5A;flex:1}
+.asp-chev{font-size:12px;color:#5A5A5A}
+.asp-body{padding:20px 24px;display:none}
+.asp-body.open{display:block}
+.phase{margin-bottom:22px}.phase:last-child{margin-bottom:0}
+.phase-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #E0DDD8}
+.p-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.p-dot.w{background:#7060D0}.p-dot.s{background:#C84030}.p-dot.n{background:#1A8060}
+.phase-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5A5A5A}
+.q-item{background:#F5F5F3;border-radius:8px;padding:13px 16px 13px 30px;margin-bottom:10px;font-size:13.5px;line-height:1.65;position:relative}
+.q-item::before{content:'›';position:absolute;left:14px;top:13px;color:#AAA;font-size:16px;font-weight:700}
+.write-area{width:100%;min-height:72px;margin-top:8px;padding:11px 13px;border:1.5px dashed #D0CEC8;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:#1C1C1C;background:#fff;resize:vertical;outline:none;line-height:1.65;transition:border-color .15s}
+.write-area::placeholder{color:#C0BDB8}
+.char-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.char-card{border-radius:14px;padding:22px;border:1px solid}
+.char-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.char-name{font-family:'Lora',serif;font-size:18px;font-weight:600;margin-bottom:12px}
+.char-text{font-size:13px;line-height:1.7;color:#333}
+.char-text em{color:#555;font-style:italic}
+.char-text strong{color:#111;font-style:normal}
+footer{background:#fff;border-top:1px solid #E0DDD8;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#AAA;flex-wrap:wrap;gap:10px}
+@media(max-width:640px){.char-grid{grid-template-columns:1fr}.main{padding:24px 16px 60px}.topnav{padding:0 12px}}
+
+.nav-tab.active{color:#004A50;border-bottom-color:#004A50}
+.write-area:focus{border-color:#004A50;border-style:solid}
+.asp-head.kog{border-left:4px solid #004A50}
+.asp-head.aff{border-left:4px solid #C84030}
+.asp-head.mot{border-left:4px solid #1A7050}
+.asp-head.kog .asp-dot{background:#004A50}
+.asp-head.aff .asp-dot{background:#C84030}
+.asp-head.mot .asp-dot{background:#1A7050}
+.asp-head.kog .asp-title{color:#004A50}
+.asp-head.aff .asp-title{color:#C84030}
+.asp-head.mot .asp-title{color:#1A7050}
+.char-card.p1{background:#E0F5F5;border-color:#70C0C8}
+.char-card.p1 .char-tag{color:#004A50}
+.char-card.p2{background:#FEF3EC;border-color:#F0C0A0}
+.char-card.p2 .char-tag{color:#B85A10}
+.case-cta{background:#E0F5F5;color:#004A50;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600}
+.hero{background:linear-gradient(140deg,#002020 0%,#004A50 55%,#006870 100%);color:#fff;padding:52px 48px 44px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-family:'Lora',serif;font-size:30px;font-weight:600;line-height:1.22;margin-bottom:10px;position:relative;z-index:1;max-width:600px}
+.hero-sub{font-size:15px;opacity:.78;font-weight:300;max-width:540px;position:relative;z-index:1}
+.hero-meta{margin-top:24px;display:flex;flex-wrap:wrap;gap:16px;font-size:12px;opacity:.6;position:relative;z-index:1}
+.scenario-text{font-size:13.5px;line-height:1.75;color:#2A2A2A;font-style:italic;border-left:3px solid #004A50;padding-left:14px}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <span class="nav-brand">Reflective Writing</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('case')">📋 Case</button>
+    <button class="nav-tab" onclick="switchTab('kog')">🧠 Kognitiv</button>
+    <button class="nav-tab" onclick="switchTab('aff')">💛 Affektiv</button>
+    <button class="nav-tab" onclick="switchTab('mot')">🎯 Motivational</button>
+  </div>
+</nav>
+<div class="hero">
+  <a href="polbild_setA_index.html" style="display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;font-size:12px;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-weight:500;position:relative;z-index:2;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.13)'">&#8592; Zur Startseite</a>
+  <div class="hero-badge">Politische Bildung - Set A - Case 5 von 5</div>
+  <h1>Streiten konnen -<br>aber miteinander.</h1>
+  <p class="hero-sub">Diskurskompetenz und politischer Konflikt im Vergleich - zwei Erwachsene, zwei Diskurskulturen</p>
+  <div class="hero-meta"><span>Kognitiv</span><span>Affektiv</span><span>Motivational</span></div>
+</div>
+<div class="main">
+
+<div id="tab-case" class="panel active">
+  <div class="section-title">Die Personen</div>
+  <p class="section-sub">Lesen Sie beide Porträts vollständig, bevor Sie zu den Reflexionsfragen übergehen.</p>
+  <div class="char-grid">
+    <div class="char-card p1">
+      <div class="char-tag">Lernende - 33 Jahre - Gymnasiallehrerin</div>
+      <div class="char-name">Isabell R.</div>
+      <div class="char-text">Isabell unterrichtet Politikwissenschaft und nimmt an einem Fortbildungsseminar zu politischer Diskussionskultur teil. <strong>Sie ist rhetorisch geschult, kennt Argumentationsstrukturen und nutzt politische Kontroversen als Lernformat.</strong> In Diskussionen bleibt sie sachlich, setzt Argumente prazise ein und signalisiert Offenheit - aber unter der Oberflache ist ihr Verhalten stark strategisch. <em>Ich kann beide Seiten vertreten - aber ich weiss, wo ich stehe.</em> Sie verwechselt rhetorische Kompetenz manchmal mit echtem Dialog.</div>
+    </div>
+    <div class="char-card p2">
+      <div class="char-tag">Lernender - 51 Jahre - Lagerarbeiter</div>
+      <div class="char-name">Mehmet A.</div>
+      <div class="char-text">Mehmet ist politisch interessiert und verfolgt intensiv das politische Tagesgeschehen - aber er hat keine akademische Schule des Argumentierens durchlaufen. <strong>Er argumentiert aus Erfahrung und Gefuhl, direkt und unverblumit.</strong> In formalen Diskussionsrunden fuhlt er sich eingeschuchtert - nicht weil er weniger weiss, sondern weil seine Ausdrucksform nicht dem akademischen Diskursstandard entspricht. <em>Ich weiss was ich meine, aber ich kann es nicht so sagen wie die anderen.</em> Seine politischen Urteile sind oft treffend - kommen aber im Bildungsraum nicht an.</div>
+    </div>
+  </div>
+  <div class="scenario-box">
+    <div class="scenario-label">Gemeinsame Lernsituation</div>
+    <p class="scenario-text">Beide nehmen an einem eintaginigen Seminar teil: Politisch streiten lernen - Diskurskompetenz in der Demokratie. Die Dozentin initiiert eine strukturierte Kontroverse zu einem aktuellen politischen Thema. Isabell dominiert die Diskussion souveran - aber Mehmet zieht sich nach zehn Minuten zuruck. Er sagt spater in der Kaffeepause: Ich hab schon gewusst, was ich sagen wollte, aber dann kam der Satz nicht raus. Isabell hat es nicht bemerkt. Die Dozentin auch kaum.</p>
+  </div>
+  <div class="section-title" style="margin-bottom:12px">Auffällige Unterschiede im Lernverhalten</div>
+<table class="diff-table">
+<tr><th>Aspekt</th><th>Isabell R.</th><th>Mehmet A.</th></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#E0F5F5;color:#004A50">Kognitiv</span></td><td style="color:#004A50">Kennt Argumentationsstrukturen, Diskursregeln und rhetorische Strategien. Kognition: formal-analytisch, diskursgelassen.</td><td style="color:#555">Denkt in Erfahrungszusammenhangen und konkreten Urteilen. Kognition: situativ, emotional verankernd, direkt.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#FEF0EC;color:#C84030">Affektiv</span></td><td style="color:#004A50">Emotionale Sicherheit im Diskurs. Formale Debatte fuhlt sich vertraut und aktivierend an. Geringes Risikogefuhl.</td><td style="color:#555">Formale Debatte fuhlt sich einschuchternd an. Ruckzug als Schutzreaktion. Politisches Urteil vorhanden - aber nicht sagbar.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#E6F5EF;color:#1A7050">Motivational</span></td><td style="color:#004A50">Lernt, um die eigene Diskurspraxis zu reflektieren. Sucht Bestatigung und professionelle Weiterentwicklung.</td><td style="color:#555">Lernt, um gehort zu werden. Sucht einen Ort, an dem seine Perspektive Platz hat. Hoch motiviert - aber leicht entmutigt.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#F0F0EC;color:#555">Diskurskultur</span></td><td style="color:#004A50">Akademisch-formale Diskurskultur: Argumentation nach Regeln, Trennung von Person und Argument, rhetorische Kontrolle.</td><td style="color:#555">Alltagspraktische Diskurskultur: direkte Urteile, personliche Erfahrung als Argument, emotionale Direktheit.</td></tr>
+</table>
+
+  <div class="hint-box">
+    <div class="hint-head" onclick="toggleHint(this)">
+      <div class="hint-icon">💡</div>
+      <div class="hint-title">Theorie-Hinweise &amp; Lernressourcen – zum besseren Verstehen des Cases</div>
+      <div class="hint-chevron">▼</div>
+    </div>
+    <div class="hint-body"><div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Bourdieus linguistisches Kapital (1982)</strong><span>Wer die Sprache des akademischen Diskurses beherrscht, hat strukturellen Vorteil in formalen Lernraumen. Mehmets Ruckzug ist kein Kompetenzmangel - es ist eine Reaktion auf symbolische Gewalt.</span><div class="res-url">Bourdieu, P. (1982). Ce que parler veut dire. Fayard.</div></div></div>
+<div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Diskursethik (Habermas, 1983) - und ihre Kritik</strong><span>Habermas fordert herrschaftsfreien Diskurs unter gleichen Bedingungen. Das Problem: reale Diskurse sind nie herrschaftsfrei. Isabell und Mehmet sind formal gleich - aber strukturell ungleich.</span><div class="res-url">Habermas, J. (1983). Moralbewusstsein und kommunikatives Handeln. Suhrkamp.</div></div></div>
+<div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Beutelsbacher Konsens - Kontroversitatsgebot</strong><span>Kontroverse Themen mussen als kontrovers dargestellt werden - aber das setzt voraus, dass alle Stimmen im Raum auch gehort werden konnen. Was, wenn das strukturell verhindert wird?</span><div class="res-url">Wehling, H.-G. (1977). Konsens a la Bochum. Schwann.</div></div></div>
+<div class="res-item"><span class="res-badge">VIDEO</span><div class="res-info"><strong>Can you teach someone to argue well? - BBC Ideas</strong><span>Erklart, wie Argumentationskompetenz erworben wird - und warum sie nicht allen gleich zuganglich ist.</span><div class="res-url"><a href="https://www.youtube.com/watch?v=2Cvo5GVCLgE" target="_blank">https://www.youtube.com/watch?v=2Cvo5GVCLgE</a></div></div></div>
+<div class="res-item"><span class="res-badge">KONZEPT</span><div class="res-info"><strong>Inklusive Diskursgestaltung in der pol. Bildung</strong><span>Diskurse in der politischen Bildung mussen aktiv so gestaltet werden, dass verschiedene Ausdrucksformen - nicht nur akademische - als legitime Beitrage gelten.</span><div class="res-url">Reinhardt, S. (2012). Politik-Didaktik. Cornelsen.</div></div></div>
+</div>
+  </div>
+  <div style="text-align:center;padding:8px 0">
+    <button onclick="switchTab('kog')" style="background:#004A50;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer">Weiter zu den Reflexionsfragen →</button>
+  </div>
+</div>
+
+<div id="tab-kog" class="panel">
+  <div class="section-title">Kognitive Aspekte</div>
+  <p class="section-sub">Linguistisches Kapital - Diskursmacht - inklusive Diskursgestaltung - Kontroversitat</p>
+  <div class="aspect-block">
+    <div class="asp-head kog" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Kognitive Aspekte</span><span class="asp-sub">Linguistisches Kapital - Diskursmacht - inklusive Diskursgestaltung - Kontroversitat</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Beschreiben Sie den kognitiven Unterschied zwischen Isabells und Mehmets Diskursverhalten. Was passiert in beiden wahrend der Diskussionsrunde?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#004A50"></textarea></div>
+<div class="q-item">Mehmet weiss, was er sagen will - aber der Satz kommt nicht raus. Was passiert kognitiv in diesem Moment - und warum ist das kein Zeichen fehlender Kompetenz?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#004A50"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was bedeutet Bourdieus linguistisches Kapital fur das, was in diesem Seminar passiert? Wer hat strukturellen Vorteil - und warum ist das ein padagogisches Problem?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#004A50"></textarea></div>
+<div class="q-item">Inwiefern ist Isabells rhetorische Kompetenz eine Starke - und gleichzeitig ein Risiko fur den Lernraum anderer?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#004A50"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie gestalten Sie eine Diskussionsrunde, in der Mehmets Erfahrungsargumente denselben Status haben wie Isabells rhetorische Satzbauten?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#004A50"></textarea></div>
+<div class="q-item">Welche eine Methode wurden Sie einsetzen, damit Diskursmacht im Raum sichtbar und reflektierbar wird?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#004A50"></textarea></div>
+</div>
+</div>
+  </div>
+</div>
+
+<div id="tab-aff" class="panel">
+  <div class="section-title">Affektive Aspekte</div>
+  <p class="section-sub">Ruckzug als strukturelles Signal - Diskursangst - Wurdeschutz im Debattenraum</p>
+  <div class="aspect-block">
+    <div class="asp-head aff" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Affektive Aspekte</span><span class="asp-sub">Ruckzug als strukturelles Signal - Diskursangst - Wurdeschutz im Debattenraum</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Was passiert affektiv bei Mehmet, als er sich nach zehn Minuten aus der Diskussion zuruckzieht? Beschreiben Sie den inneren Prozess so konkret wie moglich.<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Isabell hat Mehmets Ruckzug nicht bemerkt. Was sagt das uber die affektive Aufmerksamkeit im Diskursraum aus?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was bedeutet es fur den Lernraum, wenn eine Form des Diskutierens (akademisch-formal) strukturell bevorteilt wird - auch ohne bose Absicht?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Was riskieren Sie als Lehrperson, wenn Sie Mehmets Ruckzug als personliche Zuruck haltung interpretieren - statt als strukturelles Signal?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie schaffen Sie einen Diskursraum, in dem Mehmet spricht - und Isabell zuhort, statt weiter zu argumentieren?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Was nehmen Sie fur Ihre eigene Haltung zu Diskursmacht und -gerechtigkeit im Lernraum mit?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+</div>
+  </div>
+</div>
+
+<div id="tab-mot" class="panel">
+  <div class="section-title">Motivationale Aspekte</div>
+  <p class="section-sub">Diskursmotivation - struktureller Ausschluss - Empowerment durch Inklusion</p>
+  <div class="aspect-block">
+    <div class="asp-head mot" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Motivationale Aspekte</span><span class="asp-sub">Diskursmotivation - struktureller Ausschluss - Empowerment durch Inklusion</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Was motiviert Isabell, an diesem Seminar teilzunehmen - und was Mehmet? Wo unterscheiden sich die Erwartungen fundamental?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Mehmet will gehort werden. Isabell will sich professionell weiterentwickeln. Was passiert mit Mehmets Motivation, wenn er wieder nicht gehort wird?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Inwiefern ist politische Diskurskompetenz motivational exklusiv - also nur fur diejenigen erreichbar, die bereits formal diskursfabig sind?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Was wurde Mehmet brauchen, damit die nachste Diskussionsrunde fur ihn motivierend statt entmutigend endet?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie formulieren Sie Diskursregeln zu Beginn eines Seminars, die explizit verschiedene Ausdrucksformen als gleichwertige Beitrage anerkennen?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Welche Veranderung in Ihrer Diskurs-Didaktik nehmen Sie nach dieser Reflexion vor?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+</div>
+  </div>
+  <div style="background:#fff;border-top:1px solid #E0DDD8;border-radius:0 0 14px 14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:4px">
+    <span style="font-size:12px;color:#888">Alle drei Aspekte ausgefüllt? Dann einreichen.</span>
+    <button onclick="openSubmitModal()" style="background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px">📧 An Dozentin senden</button>
+  </div>
+</div>
+
+</div>
+<footer><span>Case A5 - Konflikt, Kontroversitat & Diskurskompetenz</span><span>What / So What / Now What</span></footer>
+<div id="submit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:32px 28px;max-width:440px;width:100%;position:relative">
+    <button onclick="closeSubmitModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1">×</button>
+    <div style="font-family:'Lora',serif;font-size:19px;font-weight:600;margin-bottom:6px">Antworten einreichen</div>
+    <p style="font-size:12.5px;color:#777;margin-bottom:22px;line-height:1.55">Ihre Reflexionsantworten werden als E-Mail an die Dozentin gesendet.</p>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Vorname</label><input id="s-name" type="text" placeholder="z. B. Anna" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Nachname</label><input id="s-surname" type="text" placeholder="z. B. Müller" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:20px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Matrikelnummer</label><input id="s-matrikel" type="text" placeholder="z. B. 123456" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div id="submit-error" style="display:none;background:#FEF0EC;border:1px solid #F5C0B0;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#B84020;margin-bottom:14px">Bitte alle Felder ausfüllen.</div>
+    <button onclick="sendToInstructor('Case A5 - Konflikt, Kontroversitat und Diskurskompetenz')" style="width:100%;background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer">📧 An Dozentin senden</button>
+    <p style="font-size:11px;color:#AAA;text-align:center;margin-top:12px;line-height:1.5">Es öffnet sich Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht.</p>
+  </div>
+</div>
+<script>
+function switchTab(id){
+  const ids=['case','kog','aff','mot'];
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleHint(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.hint-chevron');
+  body.classList.toggle('open');
+  chev.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function toggleAsp(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.asp-chev');
+  const open=body.classList.toggle('open');
+  chev.textContent=open?'▲':'▼';
+}
+function openSubmitModal(){document.getElementById('submit-modal').style.display='flex';}
+function closeSubmitModal(){document.getElementById('submit-modal').style.display='none';}
+function sendToInstructor(caseLabel){
+  const name=document.getElementById('s-name').value.trim();
+  const surname=document.getElementById('s-surname').value.trim();
+  const matrikel=document.getElementById('s-matrikel').value.trim();
+  if(!name||!surname||!matrikel){document.getElementById('submit-error').style.display='block';return;}
+  document.getElementById('submit-error').style.display='none';
+  const tabs=['Kognitiv','Affektiv','Motivational'];
+  const tabIds=['tab-kog','tab-aff','tab-mot'];
+  const phases=['WHAT','SO WHAT','NOW WHAT'];
+  let answers='';
+  tabIds.forEach((tid,tIdx)=>{
+    answers+='\n'+'='.repeat(50)+'\n'+tabs[tIdx].toUpperCase()+'\n'+'='.repeat(50)+'\n';
+    document.querySelectorAll('#'+tid+' .write-area').forEach((ta,i)=>{
+      answers+='\n['+phases[Math.floor(i/2)]+' · Frage '+(i%2+1)+']\n'+(ta.value.trim()||'[keine Antwort]')+'\n';
+    });
+  });
+  const subject=encodeURIComponent('Reflective Writing – '+caseLabel+' – '+surname+', '+name+' – Matrikel: '+matrikel);
+  const body=encodeURIComponent('Eingereicht von:\nName: '+name+' '+surname+'\nMatrikelnummer: '+matrikel+'\nCase: '+caseLabel+'\n\n'+answers);
+  window.location.href='mailto:amine.merve.ercan@uni-jena.de?subject='+subject+'&body='+body;
+  closeSubmitModal();
+}
+
+</script>
+</body>
+</html>

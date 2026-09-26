@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case A4 - Identitat, Werte & Weltanschauung</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#F7F6F3;color:#1C1C1C;font-size:15px;line-height:1.72}
+.topnav{background:#fff;border-bottom:1px solid #E0DDD8;padding:0 32px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'Lora',serif;font-size:14px;color:#5A5A5A;padding:14px 0;margin-right:24px;white-space:nowrap}
+.nav-tabs{display:flex;overflow-x:auto}
+.nav-tab{padding:14px 18px;font-size:12.5px;font-weight:500;color:#5A5A5A;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
+.nav-tab:hover{color:#1C1C1C}
+.main{max-width:860px;margin:0 auto;padding:36px 32px 72px}
+.section-title{font-family:'Lora',serif;font-size:20px;font-weight:600;color:#1C1C1C;margin-bottom:6px}
+.section-sub{font-size:13px;color:#5A5A5A;margin-bottom:24px}
+.panel{display:none}.panel.active{display:block}
+.scenario-box{background:#fff;border:1px solid #E0DDD8;border-radius:12px;padding:20px 22px;margin-bottom:28px}
+.scenario-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5A5A5A;margin-bottom:10px}
+.diff-table{width:100%;border-collapse:collapse;margin-bottom:28px;font-size:13px}
+.diff-table th{padding:10px 14px;background:#F5F5F3;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-align:left;border-bottom:2px solid #E0DDD8}
+.diff-table td{padding:12px 14px;border-bottom:1px solid #E0DDD8;vertical-align:top;line-height:1.6}
+.diff-table tr:last-child td{border-bottom:none}
+.diff-table tr:hover td{background:#FAFAF8}
+.hint-box{background:#FFFBF0;border:1px solid #D4A820;border-radius:12px;overflow:hidden;margin-bottom:32px}
+.hint-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
+.hint-icon{width:28px;height:28px;border-radius:50%;background:#D4A820;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hint-title{font-size:13.5px;font-weight:600;color:#7A5500;flex:1}
+.hint-chevron{font-size:12px;color:#9A7000}
+.hint-body{padding:0 20px 20px;display:none;border-top:1px solid #F0D860}
+.hint-body.open{display:block;padding-top:16px}
+.res-item{display:flex;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #F5E890}
+.res-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.res-badge{background:#7A5500;color:#fff;font-size:9px;padding:3px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:3px;letter-spacing:.05em}
+.res-info strong{font-size:13px;display:block;margin-bottom:3px;color:#3A2800}
+.res-info span{font-size:12px;color:#7A5500;line-height:1.55}
+.res-url{font-size:11px;color:#3A80D0;margin-top:4px;word-break:break-all}
+.aspect-block{background:#fff;border:1px solid #E0DDD8;border-radius:14px;overflow:hidden;margin-bottom:16px}
+.asp-head{display:flex;align-items:center;gap:12px;padding:15px 20px;cursor:pointer;user-select:none;transition:background .15s}
+.asp-head:hover{background:#F5F5F3}
+.asp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.asp-title{font-size:14px;font-weight:600}
+.asp-sub{font-size:12px;color:#5A5A5A;flex:1}
+.asp-chev{font-size:12px;color:#5A5A5A}
+.asp-body{padding:20px 24px;display:none}
+.asp-body.open{display:block}
+.phase{margin-bottom:22px}.phase:last-child{margin-bottom:0}
+.phase-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #E0DDD8}
+.p-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.p-dot.w{background:#7060D0}.p-dot.s{background:#C84030}.p-dot.n{background:#1A8060}
+.phase-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5A5A5A}
+.q-item{background:#F5F5F3;border-radius:8px;padding:13px 16px 13px 30px;margin-bottom:10px;font-size:13.5px;line-height:1.65;position:relative}
+.q-item::before{content:'›';position:absolute;left:14px;top:13px;color:#AAA;font-size:16px;font-weight:700}
+.write-area{width:100%;min-height:72px;margin-top:8px;padding:11px 13px;border:1.5px dashed #D0CEC8;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:#1C1C1C;background:#fff;resize:vertical;outline:none;line-height:1.65;transition:border-color .15s}
+.write-area::placeholder{color:#C0BDB8}
+.char-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.char-card{border-radius:14px;padding:22px;border:1px solid}
+.char-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.char-name{font-family:'Lora',serif;font-size:18px;font-weight:600;margin-bottom:12px}
+.char-text{font-size:13px;line-height:1.7;color:#333}
+.char-text em{color:#555;font-style:italic}
+.char-text strong{color:#111;font-style:normal}
+footer{background:#fff;border-top:1px solid #E0DDD8;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#AAA;flex-wrap:wrap;gap:10px}
+@media(max-width:640px){.char-grid{grid-template-columns:1fr}.main{padding:24px 16px 60px}.topnav{padding:0 12px}}
+
+.nav-tab.active{color:#602080;border-bottom-color:#602080}
+.write-area:focus{border-color:#602080;border-style:solid}
+.asp-head.kog{border-left:4px solid #602080}
+.asp-head.aff{border-left:4px solid #C84030}
+.asp-head.mot{border-left:4px solid #1A7050}
+.asp-head.kog .asp-dot{background:#602080}
+.asp-head.aff .asp-dot{background:#C84030}
+.asp-head.mot .asp-dot{background:#1A7050}
+.asp-head.kog .asp-title{color:#602080}
+.asp-head.aff .asp-title{color:#C84030}
+.asp-head.mot .asp-title{color:#1A7050}
+.char-card.p1{background:#F0E8FF;border-color:#C090E8}
+.char-card.p1 .char-tag{color:#602080}
+.char-card.p2{background:#FEF3EC;border-color:#F0C0A0}
+.char-card.p2 .char-tag{color:#B85A10}
+.case-cta{background:#F0E8FF;color:#602080;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600}
+.hero{background:linear-gradient(140deg,#2A0030 0%,#602080 55%,#8030A0 100%);color:#fff;padding:52px 48px 44px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-family:'Lora',serif;font-size:30px;font-weight:600;line-height:1.22;margin-bottom:10px;position:relative;z-index:1;max-width:600px}
+.hero-sub{font-size:15px;opacity:.78;font-weight:300;max-width:540px;position:relative;z-index:1}
+.hero-meta{margin-top:24px;display:flex;flex-wrap:wrap;gap:16px;font-size:12px;opacity:.6;position:relative;z-index:1}
+.scenario-text{font-size:13.5px;line-height:1.75;color:#2A2A2A;font-style:italic;border-left:3px solid #602080;padding-left:14px}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <span class="nav-brand">Reflective Writing</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('case')">📋 Case</button>
+    <button class="nav-tab" onclick="switchTab('kog')">🧠 Kognitiv</button>
+    <button class="nav-tab" onclick="switchTab('aff')">💛 Affektiv</button>
+    <button class="nav-tab" onclick="switchTab('mot')">🎯 Motivational</button>
+  </div>
+</nav>
+<div class="hero">
+  <a href="polbild_setA_index.html" style="display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;font-size:12px;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-weight:500;position:relative;z-index:2;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.13)'">&#8592; Zur Startseite</a>
+  <div class="hero-badge">Politische Bildung - Set A - Case 4 von 5</div>
+  <h1>Wer bin ich politisch -<br>und warum?</h1>
+  <p class="hero-sub">Politische Identitat und Wertbildung im Generationenvergleich</p>
+  <div class="hero-meta"><span>Kognitiv</span><span>Affektiv</span><span>Motivational</span></div>
+</div>
+<div class="main">
+
+<div id="tab-case" class="panel active">
+  <div class="section-title">Die Personen</div>
+  <p class="section-sub">Lesen Sie beide Porträts vollständig, bevor Sie zu den Reflexionsfragen übergehen.</p>
+  <div class="char-grid">
+    <div class="char-card p1">
+      <div class="char-tag">Lernende - 26 Jahre - Absolventin</div>
+      <div class="char-name">Sofia L.</div>
+      <div class="char-text">Sofia hat Sozialwissenschaften studiert und nimmt an einem Seminar zu politischer Identitat teil. <strong>Sie identifiziert sich mit mehreren politischen Stromungen gleichzeitig</strong> - feministisch, okologisch, manchmal libertare Elemente - und empfindet das als Starke: Weltanschauungen sind fur sie fluid und kontextabhangig. Wenn im Kurs nach ihrer politischen Grunduberzeugung gefragt wird, sagt sie: <em>Das hangt davon ab, worgen es geht.</em> Klare Zuordnungen empfindet sie als Einengung. Sie ist politisch neugierig, aber schwer greifbar.</div>
+    </div>
+    <div class="char-card p2">
+      <div class="char-tag">Lernender - 58 Jahre - Handwerksmeister</div>
+      <div class="char-name">Werner B.</div>
+      <div class="char-text">Werner hat einen kleinen Betrieb, ist seit 30 Jahren in derselben Partei und nimmt an dem Seminar auf Empfehlung seiner Kreisvereinigung teil. <strong>Fur ihn ist politische Identitat klar und stabil</strong>: konservative Werte, Leistungsprinzip, Skepsis gegenuber schnellem Wandel. Er empfindet Sofias Vieldeutigkeit als Beliebigkeit: <em>Wer uberall ein bisschen ist, ist nirgends wirklich.</em> Er ist uberzeugt, dass klare Haltungen die Grundlage demokratischer Diskurse sind - und versteht nicht, warum junge Menschen so unverbindlich sind.</div>
+    </div>
+  </div>
+  <div class="scenario-box">
+    <div class="scenario-label">Gemeinsame Lernsituation</div>
+    <p class="scenario-text">Beide nehmen an einem eintaginigen Politikbildungsseminar teil: Werte, Identitat und politische Uberzeugungen. Die Dozentin arbeitet mit biographischen Reflexionsmethoden und dem Konzept des politischen Wertekompass. Sofia und Werner sitzen in einer Kleingruppenubung zusammen und sollen ihre drei wichtigsten politischen Werte benennen. Das Gesprach eskaliert nicht - aber beide verlassen die Gruppe mit dem Gefuhl, dass der andere es nicht richtig verstanden hat.</p>
+  </div>
+  <div class="section-title" style="margin-bottom:12px">Auffällige Unterschiede im Lernverhalten</div>
+<table class="diff-table">
+<tr><th>Aspekt</th><th>Sofia L.</th><th>Werner B.</th></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#F0E8FF;color:#602080">Kognitiv</span></td><td style="color:#602080">Politische Identitat als offenes System: mehrere Werte, situationsabhangig. Kognition: plural, kontextsensibel, anti-essenzialistisch.</td><td style="color:#555">Politische Identitat als geschlossenes System: stabile Uberzeugungen, konsistent uber Zeit. Kognition: prinzipientreu, kohaerent, essenzialistisch.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#FEF0EC;color:#C84030">Affektiv</span></td><td style="color:#602080">Klare Zuordnungen fuhlen sich einengend an. Pluralitat als Freiheitserfahrung. Unbehagen bei ideologischer Festlegung.</td><td style="color:#555">Vieldeutigkeit fuhlt sich wie Beliebigkeit an. Klarheit als Integritatserfahr ung. Unbehagen bei Unverbindlichkeit.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#E6F5EF;color:#1A7050">Motivational</span></td><td style="color:#602080">Lernt, um politische Neugierde zu strukturieren und zu vertiefen. Sucht keine feste Identitat, sondern Orientierungsrahmen.</td><td style="color:#555">Lernt, um die eigene Position zu scharfen und besser kommunizieren zu konnen. Sucht Bestatigung, nicht Veranderung.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#F0F0EC;color:#555">Wertbildung</span></td><td style="color:#602080">Post-materialistisch, pluralistisch (Inglehart). Werte als Ergebnis reflexiver Auseinandersetzung, nicht biographischer Kontinuitat.</td><td style="color:#555">Materialistisch-konservativ, auf Kontinuitat bedacht (Inglehart). Werte als langfristige Haltung, die sich bewahrheiten muss.</td></tr>
+</table>
+
+  <div class="hint-box">
+    <div class="hint-head" onclick="toggleHint(this)">
+      <div class="hint-icon">💡</div>
+      <div class="hint-title">Theorie-Hinweise &amp; Lernressourcen – zum besseren Verstehen des Cases</div>
+      <div class="hint-chevron">▼</div>
+    </div>
+    <div class="hint-body"><div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Wertwandel nach Inglehart (1977)</strong><span>Unterscheidet zwischen materialistischen Werten (Sicherheit, Ordnung) und post-materialistischen (Selbstverwirklichung, Partizipation). Erklart den Generationsunterschied zwischen Sofia und Werner strukturell.</span><div class="res-url">Inglehart, R. (1977). The Silent Revolution. Princeton University Press.</div></div></div>
+<div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Politische Identitat und Identifikation (Tajfel & Turner, 1979)</strong><span>Politische Identitat entsteht durch Gruppenidentifikation. Wer sich mit einer Partei oder Bewegung identifiziert, ubernimmt deren Werte als Teil des Selbst - erklar t Werners Stabilitat.</span><div class="res-url">Tajfel, H. & Turner, J. C. (1979). An integrative theory of intergroup conflict.</div></div></div>
+<div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Beutelsbacher Konsens - Uberwaltigunsverbot</strong><span>In der politischen Bildung darf keine Weltanschauung als die richtige vermittelt werden. Weder Sofias Pluralismus noch Werners Konservatismus darf als Norm gesetzt werden.</span><div class="res-url">Wehling, H.-G. (1977). Konsens a la Bochum. Schwann.</div></div></div>
+<div class="res-item"><span class="res-badge">VIDEO</span><div class="res-info"><strong>Was sind politische Werte? - Erklarvideo BpB</strong><span>Erklart, wie politische Werte entstehen und was sie von Meinungen unterscheidet.</span><div class="res-url"><a href="https://www.bpb.de/lernen/politische-bildung/" target="_blank">https://www.bpb.de/lernen/politische-bildung/</a></div></div></div>
+<div class="res-item"><span class="res-badge">KONZEPT</span><div class="res-info"><strong>Kontroversitatsgebot vs. Pluralismus in der pol. Bildung</strong><span>Politische Bildung muss Kontroversen als solche darstellen - und gleichzeitig Raume schaffen, in denen verschiedene Werteprofile coexistieren konnen, ohne sich gegenseitig zu delegitimieren.</span><div class="res-url">Reinhardt, S. (2012). Politik-Didaktik. Cornelsen.</div></div></div>
+</div>
+  </div>
+  <div style="text-align:center;padding:8px 0">
+    <button onclick="switchTab('kog')" style="background:#602080;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer">Weiter zu den Reflexionsfragen →</button>
+  </div>
+</div>
+
+<div id="tab-kog" class="panel">
+  <div class="section-title">Kognitive Aspekte</div>
+  <p class="section-sub">Wertwandel - politische Identitat - Pluralismus - Kontroversitatsgebot</p>
+  <div class="aspect-block">
+    <div class="asp-head kog" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Kognitive Aspekte</span><span class="asp-sub">Wertwandel - politische Identitat - Pluralismus - Kontroversitatsgebot</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Beschreiben Sie Sofias und Werners kognitive Struktur politischer Identitat. Was meinen beide, wenn sie von ihren Uberzeugungen sprechen?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#602080"></textarea></div>
+<div class="q-item">Werner empfindet Sofias Vieldeutigkeit als Beliebigkeit. Sofia empfindet Werners Klarheit als Einengung. Was fehlt beiden kognitiv, um das andere als legitim zu sehen?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#602080"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was bedeutet Ingleharts Wertwandel-These fur den Vergleich zwischen Sofia und Werner? Inwiefern ist ihr Unterschied kein Personen-, sondern ein Generationenproblem?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#602080"></textarea></div>
+<div class="q-item">Inwiefern kann politische Bildung Sofias Pluralismus und Werners Prinzipientreue gleichzeitig als Ressource behandeln - statt als Defizit?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#602080"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie gestalten Sie eine Ubung zu politischen Werten, die weder Pluralismus als uberlegenes Modell noch stabile Identitat als ruckstandig darstellt?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#602080"></textarea></div>
+<div class="q-item">Welche eine Methode wurden Sie einsetzen, damit beide ihr Werteverstandnis erweitern?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#602080"></textarea></div>
+</div>
+</div>
+  </div>
+</div>
+
+<div id="tab-aff" class="panel">
+  <div class="section-title">Affektive Aspekte</div>
+  <p class="section-sub">Wurden politischer Identitat - Wertkonflikt - affektive Legitimation - Lernklima</p>
+  <div class="aspect-block">
+    <div class="asp-head aff" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Affektive Aspekte</span><span class="asp-sub">Wurden politischer Identitat - Wertkonflikt - affektive Legitimation - Lernklima</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Was passiert affektiv bei Sofia, wenn Werner ihre Vieldeutigkeit als Beliebigkeit bezeichnet? Und bei Werner, wenn Sofia Klarheit als Einengung beschreibt?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Inwiefern ist politische Identitat eine Frage der Wurde - und was passiert, wenn sie im Lernraum herausgefordert wird?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was bedeutet es fur den Bildungsraum, wenn zwei Wertmodelle (pluralistisch vs. konservativ-stabil) aufeinandertreffen - und beide das Gefuhl haben, das andere versteht es nicht?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Wie halten Sie als Lehrperson den Raum fur beide Wertprofile - ohne dass das eine das andere delegitimiert?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie gestalten Sie einen Abschluss, der sowohl Sofias Offenheit als auch Werners Klarheit als demokratische Ressourcen sichtbar macht?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Was nehmen Sie fur Ihre eigene Haltung zu politischer Identitat im Lernraum mit?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+</div>
+  </div>
+</div>
+
+<div id="tab-mot" class="panel">
+  <div class="section-title">Motivationale Aspekte</div>
+  <p class="section-sub">Wertepluralismus als Ressource - Stabilitat als Starke - Motivationsdifferenz</p>
+  <div class="aspect-block">
+    <div class="asp-head mot" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Motivationale Aspekte</span><span class="asp-sub">Wertepluralismus als Ressource - Stabilitat als Starke - Motivationsdifferenz</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Was motiviert Sofia zur Kursteilnahme - und was Werner? Wo unterscheiden sich die Lernziele fundamental?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Sofia sucht Orientierungsrahmen, Werner sucht Scharfung. Wie konnen beide aus demselben Kurs etwas Wertvolles mitnehmen?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was passiert mit Werners Motivation, wenn der Kurs Pluralismus als Norm setzt? Was mit Sofias, wenn ein klares Werteprofil erwartet wird?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Inwiefern ist das Uberwaltigunsverbot des Beutelsbacher Konsens eine motivationale Schutzregel - fur beide Seiten?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie formulieren Sie einen Seminarauftakt, der sowohl Sofias neugierige Offenheit als auch Werners uberzeugte Klarheit als Ausgangspunkt wurdigt?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Welche Veranderung in Ihrer Wertedidaktik nehmen Sie nach dieser Reflexion vor?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+</div>
+  </div>
+  <div style="background:#fff;border-top:1px solid #E0DDD8;border-radius:0 0 14px 14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:4px">
+    <span style="font-size:12px;color:#888">Alle drei Aspekte ausgefüllt? Dann einreichen.</span>
+    <button onclick="openSubmitModal()" style="background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px">📧 An Dozentin senden</button>
+  </div>
+</div>
+
+</div>
+<footer><span>Case A4 - Identitat, Werte & Weltanschauung</span><span>What / So What / Now What</span></footer>
+<div id="submit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:32px 28px;max-width:440px;width:100%;position:relative">
+    <button onclick="closeSubmitModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1">×</button>
+    <div style="font-family:'Lora',serif;font-size:19px;font-weight:600;margin-bottom:6px">Antworten einreichen</div>
+    <p style="font-size:12.5px;color:#777;margin-bottom:22px;line-height:1.55">Ihre Reflexionsantworten werden als E-Mail an die Dozentin gesendet.</p>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Vorname</label><input id="s-name" type="text" placeholder="z. B. Anna" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Nachname</label><input id="s-surname" type="text" placeholder="z. B. Müller" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:20px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Matrikelnummer</label><input id="s-matrikel" type="text" placeholder="z. B. 123456" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div id="submit-error" style="display:none;background:#FEF0EC;border:1px solid #F5C0B0;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#B84020;margin-bottom:14px">Bitte alle Felder ausfüllen.</div>
+    <button onclick="sendToInstructor('Case A4 - Identitat, Werte und Weltanschauung')" style="width:100%;background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer">📧 An Dozentin senden</button>
+    <p style="font-size:11px;color:#AAA;text-align:center;margin-top:12px;line-height:1.5">Es öffnet sich Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht.</p>
+  </div>
+</div>
+<script>
+function switchTab(id){
+  const ids=['case','kog','aff','mot'];
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleHint(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.hint-chevron');
+  body.classList.toggle('open');
+  chev.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function toggleAsp(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.asp-chev');
+  const open=body.classList.toggle('open');
+  chev.textContent=open?'▲':'▼';
+}
+function openSubmitModal(){document.getElementById('submit-modal').style.display='flex';}
+function closeSubmitModal(){document.getElementById('submit-modal').style.display='none';}
+function sendToInstructor(caseLabel){
+  const name=document.getElementById('s-name').value.trim();
+  const surname=document.getElementById('s-surname').value.trim();
+  const matrikel=document.getElementById('s-matrikel').value.trim();
+  if(!name||!surname||!matrikel){document.getElementById('submit-error').style.display='block';return;}
+  document.getElementById('submit-error').style.display='none';
+  const tabs=['Kognitiv','Affektiv','Motivational'];
+  const tabIds=['tab-kog','tab-aff','tab-mot'];
+  const phases=['WHAT','SO WHAT','NOW WHAT'];
+  let answers='';
+  tabIds.forEach((tid,tIdx)=>{
+    answers+='\n'+'='.repeat(50)+'\n'+tabs[tIdx].toUpperCase()+'\n'+'='.repeat(50)+'\n';
+    document.querySelectorAll('#'+tid+' .write-area').forEach((ta,i)=>{
+      answers+='\n['+phases[Math.floor(i/2)]+' · Frage '+(i%2+1)+']\n'+(ta.value.trim()||'[keine Antwort]')+'\n';
+    });
+  });
+  const subject=encodeURIComponent('Reflective Writing – '+caseLabel+' – '+surname+', '+name+' – Matrikel: '+matrikel);
+  const body=encodeURIComponent('Eingereicht von:\nName: '+name+' '+surname+'\nMatrikelnummer: '+matrikel+'\nCase: '+caseLabel+'\n\n'+answers);
+  window.location.href='mailto:amine.merve.ercan@uni-jena.de?subject='+subject+'&body='+body;
+  closeSubmitModal();
+}
+
+</script>
+</body>
+</html>

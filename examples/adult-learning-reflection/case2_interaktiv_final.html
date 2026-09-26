@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case 2 · Zwei Generationen im Lernraum – Reflective Writing</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#1A5EA8;--blue-l:#EAF2FC;--blue-m:#6EA8E0;
+  --orange:#B85A10;--orange-l:#FEF3EC;
+  --green:#1A7050;--green-l:#E6F5EF;
+  --gray:#5A5A5A;--gray-l:#F5F5F3;--border:#E0DDD8;--text:#1C1C1C;
+  --hint:#FFFBF0;--hint-b:#D4A820;
+}
+body{font-family:'Inter',sans-serif;background:#F7F6F3;color:var(--text);font-size:15px;line-height:1.72}
+.topnav{background:#fff;border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'Lora',serif;font-size:14px;color:var(--gray);padding:14px 0;margin-right:24px;white-space:nowrap}
+.nav-tabs{display:flex;overflow-x:auto}
+.nav-tab{padding:14px 18px;font-size:12.5px;font-weight:500;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
+.nav-tab:hover{color:var(--text)}
+.nav-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.hero{background:linear-gradient(140deg,#091F4A 0%,#1A4A90 55%,#2A70CC 100%);color:#fff;padding:52px 48px 44px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Lora',serif;font-size:32px;font-weight:600;line-height:1.22;margin-bottom:12px;position:relative;z-index:1;max-width:600px}
+.hero-sub{font-size:15px;opacity:.78;font-weight:300;max-width:540px;position:relative;z-index:1}
+.hero-meta{margin-top:28px;display:flex;flex-wrap:wrap;gap:20px;font-size:12px;opacity:.6;position:relative;z-index:1}
+.main{max-width:860px;margin:0 auto;padding:36px 32px 72px}
+.section-title{font-family:'Lora',serif;font-size:20px;font-weight:600;color:var(--text);margin-bottom:6px}
+.section-sub{font-size:13px;color:var(--gray);margin-bottom:24px}
+.panel{display:none}.panel.active{display:block}
+.char-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.char-card{border-radius:14px;padding:22px;border:1px solid}
+.char-card.young{background:var(--blue-l);border-color:#B0CFF0}
+.char-card.old{background:var(--orange-l);border-color:#F0C0A0}
+.char-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.char-card.young .char-tag{color:var(--blue)}
+.char-card.old .char-tag{color:var(--orange)}
+.char-name{font-family:'Lora',serif;font-size:18px;font-weight:600;margin-bottom:12px}
+.char-text{font-size:13px;line-height:1.7;color:#333}
+.char-text em{color:#555;font-style:italic}
+.char-text strong{color:#111;font-style:normal}
+.scenario-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:28px}
+.scenario-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:10px}
+.scenario-text{font-size:13.5px;line-height:1.75;color:#2A2A2A;font-style:italic;border-left:3px solid var(--blue-m);padding-left:14px}
+.diff-table{width:100%;border-collapse:collapse;margin-bottom:28px;font-size:13px}
+.diff-table th{padding:10px 14px;background:var(--gray-l);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-align:left;border-bottom:2px solid var(--border)}
+.diff-table th:first-child{width:22%}
+.diff-table td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+.diff-table tr:last-child td{border-bottom:none}
+.diff-table tr:hover td{background:#FAFAF8}
+.asp-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px}
+.asp-k{background:var(--blue-l);color:var(--blue)}
+.asp-a{background:var(--orange-l);color:var(--orange)}
+.asp-m{background:var(--green-l);color:var(--green)}
+.col-young{color:#1040A0}
+.col-old{color:#B04010}
+.hint-box{background:var(--hint);border:1px solid var(--hint-b);border-radius:12px;overflow:hidden;margin-bottom:32px}
+.hint-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
+.hint-icon{width:28px;height:28px;border-radius:50%;background:var(--hint-b);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hint-title{font-size:13.5px;font-weight:600;color:#7A5500;flex:1}
+.hint-chevron{font-size:12px;color:#9A7000}
+.hint-body{padding:0 20px 20px;display:none;border-top:1px solid #F0D860}
+.hint-body.open{display:block;padding-top:16px}
+.res-item{display:flex;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #F5E890}
+.res-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.res-badge{background:#7A5500;color:#fff;font-size:9px;padding:3px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:3px;letter-spacing:.05em}
+.res-info strong{font-size:13px;display:block;margin-bottom:3px;color:#3A2800}
+.res-info span{font-size:12px;color:#7A5500;line-height:1.55}
+.res-url{font-size:11px;color:#3A80D0;margin-top:4px;word-break:break-all}
+.aspect-block{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.asp-head{display:flex;align-items:center;gap:12px;padding:15px 20px;cursor:pointer;user-select:none;transition:background .15s}
+.asp-head:hover{background:var(--gray-l)}
+.asp-head.kog{border-left:4px solid var(--blue)}
+.asp-head.aff{border-left:4px solid var(--orange)}
+.asp-head.mot{border-left:4px solid var(--green)}
+.asp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.asp-head.kog .asp-dot{background:var(--blue)}
+.asp-head.aff .asp-dot{background:var(--orange)}
+.asp-head.mot .asp-dot{background:var(--green)}
+.asp-title{font-size:14px;font-weight:600}
+.asp-head.kog .asp-title{color:var(--blue)}
+.asp-head.aff .asp-title{color:var(--orange)}
+.asp-head.mot .asp-title{color:var(--green)}
+.asp-sub{font-size:12px;color:var(--gray);flex:1}
+.asp-chev{font-size:12px;color:var(--gray)}
+.asp-body{padding:20px 24px;display:none}
+.asp-body.open{display:block}
+.phase{margin-bottom:22px}.phase:last-child{margin-bottom:0}
+.phase-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.p-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.p-dot.w{background:#7060D0}.p-dot.s{background:#C84030}.p-dot.n{background:#1A8060}
+.phase-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray)}
+.q-item{background:var(--gray-l);border-radius:8px;padding:13px 16px 13px 30px;margin-bottom:10px;font-size:13.5px;line-height:1.65;position:relative}
+.q-item::before{content:'›';position:absolute;left:14px;top:13px;color:#AAA;font-size:16px;font-weight:700}
+.write-area{width:100%;min-height:72px;margin-top:8px;padding:11px 13px;border:1.5px dashed #D0CEC8;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text);background:#fff;resize:vertical;outline:none;line-height:1.65;transition:border-color .15s}
+.write-area:focus{border-color:var(--blue-m);border-style:solid}
+.write-area::placeholder{color:#C0BDB8}
+footer{background:#fff;border-top:1px solid var(--border);padding:20px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#AAA;flex-wrap:wrap;gap:10px}
+@media(max-width:640px){.char-grid{grid-template-columns:1fr}.hero{padding:36px 20px 30px}.hero h1{font-size:24px}.main{padding:24px 16px 60px}.topnav{padding:0 12px}}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <span class="nav-brand">Reflective Writing</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('case')">📋 Case</button>
+    <button class="nav-tab" onclick="switchTab('kog')">🧠 Kognitiv</button>
+    <button class="nav-tab" onclick="switchTab('aff')">💛 Affektiv</button>
+    <button class="nav-tab" onclick="switchTab('mot')">🎯 Motivational</button>
+  </div>
+</nav>
+<div class="hero">
+  <a href="bildung_index.html" style="display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;font-size:12px;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-weight:500;position:relative;z-index:2;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.13)'">← Ana sayfaya dön</a>
+  <div class="hero-badge">Case 2 von 3 · Typische Erwachsenenbildung</div>
+  <h1>Gleicher Raum,<br>unterschiedliche Köpfe.</h1>
+  <p class="hero-sub">Bildungsunterschiede zwischen typischen jungen und älteren Erwachsenen</p>
+  <div class="hero-meta"><span>🧠 Fluide vs. kristallisierte Intelligenz</span><span>💛 Identität &amp; Würde</span><span>🎯 Extrinsisch vs. intrinsisch</span></div>
+</div>
+<div class="main">
+
+<div id="tab-case" class="panel active">
+  <div class="section-title">Die Personen</div>
+  <p class="section-sub">Lesen Sie beide Porträts vollständig, bevor Sie zu den Reflexionsfragen übergehen.</p>
+  <div class="char-grid">
+    <div class="char-card young">
+      <div class="char-tag">Junger Erwachsener · 26 Jahre</div>
+      <div class="char-name">Tarek M.</div>
+      <div class="char-text">Tarek hat gerade seinen Bachelor in Wirtschaft abgeschlossen und nimmt an einem freiwilligen Führungskräfte-Nachwuchsprogramm teil. Er ist <strong>schnell, multitaskingfähig und kennt digitale Tools intuitiv</strong>. In Gruppenübungen übernimmt er meist die Initiative – nicht immer hilfreich. Wenn der Trainer komplexe Konzepte erklärt, nickt Tarek und springt sofort zu Lösungsvorschlägen über, <em>bevor der Sachverhalt vollständig dargestellt wurde</em>. In der Nachbesprechung fallen ihm Fehler in seinen Antworten auf – er hatte zu schnell analogisiert. Auf Feedback reagiert er mit Ehrgeiz, aber auch mit sichtbarer Nervosität. Er lernt für den Lebenslauf.</div>
+    </div>
+    <div class="char-card old">
+      <div class="char-tag">Ältere Erwachsene · 54 Jahre</div>
+      <div class="char-name">Brigitte S.</div>
+      <div class="char-text">Brigitte ist Abteilungsleiterin im Gesundheitswesen und nimmt auf Empfehlung ihrer Personalentwicklung teil. Sie <strong>hört dem Trainer lange zu, bevor sie spricht</strong> – und wenn sie spricht, ist es präzise. Sie verknüpft neue Inhalte mit 28 Jahren Berufserfahrung. Manchmal lehnt sie Konzepte ab, die ihrer Erfahrung widersprechen: <em>„Das mag in der Theorie stimmen, aber in der Praxis läuft das anders."</em> Sie hat Mühe, neue Frameworks ohne Anker im Bekannten zu lernen. Feedback nimmt sie professionell an – aber es kostet sie mehr als es zeigt. Sie lernt für Qualität und Tiefe.</div>
+    </div>
+  </div>
+  <div class="scenario-box">
+    <div class="scenario-label">Gemeinsame Situation</div>
+    <p class="scenario-text">Beide nehmen an einem zweitägigen Seminar teil: „Agile Führung – Prinzipien und Praxis". Tag 1 ist theorielastig, Tag 2 simulationsbasiert. Der Trainer ist 38 Jahre alt und frisch zertifiziert. Er verwendet viel Jargon aus Start-up-Kultur und Design Thinking. Am Ende von Tag 1 füllen beide einen Selbsteinschätzungsbogen aus: Tarek bewertet seine Kompetenz höher als Brigitte – obwohl ihre Antworten in der Diskussion deutlich fundierter waren.</p>
+  </div>
+  <div class="section-title" style="margin-bottom:12px">Auffällige Unterschiede im Lernverhalten</div>
+  <table class="diff-table">
+    <tr><th>Aspekt</th><th>Tarek (26)</th><th>Brigitte (54)</th></tr>
+    <tr><td><span class="asp-badge asp-k">Kognitiv</span></td><td class="col-young">Schnelle Verarbeitung, oberflächliche Tiefe. Fluide Intelligenz dominant – springt zu Lösungen, bevor der Kontext klar ist.</td><td class="col-old">Langsamere Aufnahme, tiefe Verknüpfung. Kristallisierte Intelligenz – baut auf 28 Jahren Erfahrung auf.</td></tr>
+    <tr><td><span class="asp-badge asp-a">Affektiv</span></td><td class="col-young">Fehler aktivierend (Ehrgeiz + Nervosität). Identität stark an sichtbare Leistung geknüpft.</td><td class="col-old">Feedback professionell absorbiert, aber innerlich kostspielig. Würde und Selbstbild stehen auf dem Spiel.</td></tr>
+    <tr><td><span class="asp-badge asp-m">Motivational</span></td><td class="col-young">Extrinsisch – Lebenslauf, Status, Anerkennung. Lernziel: sichtbare Kompetenz zeigen.</td><td class="col-old">Intrinsisch – Qualität, Tiefe, Anwendbarkeit. Lernt nur, wenn Sinn und Relevanz klar erkennbar sind.</td></tr>
+    <tr><td><span class="asp-badge" style="background:#F0F0EC;color:#555">Selbstbild</span></td><td class="col-young">Überschätzt eigene Kompetenz (Dunning-Kruger). Selbstbewusstsein übersteigt aktuelles Können.</td><td class="col-old">Unterschätzt eigene Kompetenz. Erfahrungswissen wird intern abgewertet, weil es „nicht akademisch" klingt.</td></tr>
+  </table>
+  <div class="hint-box">
+    <div class="hint-head" onclick="toggleHint(this)">
+      <div class="hint-icon">💡</div>
+      <div class="hint-title">Theorie-Hinweise &amp; Lernressourcen – zum besseren Verstehen des Cases</div>
+      <div class="hint-chevron">▼</div>
+    </div>
+    <div class="hint-body">
+      <div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Fluide vs. kristallisierte Intelligenz (Cattell, 1971)</strong><span>Fluide Intelligenz (Tempo, Flexibilität) nimmt ab dem jungen Erwachsenenalter langsam ab; kristallisierte Intelligenz (Wissen, Verknüpfung) wächst bis ins hohe Alter. Erklärt den Kompetenz-Paradox zwischen Tarek und Brigitte.</span><div class="res-url">Cattell, R. B. (1971). Abilities: Their structure, growth, and action. Houghton Mifflin.</div></div></div>
+      <div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Dunning-Kruger-Effekt (Kruger &amp; Dunning, 1999)</strong><span>Menschen mit geringem Wissen überschätzen ihre eigene Kompetenz signifikant – während Experten dazu neigen, sich zu unterschätzen.</span><div class="res-url">Kruger, J. &amp; Dunning, D. (1999). Unskilled and unaware of it. JPSP, 77(6), 1121–1134.</div></div></div>
+      <div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Andragogie – Erwachsenenlernen nach Knowles (1984)</strong><span>Erwachsene lernen problemorientiert, mit Bezug auf Erfahrungen, selbstgesteuert und mit Bedürfnis nach Sinnhaftigkeit. Brigittes Widerstand gegen kontextfreie Theorien ist klassisch andragogisch.</span><div class="res-url">Knowles, M. S. (1984). Andragogy in Action. Jossey-Bass.</div></div></div>
+      <div class="res-item"><span class="res-badge">VIDEO</span><div class="res-info"><strong>„Fluid and Crystallized Intelligence" – Sprouts (YouTube)</strong><span>Knappe, klare Visualisierung des Cattell-Modells.</span><div class="res-url"><a href="https://www.youtube.com/watch?v=eQD0gBO9qm4" target="_blank">youtube.com/watch?v=eQD0gBO9qm4</a></div></div></div>
+      <div class="res-item"><span class="res-badge">VIDEO</span><div class="res-info"><strong>„The Dunning-Kruger Effect" – TED-Ed (YouTube)</strong><span>Exzellente Erklärung mit Praxisbeispielen.</span><div class="res-url"><a href="https://www.youtube.com/watch?v=pOLmD_WVY-E" target="_blank">youtube.com/watch?v=pOLmD_WVY-E</a></div></div></div>
+    </div>
+  </div>
+  <div style="text-align:center;padding:8px 0"><button onclick="switchTab('kog')" style="background:var(--blue);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer">Weiter zu den Reflexionsfragen →</button></div>
+</div>
+
+<div id="tab-kog" class="panel">
+  <div class="section-title">Kognitive Aspekte</div>
+  <p class="section-sub">Fluide vs. kristallisierte Intelligenz · Verarbeitungstiefe · Selbsteinschätzung</p>
+  <div class="aspect-block">
+    <div class="asp-head kog" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Kognitive Aspekte · Tarek &amp; Brigitte</span><span class="asp-sub">Intelligenztypen, Dunning-Kruger, Vorwissensnutzung</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open">
+      <div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / gelesen?</span></div>
+        <div class="q-item">Was passiert kognitiv, wenn Tarek „zu schnell analogisiert"? Beschreiben Sie den Unterschied zwischen Informationsaufnahme und Informationsverarbeitung.<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Brigitte widersetzt sich neuen Konzepten mit „in der Praxis läuft das anders". Wie unterscheidet sich das von schlichter Lernresistenz?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+        <div class="q-item">Beide lernen im selben Raum, aber auf völlig unterschiedlichen kognitiven Ebenen. Was bedeutet das für die Messbarkeit von „Lernerfolg" in einer altersgemischten Gruppe?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Tarek überschätzt sich, Brigitte unterschätzt sich – beide Selbstbilder sind falsch. Was sagt das über gängige Selbsteinschätzungstools in der Erwachsenenbildung aus?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+        <div class="q-item">Wie gestalten Sie eine Aufgabe, die sowohl Tareks fluide Stärken als auch Brigittes kristallisierte Stärken sichtbar macht und würdigt?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Welche Anpassung in Ihrer Feedbackkultur würden Sie vornehmen, um Brigittes Erfahrungswissen als Lernressource zu behandeln?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-aff" class="panel">
+  <div class="section-title">Affektive Aspekte</div>
+  <p class="section-sub">Identität · Würde · Fehlerkultur · emotionaler Aufwand</p>
+  <div class="aspect-block">
+    <div class="asp-head aff" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Affektive Aspekte · Tarek &amp; Brigitte</span><span class="asp-sub">Selbstbild beim Lernen, Feedback, Generationsdynamik</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open">
+      <div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / gelesen?</span></div>
+        <div class="q-item">Sowohl Tarek als auch Brigitte reagieren auf Feedback – aber unterschiedlich. Beschreiben Sie die emotionalen Reaktionen beider so konkret wie möglich.<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Was bedeutet es, dass Brigittes Feedback-Verarbeitung „mehr kostet als es zeigt"? Was geschieht zwischen äußerem Verhalten und innerer Realität?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+        <div class="q-item">Wenn Brigittes Identität und Selbstbild beim Lernen auf dem Spiel stehen, was bedeutet das für die Fehlerfreundlichkeit des Lernformats?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Der Trainer ist deutlich jünger als Brigitte. Welche affektiven Dynamiken entstehen dadurch – für Brigitte und für den Trainer selbst?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+        <div class="q-item">Wie gestalten Sie ein Feedback-Format, das für Tarek herausfordernd und für Brigitte würdevoll ist – gleichzeitig?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Welche Haltung gegenüber Fehlern möchten Sie im Lernraum explizit kommunizieren – und wie formulieren Sie das konkret zu Beginn einer Einheit?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-mot" class="panel">
+  <div class="section-title">Motivationale Aspekte</div>
+  <p class="section-sub">Extrinsisch vs. intrinsisch · Sinnhaftigkeit · Anwendungsbezug</p>
+  <div class="aspect-block">
+    <div class="asp-head mot" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Motivationale Aspekte · Tarek &amp; Brigitte</span><span class="asp-sub">Lernziele, Sprache, langfristige Kompetenzentwicklung</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open">
+      <div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / gelesen?</span></div>
+        <div class="q-item">Tarek lernt „für den Lebenslauf", Brigitte „für Qualität und Tiefe". Beschreiben Sie, wie sich diese unterschiedlichen Motivationsstrukturen im Seminarverhalten zeigen.<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Wann verliert Brigitte das Interesse – und was löst das aus? Was signalisiert Tarek, wenn Inhalte nicht seinem Selbstbild entsprechen?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+        <div class="q-item">Der Trainer verwendet Start-up-Jargon. Für wen ist das motivierend, für wen nicht – und warum? Was passiert mit Brigittes Motivation, wenn Sprache die eigene Lebenswelt ausschließt?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Inwiefern ist Tareks extrinsische Motivation langfristig ein Risiko für echte Kompetenzentwicklung – und Brigittes intrinsische Motivation ein stilles Kapital?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+      <div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+        <div class="q-item">Wie leiten Sie eine Einheit ein, die sowohl Tareks Karriereziele als auch Brigittes Qualitätsorientierung als Motivationsanker anspricht?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+        <div class="q-item">Was nehmen Sie aus dieser Reflexion über Ihre eigene Motivation als Lehrende/r mit?<textarea class="write-area" placeholder="Ihre Notizen..."></textarea></div>
+      </div>
+    </div>
+  </div>
+  <div style="background:#fff;border-top:1px solid var(--border);border-radius:0 0 14px 14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:4px">
+    <span style="font-size:12px;color:#888">Alle drei Aspekte ausgefüllt? Dann einreichen.</span>
+    <button onclick="openSubmitModal()" style="background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px">📧 An Dozentin senden</button>
+  </div>
+</div>
+
+</div>
+<footer><span>Case 2 von 3 · Tarek M. &amp; Brigitte S. · Reflective Writing</span><span>What / So What / Now What</span></footer>
+
+<div id="submit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:32px 28px;max-width:440px;width:100%;position:relative">
+    <button onclick="closeSubmitModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1">×</button>
+    <div style="font-family:'Lora',serif;font-size:19px;font-weight:600;margin-bottom:6px">Antworten einreichen</div>
+    <p style="font-size:12.5px;color:#777;margin-bottom:22px;line-height:1.55">Ihre ausgefüllten Reflexionsantworten werden als E-Mail an die Lehrperson gesendet.</p>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Vorname</label><input id="s-name" type="text" placeholder="z. B. Anna" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Nachname</label><input id="s-surname" type="text" placeholder="z. B. Müller" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:20px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Matrikelnummer</label><input id="s-matrikel" type="text" placeholder="z. B. 123456" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div id="submit-error" style="display:none;background:#FEF0EC;border:1px solid #F5C0B0;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#B84020;margin-bottom:14px">Bitte alle Felder ausfüllen.</div>
+    <button onclick="sendToInstructor()" style="width:100%;background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer">📧 An Dozentin senden</button>
+    <p style="font-size:11px;color:#AAA;text-align:center;margin-top:12px;line-height:1.5">Es öffnet sich Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht.</p>
+  </div>
+</div>
+
+<script>
+function switchTab(id){
+  const ids=['case','kog','aff','mot'];
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleHint(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.hint-chevron');
+  body.classList.toggle('open');
+  chev.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function toggleAsp(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.asp-chev');
+  const open=body.classList.toggle('open');
+  chev.textContent=open?'▲':'▼';
+}
+function openSubmitModal(){document.getElementById('submit-modal').style.display='flex';}
+function closeSubmitModal(){document.getElementById('submit-modal').style.display='none';}
+function sendToInstructor(){
+  const name=document.getElementById('s-name').value.trim();
+  const surname=document.getElementById('s-surname').value.trim();
+  const matrikel=document.getElementById('s-matrikel').value.trim();
+  if(!name||!surname||!matrikel){document.getElementById('submit-error').style.display='block';return;}
+  document.getElementById('submit-error').style.display='none';
+  const tabs=['Kognitiv','Affektiv','Motivational'];
+  const tabIds=['tab-kog','tab-aff','tab-mot'];
+  const phases=['WHAT','SO WHAT','NOW WHAT'];
+  let answers='';
+  tabIds.forEach((tid,tIdx)=>{
+    answers+='\n'+'='.repeat(50)+'\n'+tabs[tIdx].toUpperCase()+'\n'+'='.repeat(50)+'\n';
+    document.querySelectorAll('#'+tid+' .write-area').forEach((ta,i)=>{
+      answers+='\n['+phases[Math.floor(i/2)]+' · Frage '+(i%2+1)+']\n'+(ta.value.trim()||'[keine Antwort]')+'\n';
+    });
+  });
+  const subject=encodeURIComponent('Reflective Writing – Case 2 – '+surname+', '+name+' – Matrikel: '+matrikel);
+  const body=encodeURIComponent('Eingereicht von:\nName: '+name+' '+surname+'\nMatrikelnummer: '+matrikel+'\nCase: Zwei Generationen im Lernraum\n\n'+answers);
+  window.location.href='mailto:amine.merve.ercan@uni-jena.de?subject='+subject+'&body='+body;
+  closeSubmitModal();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Basiswissen Magnetresonanztomographie</title>
+<style>
+:root{
+  --bg:#eef2f6; --surface:#ffffff; --surface-2:#f4f7fa;
+  --ink:#122033; --ink-dim:#4c6079; --line:#d7e0ea;
+  --accent:#0a5ea8; --accent-ink:#ffffff; --accent-soft:#e2eefa;
+  --good:#177350; --good-soft:#e3f5ec; --bad:#a3283f; --bad-soft:#fbe7ea;
+  --radius:14px;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1620; --surface:#16212e; --surface-2:#1c2938;
+    --ink:#e8eef5; --ink-dim:#93a5ba; --line:#2a3a4c;
+    --accent:#5aa9e6; --accent-ink:#06131f; --accent-soft:#1c344a;
+    --good:#4fcf9a; --good-soft:#123227; --bad:#f2879a; --bad-soft:#3a1620;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1620; --surface:#16212e; --surface-2:#1c2938;
+  --ink:#e8eef5; --ink-dim:#93a5ba; --line:#2a3a4c;
+  --accent:#5aa9e6; --accent-ink:#06131f; --accent-soft:#1c344a;
+  --good:#4fcf9a; --good-soft:#123227; --bad:#f2879a; --bad-soft:#3a1620;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  min-height:100%;
+}
+.shell{max-width:760px;margin:0 auto;padding:20px 18px 60px}
+header.top{
+  display:flex;align-items:center;gap:12px;padding:14px 18px;
+  background:var(--surface);border-bottom:1px solid var(--line);
+  position:sticky;top:0;padding-top:calc(14px + env(safe-area-inset-top,0px));z-index:5;
+}
+.mark{width:34px;height:34px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex:none}
+.top-txt{line-height:1.25}
+.top-txt b{font-size:14.5px}
+.top-txt span{display:block;font-size:12px;color:var(--ink-dim)}
+.progress-wrap{margin-left:auto;width:110px}
+.progress-bar{height:6px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.progress-bar i{display:block;height:100%;background:var(--accent);width:0%;transition:width .4s ease}
+.progress-lbl{font-size:11px;color:var(--ink-dim);text-align:right;margin-top:3px}
+
+.screen{display:none}
+.screen.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+h1{font-size:26px;line-height:1.25;margin:6px 0 8px}
+h2{font-size:20px;margin:0 0 6px}
+p.lead{color:var(--ink-dim);font-size:15px;line-height:1.55;max-width:60ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.stack{display:flex;flex-direction:column;gap:14px}
+
+.btn{
+  appearance:none;border:none;cursor:pointer;font-size:14.5px;font-weight:600;
+  border-radius:10px;padding:11px 18px;background:var(--accent);color:var(--accent-ink);
+}
+.btn.secondary{background:var(--surface-2);color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+.obj-list{margin:0;padding-left:18px;color:var(--ink-dim);font-size:14.5px;line-height:1.8}
+
+/* Module hub */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+@media (max-width:520px){.grid{grid-template-columns:1fr}}
+.mod-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:8px;
+  transition:border-color .15s ease; color:var(--ink); font-family:inherit;
+}
+.mod-card:hover{border-color:var(--accent)}
+.mod-card .num{font-size:12px;color:var(--accent);font-weight:700}
+.mod-card .ttl{font-size:15px;font-weight:600}
+.mod-card .stat{font-size:12px;color:var(--ink-dim)}
+.mod-card.done{border-color:var(--good)}
+.mod-card.done .stat{color:var(--good)}
+
+.sim-card{
+  background:linear-gradient(135deg,var(--accent-soft),var(--surface));
+  border:1px solid var(--accent);border-radius:var(--radius);padding:18px;
+  display:flex;flex-direction:column;gap:8px;text-align:left;cursor:pointer;
+  font-family:inherit;color:var(--ink);margin-top:14px;width:100%;
+}
+.sim-card .tag{font-size:12px;font-weight:700;color:var(--accent)}
+.sim-card .ttl{font-size:17px;font-weight:700}
+.sim-card .desc{font-size:13.5px;color:var(--ink-dim);line-height:1.5}
+.sim-card .badge{font-size:12px;color:var(--good);font-weight:600}
+
+.sim-progress{display:flex;gap:6px;margin:12px 0}
+.sim-progress .seg{flex:1;height:6px;border-radius:4px;background:var(--surface-2)}
+.sim-progress .seg.on{background:var(--accent)}
+.sim-score{font-size:13px;color:var(--ink-dim);margin-bottom:4px}
+
+.layer{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:14px;background:var(--surface-2)}
+.layer-h{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.layer-h .ico{font-size:18px}
+.layer-h .ttl{font-weight:700;font-size:14.5px}
+.layer-d{font-size:13px;color:var(--ink-dim);margin:0 0 10px;line-height:1.5}
+.rec-row{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:7px 0;border-bottom:1px solid var(--line)}
+.rec-row:last-child{border-bottom:none}
+.gap-tag{display:inline-block;font-size:12px;background:var(--bad-soft);color:var(--bad);padding:4px 9px;border-radius:20px;margin:3px 6px 0 0}
+.ok-tag{display:inline-block;font-size:12px;background:var(--good-soft);color:var(--good);padding:4px 9px;border-radius:20px;margin:3px 6px 0 0}
+.wall-note{font-size:12px;color:var(--ink-dim);background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:8px 10px;margin-bottom:10px;line-height:1.5}
+.chat{max-height:230px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:10px;padding-right:2px}
+.msg{max-width:85%;padding:9px 12px;border-radius:10px;font-size:13.5px;line-height:1.5}
+.msg.user{align-self:flex-end;background:var(--accent);color:var(--accent-ink)}
+.msg.bot{align-self:flex-start;background:var(--surface);border:1px solid var(--line)}
+.chat-input{display:flex;gap:8px}
+.chat-input input{flex:1;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:14px}
+.agent-btn{padding:7px 12px;font-size:12.5px;margin-left:8px;flex:none}
+
+/* interactions */
+.hotspot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+@media (max-width:480px){.hotspot-grid{grid-template-columns:1fr}}
+.hotspot{
+  border:1px solid var(--line);background:var(--surface-2);border-radius:10px;
+  padding:13px;cursor:pointer;font-size:14px;text-align:left;color:var(--ink);
+}
+.hotspot.on{background:var(--accent-soft);border-color:var(--accent)}
+.hotspot .reveal{display:none;margin-top:8px;font-size:13px;color:var(--ink-dim);line-height:1.5}
+.hotspot.on .reveal{display:block}
+
+.steps{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.step{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--surface-2);cursor:pointer}
+.step .dot{width:26px;height:26px;border-radius:50%;background:var(--surface);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none;color:var(--ink-dim)}
+.step.on{border-color:var(--accent)}
+.step.on .dot{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.step .txt{font-size:13.5px;color:var(--ink-dim);display:none;line-height:1.5;margin-top:4px}
+.step.on .txt{display:block}
+.step .ttl{font-size:14.5px;font-weight:600}
+
+.plane-tabs{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.plane-tab{padding:9px 14px;border-radius:20px;border:1px solid var(--line);background:var(--surface-2);cursor:pointer;font-size:13.5px;color:var(--ink)}
+.plane-tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.plane-view{border:1px solid var(--line);border-radius:10px;padding:16px;background:var(--surface-2);min-height:150px}
+.plane-view svg{display:block;margin:0 auto}
+.plane-view p{font-size:13.5px;color:var(--ink-dim);margin:10px 0 0;line-height:1.55}
+
+.compare-tabs{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.ctab{padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);cursor:pointer;font-size:13.5px;font-weight:600}
+.ctab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.cview{border:1px solid var(--line);border-radius:10px;padding:16px;background:var(--surface-2);font-size:13.5px;color:var(--ink-dim);line-height:1.6}
+.cview b{color:var(--ink)}
+
+.scenario-box{border:1px solid var(--line);border-radius:10px;background:var(--surface-2);padding:15px;margin:14px 0;font-size:14.5px;line-height:1.6}
+.opt-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.opt{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:12px 14px;cursor:pointer;font-size:14px;text-align:left;color:var(--ink)}
+.opt.correct{background:var(--good-soft);border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.fb{margin-top:10px;font-size:13.5px;padding:10px 12px;border-radius:8px;display:none;line-height:1.5}
+.fb.show{display:block}
+.fb.good{background:var(--good-soft);color:var(--good)}
+.fb.bad{background:var(--bad-soft);color:var(--bad)}
+
+.check{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:15px;margin-top:16px}
+.check .q{font-size:14.5px;font-weight:600;margin-bottom:10px}
+
+.quiz-progress{font-size:12px;color:var(--ink-dim);margin-bottom:6px}
+.score-ring{width:120px;height:120px;margin:10px auto 4px;position:relative}
+.score-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700}
+
+footer.crumb{text-align:center;font-size:12px;color:var(--ink-dim);margin-top:22px}
+
+/* Institutional dashboard */
+.disclaimer-bar{background:var(--surface-2);border-bottom:1px dashed var(--line);color:var(--ink-dim);
+  font-size:11.5px;line-height:1.5;text-align:center;padding:6px 14px}
+.wm{position:fixed;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;pointer-events:none}
+.wm span{font-size:22vw;font-weight:800;color:var(--ink);opacity:.035;white-space:nowrap;
+  transform:rotate(-25deg);letter-spacing:4px}
+.shell{position:relative;z-index:1}
+header.top{position:sticky;z-index:5}
+
+.dash-card{background:linear-gradient(135deg,var(--surface-2),var(--surface));border:1px solid var(--line);
+  border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:8px;text-align:left;
+  cursor:pointer;font-family:inherit;color:var(--ink);margin-top:14px;width:100%}
+.dash-card .tag{font-size:12px;font-weight:700;color:var(--accent)}
+.dash-card .ttl{font-size:17px;font-weight:700}
+.dash-card .desc{font-size:13.5px;color:var(--ink-dim);line-height:1.5}
+
+.fw-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.fw-table th,.fw-table td{border:1px solid var(--line);padding:8px 9px;text-align:left;line-height:1.4}
+.fw-table th{background:var(--surface-2);font-size:12px;color:var(--ink-dim);font-weight:700}
+.fw-table td.num{text-align:right;white-space:nowrap}
+
+.density-row{margin:10px 0}
+.density-lbl{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+.density-lbl b{font-weight:600}
+.density-track{height:9px;border-radius:5px;background:var(--surface-2);overflow:hidden}
+.density-fill{height:100%;background:var(--accent);border-radius:5px}
+
+.heat-grid{display:grid;grid-template-columns:1fr repeat(3,64px);gap:4px;margin:14px 0;font-size:11.5px}
+.heat-grid .hh{font-weight:700;color:var(--ink-dim);text-align:center;padding:4px 2px}
+.heat-grid .hrow-lbl{font-size:12px;color:var(--ink);display:flex;align-items:center;padding:4px 2px}
+.heat-cell{border-radius:6px;padding:6px 2px;text-align:center;font-weight:700;color:#fff}
+
+.metric-pair{display:flex;gap:10px;margin:14px 0;flex-wrap:wrap}
+.metric-box{flex:1;min-width:120px;border:1px solid var(--line);border-radius:10px;padding:12px;
+  background:var(--surface-2);text-align:center}
+.metric-box .n{font-size:22px;font-weight:700;color:var(--accent)}
+.metric-box .l{font-size:11.5px;color:var(--ink-dim);margin-top:2px}
+
+.warn-box{border:1px solid var(--bad);background:var(--bad-soft);color:var(--bad);border-radius:10px;
+  padding:12px 14px;font-size:13px;line-height:1.55;margin:12px 0}
+.warn-box b{display:block;margin-bottom:4px;font-size:13px}
+.dash-nav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.dash-nav button{padding:8px 13px;border-radius:20px;border:1px solid var(--line);background:var(--surface-2);
+  cursor:pointer;font-size:12.5px;color:var(--ink)}
+.dash-nav button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.dash-sec{display:none}
+.dash-sec.on{display:block}
+</style>
+</head>
+<body>
+
+<div class="wm" aria-hidden="true"><span>PHILIPS</span></div>
+
+<div class="disclaimer-bar">⚠️ Kein offizielles Philips-Schulungsmaterial — dieses Modul ist ein Beispiel-/Pilotmodul für eine Produktschulung, erstellt zu Demonstrationszwecken.</div>
+
+<header class="top">
+  <div class="mark">MR</div>
+  <div class="top-txt"><b>Basiswissen MRT</b><span>Learning Academy ICARUS · Pilotmodul-Prototyp</span></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><i id="progFill"></i></div>
+    <div class="progress-lbl" id="progLbl">0 / 6 Themen</div>
+  </div>
+  <button class="btn secondary agent-btn" onclick="go('s-agent')">🤖 AI Coach</button>
+  <button class="btn secondary agent-btn" onclick="go('s-instdash')">📊 Institution</button>
+</header>
+
+<div class="shell">
+
+  <!-- START -->
+  <section class="screen active" id="s-start">
+    <div class="card">
+      <h1>Basiswissen Magnetresonanztomographie</h1>
+      <p class="lead">Ein Einstiegsmodul für medizinische Fachpersonen ohne Vorkenntnisse in der MR-Schnittbildgebung. Sie lernen Sicherheitsgrundlagen, den typischen Software-Workflow, die drei Bildebenen sowie Grundkontraste, Fettsättigung und Kontrastmittel kennen.</p>
+      <p style="font-size:13px;color:var(--ink-dim);margin-top:12px">Lernziele:</p>
+      <ul class="obj-list">
+        <li>Zentrale Gefahrenquellen in der MRT benennen können</li>
+        <li>Den groben Ablauf einer MR-Untersuchung an der Software nachvollziehen</li>
+        <li>Transversale, sagittale und coronale Ebene unterscheiden</li>
+        <li>Erklären, wofür T1-, T2- und PD-Wichtung, Fettsättigung und Kontrastmittel jeweils dienen</li>
+      </ul>
+      <div class="btn-row">
+        <button class="btn" onclick="go('s-hub')">Modul starten</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HUB -->
+  <section class="screen" id="s-hub">
+    <h2>Themenübersicht</h2>
+    <p class="lead" style="margin-bottom:0">Wählen Sie ein Thema. Am Ende aller Themen schaltet sich die Abschlussprüfung frei.</p>
+    <button class="sim-card" onclick="go('s-sim')">
+      <span class="tag">PRAXISSIMULATION</span>
+      <span class="ttl">Kompletter Fall: Knie-MRT bei V.a. Meniskusriss</span>
+      <span class="desc">Durchlaufen Sie einen realistischen Untersuchungsablauf vom Sicherheits-Screening über Protokoll- und Spulenwahl bis zur Beurteilung eines Bildartefakts — und treffen Sie an jedem Schritt selbst die Entscheidung.</span>
+      <span class="badge" id="simBadge"></span>
+    </button>
+    <button class="dash-card" onclick="go('s-instdash')">
+      <span class="tag">FÜR LEHRENDE &amp; BILDUNGSVERANTWORTLICHE</span>
+      <span class="ttl">Institutionelles Capability Dashboard</span>
+      <span class="desc">Ein zweites Pilotmodul: Wie lassen sich Teilnahme- und Kompetenzdaten aus Schulungen wie dieser institutionell auswerten, ohne einzelne Lehrende zu bewerten oder Engagement mit Kompetenz zu verwechseln?</span>
+    </button>
+    <div class="grid" id="hubGrid"></div>
+    <div class="btn-row">
+      <button class="btn" id="toQuizBtn" onclick="go('s-quiz')" disabled>Abschlussprüfung (0/6 Themen)</button>
+    </div>
+  </section>
+
+  <!-- TOPIC 1: Sicherheit -->
+  <section class="screen" id="t-1">
+    <div class="card">
+      <span style="font-size:12px;color:var(--accent);font-weight:700">THEMA 1 / 6</span>
+      <h2>Sicherheit in der MRT</h2>
+      <p class="lead">Das starke, permanente Magnetfeld ist die zentrale Besonderheit der MRT. Klicken Sie jede Gefahrenquelle an, um zu erfahren, worauf zu achten ist.</p>
+      <div class="hotspot-grid" id="hs-grid"></div>
+      <div class="check">
+        <div class="q">Bilanzfrage: Warum wird jeder Patient vor der Untersuchung nach Implantaten gefragt?</div>
+        <div class="opt-list" id="q1-opts"></div>
+        <div class="fb" id="q1-fb"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn secondary" onclick="go('s-hub')">Zur Übersicht</button>
+        <button class="btn" onclick="completeTopic(1)">Thema abschließen</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPIC 2: Software Workflow -->
+  <section class="screen" id="t-2">
+    <div class="card">
+      <span style="font-size:12px;color:var(--accent);font-weight:700">THEMA 2 / 6</span>
+      <h2>Grundlagen der MR-Software</h2>
+      <p class="lead">Ein typischer Untersuchungsablauf an der MR-Konsole folgt immer denselben Schritten. Klicken Sie sich chronologisch durch.</p>
+      <div class="steps" id="stepList"></div>
+      <div class="check">
+        <div class="q">Bilanzfrage: In welcher Phase wird das passende Untersuchungsprotokoll (z.B. „Knie nativ“) ausgewählt?</div>
+        <div class="opt-list" id="q2-opts"></div>
+        <div class="fb" id="q2-fb"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn secondary" onclick="go('s-hub')">Zur Übersicht</button>
+        <button class="btn" onclick="completeTopic(2)">Thema abschließen</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPIC 3: Ebenen -->
+  <section class="screen" id="t-3">
+    <div class="card">
+      <span style="font-size:12px;color:var(--accent);font-weight:700">THEMA 3 / 6</span>
+      <h2>Anatomische Bildebenen</h2>
+      <p class="lead">MR-Bilder werden in drei Standardebenen aufgenommen. Wählen Sie eine Ebene, um die Schnittrichtung am Körperschema zu sehen.</p>
+      <div class="plane-tabs" id="planeTabs"></div>
+      <div class="plane-view" id="planeView"></div>
+      <div class="check">
+        <div class="q">Bilanzfrage: Eine Ebene, die den Körper von oben nach unten in vordere und hintere Hälften teilt, heißt …</div>
+        <div class="opt-list" id="q3-opts"></div>
+        <div class="fb" id="q3-fb"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn secondary" onclick="go('s-hub')">Zur Übersicht</button>
+        <button class="btn" onclick="completeTopic(3)">Thema abschließen</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPIC 4: T1/T2/PD -->
+  <section class="screen" id="t-4">
+    <div class="card">
+      <span style="font-size:12px;color:var(--accent);font-weight:700">THEMA 4 / 6</span>
+      <h2>T1-, T2- und PD-Wichtung</h2>
+      <p class="lead">Jede Wichtung betont andere Gewebeeigenschaften. Vergleichen Sie die drei Grundkontraste.</p>
+      <div class="compare-tabs" id="compTabs"></div>
+      <div class="cview" id="compView"></div>
+      <div class="check">
+        <div class="q">Bilanzfrage: Welche Wichtung zeigt Flüssigkeit typischerweise signalreich (hell)?</div>
+        <div class="opt-list" id="q4-opts"></div>
+        <div class="fb" id="q4-fb"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn secondary" onclick="go('s-hub')">Zur Übersicht</button>
+        <button class="btn" onclick="completeTopic(4)">Thema abschließen</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPIC 5: Fettsättigung (scenario) -->
+  <section class="screen" id="t-5">
+    <div class="card">
+      <span style="font-size:12px;color:var(--accent);font-weight:700">THEMA 5 / 6</span>
+      <h2>Fettsättigung</h2>
+      <div class="scenario-box">
+        <b>Szenario:</b> Bei einer Schulter-MRT mit Kontrastmittel soll beurteilt werden, ob sich Gadolinium in einer entzündeten Struktur anreichert. Das umgebende Fettgewebe ist auf T1-Bildern jedoch ebenfalls hell und könnte die Anreicherung überdecken.
+        <div class="opt-list" id="q5-opts"></div>
+        <div class="fb" id="q5-fb"></div>
+      </div>
+      <p class="lead" style="margin-top:14px">Fettsättigung unterdrückt gezielt das Fettsignal, damit sich signalreiche Strukturen wie Kontrastmittelanreicherung, Ödeme oder Entzündungen klar davon abheben. Gängige Techniken sind SPIR, SPAIR, STIR und mDixon.</p>
+      <div class="btn-row">
+        <button class="btn secondary" onclick="go('s-hub')">Zur Übersicht</button>
+        <button class="btn" onclick="completeTopic(5)">Thema abschließen</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPIC 6: Kontrastmittel (scenario) -->
+  <section class="screen" id="t-6">
+    <div class="card">
+      <span style="font-size:12px;color:var(--accent);font-weight:700">THEMA 6 / 6</span>
+      <h2>Kontrastmittel</h2>
+      <div class="scenario-box">
+        <b>Szenario:</b> Ein Patient soll auf einen Tumorverdacht im Gehirn untersucht werden. Der Radiologe möchte wissen, ob die Läsion gut durchblutet ist und wie scharf sie sich vom umliegenden Gewebe abgrenzt.
+        <div class="opt-list" id="q6-opts"></div>
+        <div class="fb" id="q6-fb"></div>
+      </div>
+      <p class="lead" style="margin-top:14px">Gadoliniumhaltiges Kontrastmittel verkürzt die T1-Zeit angereicherten Gewebes und macht es signalreich. So werden Durchblutung, Gefäßversorgung und die Abgrenzung von Läsionen sichtbar, die nativ oft nicht eindeutig zu erkennen sind.</p>
+      <div class="btn-row">
+        <button class="btn secondary" onclick="go('s-hub')">Zur Übersicht</button>
+        <button class="btn" onclick="completeTopic(6)">Thema abschließen</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTICE CASE SIMULATION -->
+  <section class="screen" id="s-sim">
+    <div class="card">
+      <span style="font-size:12px;color:var(--accent);font-weight:700">PRAXISSIMULATION</span>
+      <h2>Fall: Knie-MRT bei V.a. Meniskusriss</h2>
+      <div class="sim-progress" id="simProgress"></div>
+      <div class="sim-score" id="simScoreLbl"></div>
+      <div id="simBody"></div>
+    </div>
+  </section>
+
+  <!-- AI AGENT SYSTEM -->
+  <section class="screen" id="s-agent">
+    <div class="card">
+      <span style="font-size:12px;color:var(--accent);font-weight:700">AI AGENT SYSTEM — PROTOTYP</span>
+      <h2>Drei-Schichten-Architektur</h2>
+      <p class="lead">Dieses Modul dient als erster Pilot der geplanten Forschungsinfrastruktur — ein begrenzter, kontrollierbarer „Walled Garden“ mit eigenen Kursmaterialien, bevor auf universitätsweite Wissenssysteme zugegriffen wird.</p>
+
+      <div class="layer">
+        <div class="layer-h"><span class="ico">🗂️</span><span class="ttl">Systems of Record</span></div>
+        <p class="layer-d">Lernaufgaben, Bewertungen und Kompetenznachweise — die echten Fortschrittsdaten dieser Sitzung.</p>
+        <div id="recordBody"></div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-h"><span class="ico">🧭</span><span class="ttl">Systems of Discovery</span></div>
+        <p class="layer-d">Freigegebene Lernmaterialien, erkannte Kompetenzlücken und der empfohlene Lernpfad.</p>
+        <div id="discoveryBody"></div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-h"><span class="ico">💬</span><span class="ttl">Systems of Assistance — AI Learning Coach</span></div>
+        <p class="layer-d">Unterstützt im Moment eines echten Problems — beschränkt auf freigegebene Inhalte dieses Moduls.</p>
+        <div class="wall-note">🔒 Walled Garden: Nur die 6 Themen und die Fallsimulation dieses Moduls sind zugängliche Quellen. Kein Zugriff auf weitere Universitätssysteme. Fragen außerhalb dieses Rahmens werden abgelehnt und können an eine Lehrperson eskaliert werden (Human-in-the-Loop).</div>
+        <div class="chat" id="chatLog"></div>
+        <form class="chat-input" id="chatForm">
+          <input type="text" id="chatInput" placeholder="Frage stellen, z.B. „Wozu dient Fettsättigung?“" autocomplete="off">
+          <button class="btn" type="submit">Senden</button>
+        </form>
+        <div id="escalateWrap"></div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn secondary" onclick="go('s-hub')">Zurück zum Modul</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL QUIZ -->
+  <section class="screen" id="s-quiz">
+    <div class="card">
+      <h2>Abschlussprüfung</h2>
+      <div class="quiz-progress" id="quizProg">Frage 1 / 6</div>
+      <div id="quizBody"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section class="screen" id="s-result">
+    <div class="card" style="text-align:center">
+      <div class="score-ring">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="var(--surface-2)" stroke-width="10"/>
+          <circle id="scoreArc" cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+        </svg>
+        <div class="score-num" id="scoreNum">0/6</div>
+      </div>
+      <h2 id="resultTitle">Ergebnis</h2>
+      <p class="lead" id="resultText" style="margin:0 auto"></p>
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn secondary" onclick="retryQuiz()">Prüfung wiederholen</button>
+        <button class="btn" onclick="go('s-hub')">Zur Themenübersicht</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTITUTIONAL CAPABILITY DASHBOARD -->
+  <section class="screen" id="s-instdash">
+    <div class="card">
+      <span style="font-size:12px;color:var(--accent);font-weight:700">PILOTMODUL 2 — INSTITUTIONELLE EBENE</span>
+      <h2>Institutionelles Capability Dashboard</h2>
+      <p class="lead">Während der AI Coach auf der Ebene einzelner Lernender arbeitet, zeigt dieses Pilotmodul, wie dieselben Trainingsdaten aggregiert und institutionell ausgewertet werden können — z.B. für eine Fakultät, die Schulungen wie „Basiswissen MRT“ mehreren Fachbereichen anbietet.</p>
+
+      <div class="dash-nav" id="dashNav"></div>
+      <div id="dashBody">
+
+        <div class="dash-sec" data-k="model">
+          <h2 style="font-size:16px">Drei-Ebenen-Bewertungsmodell</h2>
+          <table class="fw-table">
+            <tr><th>Dashboard-Ebene</th><th>Gemessene Indikatoren</th><th>Institutioneller Nutzen</th></tr>
+            <tr><td><b>Utility Layer</b></td><td>Lizenzanzahl, Systemverfügbarkeit, Infrastrukturnutzung</td><td>Verwaltung der technischen Infrastruktur</td></tr>
+            <tr><td><b>Engagement Layer</b></td><td>Workshop-Teilnahme, LMS-Logins, Abschlussraten</td><td>Bewertung von Zugang und Teilnahme an Schulungen</td></tr>
+            <tr><td><b>Capability Layer</b></td><td>Skill Density, verifizierte Kompetenzen, eigenständiger Aufgabenerfolg</td><td>Identifikation von Kompetenzlücken und Schulungsplanung</td></tr>
+          </table>
+          <p class="lead" style="margin:0">Diese Ebenen ersetzen einander nicht — Teilnahmequoten zeigen z.B., ob eine Schulung ihre Zielgruppe erreicht. Der entscheidende Perspektivwechsel besteht darin, Teilnahme oder Systemnutzung nicht isoliert als Erfolgsnachweis zu verwenden: Nur die Capability Layer zeigt, ob Kompetenzen tatsächlich erworben wurden.</p>
+        </div>
+
+        <div class="dash-sec" data-k="density">
+          <h2 style="font-size:16px">Dashboard 1 · Institutional Skill Density</h2>
+          <p class="lead" style="margin-bottom:0">Zeigt, welcher Anteil der teilnehmenden Lehrenden eine Kompetenz nachweislich verifiziert hat (Beispielwerte).</p>
+          <div id="densityBars"></div>
+          <table class="fw-table">
+            <tr><th>Kompetenz</th><th>Verifiziert</th><th>Skill Density</th><th>Assessment Coverage</th></tr>
+            <tr><td>AI Literacy</td><td class="num">21/30</td><td class="num">70%</td><td class="num">30 von 45 Zielgruppe (67%)</td></tr>
+            <tr><td>Data Privacy</td><td class="num">12/30</td><td class="num">40%</td><td class="num">30 von 50 Zielgruppe (60%)</td></tr>
+            <tr><td>Instructional Design</td><td class="num">24/30</td><td class="num">80%</td><td class="num">30 von 40 Zielgruppe (75%)</td></tr>
+          </table>
+          <p class="lead" style="margin:0">Gesamt-Skill-Density: <b style="color:var(--ink)">63,3%</b> — dieser Durchschnitt wird bewusst <em>nicht</em> allein angezeigt, da zwei Fachbereiche mit identischem Durchschnitt sehr unterschiedliche Kompetenzprofile haben können. Die <b style="color:var(--ink)">Assessment Coverage</b> verhindert zudem, dass die Leistung weniger Freiwilliger fälschlich als Kompetenzniveau der gesamten Fakultät dargestellt wird.</p>
+        </div>
+
+        <div class="dash-sec" data-k="heat">
+          <h2 style="font-size:16px">Dashboard 2 · Capability Heat Map</h2>
+          <p class="lead" style="margin-bottom:0">Vergleich verifizierter Kompetenzen zwischen Fachbereichen (aggregiert, nicht personenbezogen).</p>
+          <div class="heat-grid" id="heatGrid"></div>
+          <p class="lead" style="margin:0">Beispiel: Die Pflegewissenschaft zeigt eine niedrige verifizierte Kompetenz bei Data Privacy — das begründet eine gezielte Schulungsintervention für diesen Bereich. Die Heat Map dient <b style="color:var(--ink)">nicht</b> dazu, einzelne Lehrende zu ranken oder zu überwachen; ausgewertet werden nur Gruppen mit ausreichender Teilnehmerzahl.</p>
+        </div>
+
+        <div class="dash-sec" data-k="inquiry">
+          <h2 style="font-size:16px">3. Point of Inquiry — Dashboard mit Lernintervention verknüpfen</h2>
+          <p class="lead" style="margin-bottom:0">Die eigentliche Funktion des Capability Dashboards ist nicht die Visualisierung allein, sondern die Ableitung passender Lernunterstützung.</p>
+          <div class="scenario-box">
+            <b>Beispiel:</b> Die Daten zeigen häufige Fehler bei Data-Privacy-Aufgaben. Statt einer zusätzlichen zweistündigen Pflichtschulung für alle wird eine in den echten Arbeitsablauf eingebettete Intervention entwickelt: Möchte eine Lehrperson bei der Erstellung KI-gestützter Lernmaterialien Studierendendaten verwenden, zeigt das System einen kurzen Entscheidungs­unterstützungs-Hinweis. Die Lehrperson selbst beurteilt, ob die Daten personenbezogen sind, und entscheidet über die passende Verarbeitungsweise.</p>
+          </div>
+          <p class="lead" style="margin-bottom:0">Dieses Design folgt demselben pädagogischen Prinzip wie der zuvor entwickelte <b style="color:var(--ink)">Citation Decision Coach</b>: Die Technologie unterstützt die Entscheidung, übernimmt aber nicht die notwendige kognitive Aufgabe anstelle der Lehrperson bzw. Studierenden.</p>
+          <div class="metric-pair">
+            <div class="metric-box"><div class="n">✗</div><div class="l">Nicht messen: Wie oft die Checkliste geöffnet wurde</div></div>
+            <div class="metric-box"><div class="n">✓</div><div class="l">Impact Metric: Anteil korrekt &amp; eigenständig abgeschlossener Data-Privacy-Aufgaben</div></div>
+          </div>
+          <p class="lead" style="margin:0">Ergänzend lassen sich Aufgabendauer und die Rate kritischer Fehler erfassen.</p>
+        </div>
+
+        <div class="dash-sec" data-k="roi">
+          <h2 style="font-size:16px">4. Predictive ROI — methodische Vorsicht</h2>
+          <p class="lead" style="margin-bottom:0">Im Kursmaterial findet sich eine gängige, aber methodisch problematische Aussage: Ein sinkender <i>Time-to-Competency</i>-Wert werde als Beleg für finanzielle Einsparungen der digitalen Intervention dargestellt.</p>
+          <div class="metric-pair">
+            <div class="metric-box"><div class="n">120 Min.</div><div class="l">Klassischer Workshop — Ø Zeit bis Kompetenznachweis</div></div>
+            <div class="metric-box"><div class="n">75 Min.</div><div class="l">Eingebettete Unterstützung — Ø Zeit bis Kompetenznachweis</div></div>
+          </div>
+          <div class="warn-box">
+            <b>Warum das allein keine Kosteneinsparung beweist:</b>
+            Ein kürzerer Time-to-Competency zeigt unter vergleichbaren Bewertungsbedingungen nur, dass die neue Intervention schneller zur Kompetenz führt. Für eine finanzielle Aussage müssen zusätzlich Entwicklungs-, Implementierungs- und Wartungskosten der Intervention berücksichtigt werden. Zudem sollte separat geprüft werden, ob die erworbene Kompetenz eigenständig erhalten bleibt (Retention).
+          </div>
+          <p class="lead" style="margin:0">Das Dashboard kann vergangene und aktuelle Leistung zuverlässig abbilden. Eine Prognose des künftigen institutionellen Werts erfordert dagegen ein separates, mit ausreichenden Daten validiertes Vorhersagemodell.</p>
+        </div>
+
+      </div>
+
+      <div class="btn-row">
+        <button class="btn secondary" onclick="go('s-hub')">Zur Übersicht</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="crumb">Interaktiver Prototyp · konzipiert für Umsetzung in Articulate Storyline 360<br>Basiswissen MRT &amp; Institutionelles Capability Dashboard sind Beispiel-/Pilotmodule und kein offizielles Philips-Produkt.</footer>
+</div>
+
+<script>
+try{
+  var savedTheme = localStorage.getItem('mrt_theme');
+  if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+}catch(e){}
+
+var TOPICS = [
+  {id:1,title:'Sicherheit in der MRT'},
+  {id:2,title:'MR-Software Grundlagen'},
+  {id:3,title:'Anatomische Ebenen'},
+  {id:4,title:'T1-, T2-, PD-Wichtung'},
+  {id:5,title:'Fettsättigung'},
+  {id:6,title:'Kontrastmittel'}
+];
+
+var state = {done:{}};
+try{
+  var raw = localStorage.getItem('mrt_progress');
+  if(raw) state = JSON.parse(raw);
+}catch(e){}
+
+function saveState(){
+  try{ localStorage.setItem('mrt_progress', JSON.stringify(state)); }catch(e){}
+}
+
+function go(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='s-hub') renderHub();
+}
+
+function renderHub(){
+  var grid = document.getElementById('hubGrid');
+  grid.innerHTML = '';
+  var doneCount = 0;
+  TOPICS.forEach(function(t){
+    var isDone = !!state.done[t.id];
+    if(isDone) doneCount++;
+    var el = document.createElement('button');
+    el.className = 'mod-card' + (isDone?' done':'');
+    el.innerHTML = '<span class="num">THEMA '+t.id+'</span><span class="ttl">'+t.title+'</span><span class="stat">'+(isDone?'✓ Abgeschlossen':'Noch offen')+'</span>';
+    el.onclick = function(){ go('t-'+t.id); };
+    grid.appendChild(el);
+  });
+  var pct = Math.round(doneCount/6*100);
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('progLbl').textContent = doneCount+' / 6 Themen';
+  var qb = document.getElementById('toQuizBtn');
+  qb.textContent = 'Abschlussprüfung ('+doneCount+'/6 Themen)';
+  qb.disabled = doneCount < 6;
+  var simBadge = document.getElementById('simBadge');
+  if(simBadge){
+    simBadge.textContent = state.simDone ? ('✓ Abgeschlossen · '+state.simScore+'/5 Punkte') : 'Noch nicht gestartet';
+  }
+}
+
+function completeTopic(id){
+  state.done[id] = true;
+  saveState();
+  go('s-hub');
+}
+
+/* ---- Topic 1: Sicherheit hotspots ---- */
+var hazards = [
+  {t:'Ferromagnetische Gegenstände', d:'Metallteile werden vom Magnetfeld angezogen und können zu gefährlichen Projektilen werden. Deshalb: Taschen leeren, Schmuck und Kleidung mit Metall ablegen.'},
+  {t:'Aktive und passive Implantate', d:'Herzschrittmacher, bestimmte Clips oder Prothesen können durch das Feld gestört, erhitzt oder bewegt werden. MR-Sicherheit muss vorab geprüft werden.'},
+  {t:'Erwärmung / Verbrennungsgefahr', d:'Hochfrequenzenergie kann sich in Kabeln, Schmuck oder eng anliegender Kleidung als Wärme aufbauen. Keine Schleifen bilden, Haut-zu-Haut-Kontakt vermeiden.'},
+  {t:'Lärmbelastung', d:'Schaltvorgänge der Gradienten erzeugen laute Klopfgeräusche. Patienten erhalten Gehörschutz.'}
+];
+var hsGrid = document.getElementById('hs-grid');
+hazards.forEach(function(h,i){
+  var el = document.createElement('button');
+  el.className='hotspot';
+  el.innerHTML = h.t + '<div class="reveal">'+h.d+'</div>';
+  el.onclick = function(){ el.classList.toggle('on'); };
+  hsGrid.appendChild(el);
+});
+mcq('q1-opts','q1-fb',[
+  {t:'Um festzustellen, ob ein Gegenstand durch das Magnetfeld bewegt oder erhitzt werden könnte', c:true, f:'Richtig — Implantate können ferromagnetisch sein oder sich erwärmen; das muss vor jeder Untersuchung geprüft werden.'},
+  {t:'Weil Implantate die Bildauflösung verbessern', c:false, f:'Nicht ganz — es geht primär um Patientensicherheit, nicht um Bildqualität.'},
+  {t:'Nur aus versicherungstechnischen Gründen', c:false, f:'Nicht ganz — der Hauptgrund ist die Sicherheit im Magnetfeld.'}
+]);
+
+/* ---- Topic 2: Steps ---- */
+var steps = [
+  {t:'Patientenregistrierung', d:'Patientendaten werden im System angelegt, Sicherheitsfragebogen (Implantate, Kontraindikationen) wird geprüft.'},
+  {t:'Protokoll- / Untersuchungsauswahl', d:'Passendes Exam Card / Protokoll wird nach ärztlicher Fragestellung ausgewählt, z.B. „Knie nativ“ oder „Schulter mit KM“.'},
+  {t:'Patientenlagerung und Spulenwahl', d:'Patient wird positioniert, die passende Empfangsspule für die Zielregion angebracht.'},
+  {t:'Scan-Durchführung', d:'Die einzelnen Sequenzen werden gestartet, Bildqualität während der Aufnahme überwacht.'},
+  {t:'Rekonstruktion und Nachbearbeitung', d:'Rohdaten werden zu Bildern rekonstruiert, ggf. weitere Bildebenen berechnet.'},
+  {t:'Archivierung / Befundung', d:'Bilder werden im PACS gespeichert und stehen dem Radiologen zur Befundung bereit.'}
+];
+var stepList = document.getElementById('stepList');
+steps.forEach(function(s,i){
+  var el = document.createElement('div');
+  el.className='step';
+  el.innerHTML = '<div class="dot">'+(i+1)+'</div><div><div class="ttl">'+s.t+'</div><div class="txt">'+s.d+'</div></div>';
+  el.onclick=function(){ el.classList.toggle('on'); };
+  stepList.appendChild(el);
+});
+mcq('q2-opts','q2-fb',[
+  {t:'Bei der Protokoll- / Untersuchungsauswahl', c:true, f:'Richtig — hier wird die passende Exam Card entsprechend der Fragestellung gewählt.'},
+  {t:'Bei der Archivierung', c:false, f:'Nicht ganz — dort werden bereits fertige Bilder gespeichert.'},
+  {t:'Bei der Patientenregistrierung', c:false, f:'Nicht ganz — dort werden zunächst nur Daten und Sicherheitsfragen erfasst.'}
+]);
+
+/* ---- Topic 3: Planes ---- */
+var planes = {
+  trans:{label:'Transversal', txt:'Schneidet den Körper waagrecht in obere und untere Anteile — Blick von den Füßen nach oben.'},
+  sag:{label:'Sagittal', txt:'Schneidet den Körper von vorne nach hinten in linke und rechte Anteile.'},
+  cor:{label:'Coronal', txt:'Schneidet den Körper von oben nach unten in vordere und hintere Anteile.'}
+};
+var planeTabs = document.getElementById('planeTabs');
+var planeKeys = ['trans','sag','cor'];
+function renderPlane(key){
+  planeTabs.querySelectorAll('.plane-tab').forEach(function(b){b.classList.toggle('on', b.dataset.k===key)});
+  var svgMap = {
+    trans:'<svg viewBox="0 0 160 120" width="160" height="120"><ellipse cx="80" cy="60" rx="55" ry="70" fill="none" stroke="var(--ink-dim)" stroke-width="1.5"/><line x1="10" y1="60" x2="150" y2="60" stroke="var(--accent)" stroke-width="3"/></svg>',
+    sag:'<svg viewBox="0 0 160 120" width="160" height="120"><ellipse cx="80" cy="60" rx="55" ry="70" fill="none" stroke="var(--ink-dim)" stroke-width="1.5"/><line x1="80" y1="0" x2="80" y2="120" stroke="var(--accent)" stroke-width="3"/></svg>',
+    cor:'<svg viewBox="0 0 160 120" width="160" height="120"><ellipse cx="80" cy="60" rx="55" ry="70" fill="none" stroke="var(--ink-dim)" stroke-width="1.5"/><line x1="35" y1="10" x2="35" y2="110" stroke="var(--accent)" stroke-width="3"/><line x1="125" y1="10" x2="125" y2="110" stroke="var(--accent)" stroke-width="3" opacity="0"/></svg>'
+  };
+  document.getElementById('planeView').innerHTML = svgMap[key] + '<p>'+planes[key].txt+'</p>';
+}
+planeKeys.forEach(function(k){
+  var b=document.createElement('button');
+  b.className='plane-tab'; b.dataset.k=k; b.textContent=planes[k].label;
+  b.onclick=function(){renderPlane(k)};
+  planeTabs.appendChild(b);
+});
+renderPlane('trans');
+mcq('q3-opts','q3-fb',[
+  {t:'Coronal', c:true, f:'Richtig — die coronale Ebene trennt vorne und hinten.'},
+  {t:'Transversal', c:false, f:'Nicht ganz — transversal trennt oben und unten.'},
+  {t:'Sagittal', c:false, f:'Nicht ganz — sagittal trennt links und rechts.'}
+]);
+
+/* ---- Topic 4: T1/T2/PD compare ---- */
+var comps = {
+  t1:{label:'T1',html:'<b>T1-Wichtung:</b> Fett erscheint signalreich (hell), Flüssigkeit eher signalarm (dunkel). Gut geeignet zur Darstellung von Anatomie und Kontrastmittelanreicherung.'},
+  t2:{label:'T2',html:'<b>T2-Wichtung:</b> Flüssigkeit erscheint signalreich (hell) — ideal zur Darstellung von Ödemen, Entzündungen und Flüssigkeitsansammlungen.'},
+  pd:{label:'PD',html:'<b>PD-Wichtung (Protonendichte):</b> Betont die Anzahl der Wasserstoffprotonen im Gewebe, mit gutem Kontrast bei geringerem T1-/T2-Einfluss — häufig in der Gelenkbildgebung genutzt.'}
+};
+var compTabs = document.getElementById('compTabs');
+['t1','t2','pd'].forEach(function(k){
+  var b=document.createElement('button');
+  b.className='ctab'; b.textContent=comps[k].label; b.dataset.k=k;
+  b.onclick=function(){renderComp(k)};
+  compTabs.appendChild(b);
+});
+function renderComp(k){
+  compTabs.querySelectorAll('.ctab').forEach(function(b){b.classList.toggle('on', b.dataset.k===k)});
+  document.getElementById('compView').innerHTML = comps[k].html;
+}
+renderComp('t1');
+mcq('q4-opts','q4-fb',[
+  {t:'T2-Wichtung', c:true, f:'Richtig — auf T2-Bildern ist Flüssigkeit typischerweise hell.'},
+  {t:'T1-Wichtung', c:false, f:'Nicht ganz — dort ist Flüssigkeit eher dunkel.'},
+  {t:'PD-Wichtung', c:false, f:'Nicht ganz — PD betont primär die Protonendichte, nicht gezielt Flüssigkeit.'}
+]);
+
+mcq('q5-opts','q5-fb',[
+  {t:'Fettsättigung einsetzen, um helles Fettsignal vom Anreicherungssignal zu trennen', c:true, f:'Richtig — genau dafür wird die Fettsättigung eingesetzt, z.B. mit SPIR, SPAIR, STIR oder mDixon.'},
+  {t:'Die Sequenz einfach wiederholen', c:false, f:'Nicht ganz — das Wiederholen ändert nichts am Überlagerungsproblem von Fett- und Anreicherungssignal.'},
+  {t:'Auf Kontrastmittel verzichten', c:false, f:'Nicht ganz — Kontrastmittel bleibt für die Fragestellung nötig; die Lösung liegt in der Fettunterdrückung.'}
+]);
+
+mcq('q6-opts','q6-fb',[
+  {t:'Kontrastmittel injizieren, um Durchblutung und Abgrenzung der Läsion sichtbar zu machen', c:true, f:'Richtig — Gadolinium reichert sich in gut durchblutetem bzw. pathologisch verändertem Gewebe an und verbessert die Abgrenzbarkeit.'},
+  {t:'Nur T2-Wichtung ohne Kontrastmittel verwenden', c:false, f:'Nicht ganz — T2 zeigt Flüssigkeit gut, beantwortet aber nicht gezielt die Frage nach Durchblutung und Abgrenzung.'},
+  {t:'Untersuchung ohne weitere Maßnahmen abschließen', c:false, f:'Nicht ganz — ohne Kontrastmittel bleibt die gestellte Frage zur Durchblutung offen.'}
+]);
+
+function mcq(optsId, fbId, options){
+  var wrap = document.getElementById(optsId);
+  var fb = document.getElementById(fbId);
+  var answered = false;
+  options.forEach(function(o){
+    var b = document.createElement('button');
+    b.className='opt'; b.textContent=o.t;
+    b.onclick=function(){
+      if(answered) return;
+      answered = true;
+      wrap.querySelectorAll('.opt').forEach(function(x,i){
+        if(options[i].c) x.classList.add('correct');
+      });
+      if(!o.c) b.classList.add('wrong');
+      fb.textContent = o.f;
+      fb.className = 'fb show ' + (o.c?'good':'bad');
+    };
+    wrap.appendChild(b);
+  });
+}
+
+/* ---- Final quiz ---- */
+var quizQuestions = [
+  {q:'Warum werden vor der MRT metallische Gegenstände abgelegt?', opts:[
+    {t:'Wegen der Anziehung durch das starke Magnetfeld', c:true},
+    {t:'Weil Metall die Raumtemperatur verändert', c:false},
+    {t:'Aus rein hygienischen Gründen', c:false}]},
+  {q:'In welchem Schritt des Software-Workflows wird die Empfangsspule gewählt?', opts:[
+    {t:'Bei der Patientenlagerung', c:true},
+    {t:'Bei der Archivierung', c:false},
+    {t:'Bei der Protokollauswahl', c:false}]},
+  {q:'Welche Ebene trennt links und rechts?', opts:[
+    {t:'Sagittal', c:true},
+    {t:'Transversal', c:false},
+    {t:'Coronal', c:false}]},
+  {q:'Welche Wichtung zeigt Fett typischerweise signalreich?', opts:[
+    {t:'T1-Wichtung', c:true},
+    {t:'T2-Wichtung', c:false},
+    {t:'Keine der beiden', c:false}]},
+  {q:'Wozu dient Fettsättigung vor allem?', opts:[
+    {t:'Fettsignal unterdrücken, damit andere signalreiche Strukturen erkennbar bleiben', c:true},
+    {t:'Die Untersuchungszeit verkürzen', c:false},
+    {t:'Das Magnetfeld verstärken', c:false}]},
+  {q:'Was bewirkt gadoliniumhaltiges Kontrastmittel im Gewebe?', opts:[
+    {t:'Es verkürzt die T1-Zeit angereicherten Gewebes und macht es signalreich', c:true},
+    {t:'Es entfernt Bewegungsartefakte', c:false},
+    {t:'Es ersetzt die Notwendigkeit einer T2-Sequenz', c:false}]}
+];
+var quizIndex = 0, quizScore = 0, quizAnswers = [];
+
+function startQuiz(){
+  quizIndex = 0; quizScore = 0; quizAnswers = [];
+  renderQuizQ();
+}
+function renderQuizQ(){
+  var q = quizQuestions[quizIndex];
+  document.getElementById('quizProg').textContent = 'Frage '+(quizIndex+1)+' / '+quizQuestions.length;
+  var body = document.getElementById('quizBody');
+  var html = '<div class="q" style="font-size:15.5px;font-weight:600;margin-bottom:10px">'+q.q+'</div><div class="opt-list" id="liveOpts"></div><div class="btn-row" id="quizNav" style="display:none"><button class="btn" onclick="nextQuizQ()">Weiter</button></div>';
+  body.innerHTML = html;
+  var wrap = document.getElementById('liveOpts');
+  var answered = false;
+  q.opts.forEach(function(o){
+    var b = document.createElement('button');
+    b.className='opt'; b.textContent=o.t;
+    b.onclick=function(){
+      if(answered) return;
+      answered = true;
+      wrap.querySelectorAll('.opt').forEach(function(x,i){ if(q.opts[i].c) x.classList.add('correct'); });
+      if(!o.c) b.classList.add('wrong'); else quizScore++;
+      document.getElementById('quizNav').style.display='flex';
+    };
+    wrap.appendChild(b);
+  });
+}
+function nextQuizQ(){
+  quizIndex++;
+  if(quizIndex >= quizQuestions.length){ showResult(); } else { renderQuizQ(); }
+}
+function showResult(){
+  go('s-result');
+  state.quizDone = true;
+  state.quizScore = quizScore;
+  saveState();
+  var pct = quizScore/quizQuestions.length;
+  document.getElementById('scoreNum').textContent = quizScore+'/'+quizQuestions.length;
+  var circ = 2*Math.PI*52;
+  var arc = document.getElementById('scoreArc');
+  arc.style.strokeDasharray = circ;
+  arc.style.strokeDashoffset = circ*(1-pct);
+  var title = document.getElementById('resultTitle');
+  var text = document.getElementById('resultText');
+  if(pct >= 0.8){
+    title.textContent = 'Modul bestanden';
+    text.textContent = 'Starke Leistung — die Grundlagen der MR-Bildgebung sitzen. Sie können mit dem nächsten Modul, „MRT für Fortgeschrittene“, fortfahren.';
+  } else if(pct >= 0.5){
+    title.textContent = 'Knapp geschafft';
+    text.textContent = 'Solide Basis, aber einzelne Themen lohnen eine Wiederholung, bevor es weitergeht.';
+    try{ localStorage.setItem('mrt_theme', localStorage.getItem('mrt_theme')||''); }catch(e){}
+  } else {
+    title.textContent = 'Noch nicht bestanden';
+    text.textContent = 'Gehen Sie die Themen in der Übersicht noch einmal durch, bevor Sie erneut antreten.';
+  }
+}
+document.getElementById('s-quiz').addEventListener('transitionend', function(){});
+var origGo = go;
+go = function(id){
+  origGo(id);
+  if(id==='s-quiz') startQuiz();
+  if(id==='s-sim') startSim();
+  if(id==='s-agent') renderAgent();
+};
+function retryQuiz(){ go('s-quiz'); }
+renderHub();
+
+/* ---- AI Agent System: Record / Discovery / Assistance ---- */
+var sampleFn = null;
+async function initSample(){
+  try{
+    if(typeof claude === 'undefined' || !claude.use) return;
+    sampleFn = await claude.use('sample');
+  }catch(e){ sampleFn = null; }
+}
+initSample();
+
+function renderAgent(){
+  var rb = document.getElementById('recordBody');
+  var html = '';
+  TOPICS.forEach(function(t){
+    html += '<div class="rec-row"><span>'+t.title+'</span><span>'+(state.done[t.id]?'✓ Abgeschlossen':'— Offen')+'</span></div>';
+  });
+  html += '<div class="rec-row"><span>Praxissimulation (Fall)</span><span>'+(state.simDone?('✓ '+state.simScore+'/5'):'— Offen')+'</span></div>';
+  html += '<div class="rec-row"><span>Abschlussprüfung</span><span>'+(state.quizDone?('✓ '+state.quizScore+'/6'):'— Offen')+'</span></div>';
+  rb.innerHTML = html;
+
+  var gaps = TOPICS.filter(function(t){return !state.done[t.id]}).map(function(t){return t.title});
+  var tags = '';
+  if(gaps.length===0) tags += '<span class="ok-tag">Alle Themen abgeschlossen</span>';
+  gaps.forEach(function(g){ tags += '<span class="gap-tag">Lücke: '+g+'</span>'; });
+  if(state.simDone && state.simScore<4) tags += '<span class="gap-tag">Empfehlung: Fallsimulation wiederholen</span>';
+  var nextPath = (gaps.length===0 && state.quizDone && state.quizScore>=5)
+    ? 'Empfohlener nächster Lernpfad: <b>MRT für Fortgeschrittene</b>'
+    : 'Empfohlener nächster Schritt: offene Themen abschließen, danach die Abschlussprüfung.';
+  document.getElementById('discoveryBody').innerHTML = tags + '<p style="font-size:13px;color:var(--ink-dim);margin-top:10px">'+nextPath+'</p>';
+
+  var log = document.getElementById('chatLog');
+  if(log.children.length===0){
+    addMsg('bot','Hallo! Ich bin der AI Learning Coach dieses Moduls. Ich beantworte nur Fragen zu den freigegebenen Inhalten von Basiswissen MRT.');
+  }
+}
+
+function addMsg(role, text){
+  var log = document.getElementById('chatLog');
+  var d = document.createElement('div');
+  d.className = 'msg ' + role;
+  d.textContent = text;
+  log.appendChild(d);
+  log.scrollTop = log.scrollHeight;
+  return d;
+}
+
+function buildContext(){
+  var c = 'FREIGEGEBENE MODULINHALTE (nur diese verwenden):\n';
+  c += '1) Sicherheit: ' + hazards.map(function(h){return h.t+': '+h.d}).join(' | ') + '\n';
+  c += '2) Software-Workflow: ' + steps.map(function(s){return s.t+': '+s.d}).join(' | ') + '\n';
+  c += '3) Ebenen: ' + planeKeys.map(function(k){return planes[k].label+': '+planes[k].txt}).join(' | ') + '\n';
+  c += '4) Wichtungen: ' + Object.keys(comps).map(function(k){return comps[k].html.replace(/<[^>]+>/g,'')}).join(' | ') + '\n';
+  c += '5) Fallsimulation (Knie-MRT): ' + simCase.map(function(s){return s.narrative}).join(' | ');
+  return c;
+}
+function progressSummary(){
+  var doneT = TOPICS.filter(function(t){return state.done[t.id]}).map(function(t){return t.title});
+  var s = 'Abgeschlossene Themen: ' + (doneT.length?doneT.join(', '):'keine') + '. ';
+  if(state.simDone) s += 'Fallsimulation: '+state.simScore+'/5. ';
+  if(state.quizDone) s += 'Abschlussprüfung: '+state.quizScore+'/6. ';
+  return s;
+}
+
+document.getElementById('chatForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  var inp = document.getElementById('chatInput');
+  var q = inp.value.trim();
+  if(!q) return;
+  addMsg('user', q);
+  inp.value = '';
+  document.getElementById('escalateWrap').innerHTML = '';
+  var thinking = addMsg('bot', 'Denkt nach …');
+  if(!sampleFn){
+    thinking.textContent = 'Der AI Coach ist in dieser Ansicht gerade nicht verfügbar.';
+    return;
+  }
+  try{
+    var sys = 'Du bist der AI Learning Coach des ICARUS-Moduls „Basiswissen MRT“. Du bist STRIKT auf die folgenden freigegebenen Inhalte beschränkt (Walled Garden). Fragen außerhalb dieses Rahmens (z.B. individuelle medizinische Beratung, andere Universitätssysteme, persönliche Daten) lehnst du höflich ab und schlägst eine Eskalation an eine Lehrperson vor. Antworte kurz, in Stichpunkten, auf Deutsch.\n\n' + buildContext() + '\n\nFortschritt der Lernperson: ' + progressSummary();
+    var res = await sampleFn([{role:'user', content: sys + '\n\nFrage: ' + q}], {
+      modelTier:'quick',
+      onText:function(u){ thinking.textContent = u.text; }
+    });
+    thinking.textContent = res.text;
+    if(/eskalat|lehrperson|außerhalb|nicht beantworten/i.test(res.text)){
+      document.getElementById('escalateWrap').innerHTML = '<button class="btn secondary" style="margin-top:2px;font-size:12.5px" onclick="escalate()">👤 An Lehrperson eskalieren (Human-in-the-Loop)</button>';
+    }
+  }catch(err){
+    thinking.textContent = 'Gerade keine Antwort möglich. Bitte erneut versuchen.';
+  }
+});
+function escalate(){
+  addMsg('bot','✅ Diese Frage wurde zur Klärung an eine Lehrperson markiert (Simulation der Human-in-the-Loop-Schicht).');
+  document.getElementById('escalateWrap').innerHTML = '';
+}
+
+/* ---- Practice case simulation: branching, scored ---- */
+var simCase = [
+  {
+    narrative:'Ein 45-jähriger Patient wird zur Knie-MRT bei Verdacht auf einen Meniskusriss angemeldet. Beim Sicherheits-Screening gibt er an, beruflich häufig mit Metall zu arbeiten (Schleifer), und weiß nicht sicher, ob er schon einmal einen Metallsplitter im Auge hatte.',
+    q:'Wie gehen Sie vor?',
+    opts:[
+      {t:'Patient direkt zur MRT bringen, um Zeit zu sparen', c:false, f:'Riskant: Ein unentdeckter intraorbitaler Metallsplitter kann sich im Magnetfeld bewegen und das Auge schädigen.'},
+      {t:'Vor der MRT eine Röntgenaufnahme der Augen anfordern, um einen Metallsplitter auszuschließen', c:true, f:'Richtig — bei unklarer Metallsplitter-Anamnese in einem Hochrisikoberuf ist der Ausschluss vor der MRT Standard.'},
+      {t:'Die Angabe ignorieren, da unwahrscheinlich', c:false, f:'Nicht sicher genug — bei unklarer Anamnese muss das Risiko aktiv ausgeschlossen werden.'}
+    ]
+  },
+  {
+    narrative:'Das Screening ist unauffällig, der Patient darf untersucht werden. Die ärztliche Fragestellung lautet: „Meniskusriss rechtes Knie?“',
+    q:'Welches Protokoll wählen Sie aus der Exam Card?',
+    opts:[
+      {t:'Kopf nativ', c:false, f:'Falsches Zielgebiet — die Fragestellung betrifft das Knie, nicht den Kopf.'},
+      {t:'Knie nativ, PD fettgesättigt', c:true, f:'Richtig — Meniskusstrukturen werden typischerweise mit fettgesättigten PD- bzw. T2-Sequenzen gut beurteilt.'},
+      {t:'Schulter mit Kontrastmittel', c:false, f:'Falsches Zielgebiet und für diese Fragestellung unnötiges Kontrastmittel.'}
+    ]
+  },
+  {
+    narrative:'Das Protokoll ist ausgewählt. Nun folgt die Patientenlagerung.',
+    q:'Welche Spule und Lagerung sind korrekt?',
+    opts:[
+      {t:'Kopfspule, Patient sitzend', c:false, f:'Falsche Spule und Lagerung für eine Knieuntersuchung.'},
+      {t:'Knie-Spule, Patient in Rückenlage, Knie zentriert in der Spule', c:true, f:'Richtig — die Knie-Spule liefert das beste Signal-zu-Rausch-Verhältnis für diese Region.'},
+      {t:'Herzspule, Patient in Bauchlage', c:false, f:'Falsche Spule für eine Kniediagnostik.'}
+    ]
+  },
+  {
+    narrative:'Vor dem Scan überlegen Sie, ob zusätzlich Kontrastmittel notwendig ist.',
+    q:'Ist Kontrastmittel für diese Standardfragestellung erforderlich?',
+    opts:[
+      {t:'Ja, bei jeder Gelenk-MRT immer notwendig', c:false, f:'Nicht korrekt — Kontrastmittel ist nicht routinemäßig bei jeder Gelenkuntersuchung nötig.'},
+      {t:'Nein, native fettgesättigte PD-/T2-Sequenzen reichen für den Meniskusverdacht meist aus', c:true, f:'Richtig — Kontrastmittel wird eher bei speziellen Fragestellungen wie Infekt oder Tumor eingesetzt.'},
+      {t:'Nur T1 ohne Fettsättigung genügt', c:false, f:'Nicht optimal — ohne Fettsättigung ist der Kontrast für Meniskusläsionen oft schlechter.'}
+    ]
+  },
+  {
+    narrative:'Der Scan läuft. Beim Prüfen der Bilder fällt eine deutliche Unschärfe an den Konturen auf, die in einer einzelnen Sequenz auftritt.',
+    q:'Was ist die wahrscheinlichste Ursache und wie reagieren Sie?',
+    opts:[
+      {t:'Patientenbewegung während der Aufnahme — Sequenz wiederholen und Patient erneut instruieren', c:true, f:'Richtig — Bewegungsunschärfe ist ein klassisches Artefakt; erneute Instruktion und Wiederholung sind der richtige Schritt.'},
+      {t:'Fehlerhafte Fettsättigung — Untersuchung sofort abbrechen', c:false, f:'Das beschriebene Muster passt eher zu Bewegung als zu einem Fettsättigungsfehler.'},
+      {t:'Falsche Spule — komplette Untersuchung neu planen', c:false, f:'Die Spule war korrekt gewählt; das Problem liegt an der einzelnen Sequenz, nicht an der Spule.'}
+    ]
+  }
+];
+var simIndex = 0, simRunScore = 0;
+
+function startSim(){
+  simIndex = 0; simRunScore = 0;
+  renderSimStep();
+}
+function renderSimStep(){
+  var s = simCase[simIndex];
+  var prog = document.getElementById('simProgress');
+  prog.innerHTML = '';
+  simCase.forEach(function(_,i){
+    var seg = document.createElement('div');
+    seg.className = 'seg' + (i<=simIndex?' on':'');
+    prog.appendChild(seg);
+  });
+  document.getElementById('simScoreLbl').textContent = 'Schritt '+(simIndex+1)+' / '+simCase.length;
+  var body = document.getElementById('simBody');
+  body.innerHTML = '<div class="scenario-box">'+s.narrative+'<div style="font-weight:600;margin-top:10px">'+s.q+'</div><div class="opt-list" id="simOpts"></div><div class="fb" id="simFb"></div><div class="btn-row" id="simNav" style="display:none"><button class="btn" onclick="nextSimStep()">'+(simIndex<simCase.length-1?'Weiter':'Fall abschließen')+'</button></div></div>';
+  var wrap = document.getElementById('simOpts');
+  var fb = document.getElementById('simFb');
+  var answered = false;
+  s.opts.forEach(function(o){
+    var b = document.createElement('button');
+    b.className='opt'; b.textContent=o.t;
+    b.onclick=function(){
+      if(answered) return;
+      answered = true;
+      wrap.querySelectorAll('.opt').forEach(function(x,i){ if(s.opts[i].c) x.classList.add('correct'); });
+      if(!o.c) b.classList.add('wrong'); else simRunScore++;
+      fb.textContent = o.f;
+      fb.className = 'fb show ' + (o.c?'good':'bad');
+      document.getElementById('simNav').style.display='flex';
+    };
+    wrap.appendChild(b);
+  });
+}
+function nextSimStep(){
+  simIndex++;
+  if(simIndex >= simCase.length){
+    state.simDone = true;
+    state.simScore = simRunScore;
+    saveState();
+    var body = document.getElementById('simBody');
+    var prog = document.getElementById('simProgress');
+    prog.querySelectorAll('.seg').forEach(function(s){s.classList.add('on')});
+    document.getElementById('simScoreLbl').textContent = 'Fall abgeschlossen';
+    var verdict = simRunScore>=4 ? 'Sehr gute Entscheidungsfindung — der Fall wurde sicher und korrekt bearbeitet.' : (simRunScore>=3 ? 'Solide Bearbeitung, einzelne Entscheidungen verdienen eine zweite Betrachtung.' : 'Einige zentrale Entscheidungen waren nicht optimal — ein erneuter Durchlauf hilft, die Abläufe zu festigen.');
+    body.innerHTML = '<div class="scenario-box"><b>Fall abgeschlossen: '+simRunScore+' / 5 richtige Entscheidungen.</b><br><br>'+verdict+'</div><div class="btn-row"><button class="btn secondary" onclick="go(\'s-hub\')">Zur Übersicht</button><button class="btn" onclick="go(\'s-sim\')">Fall erneut durchlaufen</button></div>';
+  } else {
+    renderSimStep();
+  }
+}
+
+/* ---- Institutional Capability Dashboard ---- */
+var dashSections = [
+  {k:'model', t:'Modell'},
+  {k:'density', t:'Skill Density'},
+  {k:'heat', t:'Heat Map'},
+  {k:'inquiry', t:'Point of Inquiry'},
+  {k:'roi', t:'Predictive ROI'}
+];
+function renderDashNav(active){
+  var nav = document.getElementById('dashNav');
+  nav.innerHTML = '';
+  dashSections.forEach(function(s){
+    var b = document.createElement('button');
+    b.textContent = s.t;
+    b.className = (s.k===active?'on':'');
+    b.onclick = function(){ showDashSec(s.k); };
+    nav.appendChild(b);
+  });
+}
+function showDashSec(k){
+  document.querySelectorAll('.dash-sec').forEach(function(s){ s.classList.toggle('on', s.dataset.k===k); });
+  renderDashNav(k);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+var skillDensity = [
+  {name:'AI Literacy', pct:70},
+  {name:'Data Privacy', pct:40},
+  {name:'Instructional Design', pct:80}
+];
+function renderDensityBars(){
+  var wrap = document.getElementById('densityBars');
+  if(!wrap || wrap.children.length) return;
+  skillDensity.forEach(function(d){
+    var row = document.createElement('div');
+    row.className = 'density-row';
+    row.innerHTML = '<div class="density-lbl"><span>'+d.name+'</span><b>'+d.pct+'%</b></div><div class="density-track"><div class="density-fill" style="width:'+d.pct+'%"></div></div>';
+    wrap.appendChild(row);
+  });
+}
+
+var heatGroups = ['Radiologie','Innere Medizin','Pflegewissenschaft','Physiotherapie'];
+var heatComp = ['AI Lit.','Privacy','Instr. Design'];
+var heatData = {
+  'Radiologie':[85,55,70],
+  'Innere Medizin':[60,35,75],
+  'Pflegewissenschaft':[50,30,60],
+  'Physiotherapie':[70,45,65]
+};
+function heatColor(v){
+  if(v>=70) return 'var(--good)';
+  if(v>=45) return '#c9922a';
+  return 'var(--bad)';
+}
+function renderHeatMap(){
+  var grid = document.getElementById('heatGrid');
+  if(!grid || grid.children.length) return;
+  grid.appendChild(document.createElement('div'));
+  heatComp.forEach(function(c){
+    var h = document.createElement('div'); h.className='hh'; h.textContent=c; grid.appendChild(h);
+  });
+  heatGroups.forEach(function(g){
+    var lbl = document.createElement('div'); lbl.className='hrow-lbl'; lbl.textContent=g; grid.appendChild(lbl);
+    heatData[g].forEach(function(v){
+      var cell = document.createElement('div');
+      cell.className = 'heat-cell';
+      cell.style.background = heatColor(v);
+      cell.textContent = v+'%';
+      grid.appendChild(cell);
+    });
+  });
+}
+
+var origGo2 = go;
+go = function(id){
+  origGo2(id);
+  if(id==='s-instdash'){
+    renderDensityBars();
+    renderHeatMap();
+    if(!document.querySelector('.dash-sec.on')) showDashSec('model');
+    else renderDashNav(document.querySelector('.dash-sec.on').dataset.k);
+  }
+};
+
+renderHub();
+</script>
+</body>
+</html>

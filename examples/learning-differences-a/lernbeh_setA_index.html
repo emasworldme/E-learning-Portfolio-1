@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set A - Lernbehinderungen</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#F7F6F3;color:#1C1C1C;min-height:100vh}
+.hero{color:#fff;padding:64px 48px 52px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;left:-100px;top:-100px;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.03)}
+.hero::after{content:'';position:absolute;right:-80px;bottom:-80px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.03)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 16px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;position:relative;z-index:1}
+.hero h1{font-family:'Lora',serif;font-size:36px;font-weight:600;line-height:1.18;margin-bottom:14px;position:relative;z-index:1;max-width:700px;margin-left:auto;margin-right:auto}
+.hero-sub{font-size:15px;opacity:.75;font-weight:300;max-width:520px;margin:0 auto 32px;line-height:1.65;position:relative;z-index:1}
+.hero-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;position:relative;z-index:1}
+.pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:5px 14px;font-size:12px;opacity:.85}
+.main{max-width:940px;margin:0 auto;padding:44px 32px 72px}
+.structure{background:#fff;border:1px solid #E0DDD8;border-radius:12px;padding:20px 24px;margin-bottom:44px}
+.structure-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5A5A5A;margin-bottom:14px}
+.phases{display:flex;gap:0}
+.phase-block{flex:1;padding:14px 16px;border-radius:8px;position:relative}
+.phase-block:not(:last-child)::after{content:'\2192';position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:14px;color:#CCC;z-index:1}
+.phase-block.w{background:#F0EEFF}.phase-block.s{background:#FEF0EC}.phase-block.n{background:#E6F5EF}
+.phase-name{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.phase-block.w .phase-name{color:#5B4DB8}.phase-block.s .phase-name{color:#C84030}.phase-block.n .phase-name{color:#1A7050}
+.phase-desc{font-size:12px;color:#555;line-height:1.55}
+.section-label{font-family:'Lora',serif;font-size:22px;font-weight:600;margin-bottom:20px;color:#1C1C1C}
+.cards{display:grid;gap:20px;margin-bottom:60px}
+.case-card{background:#fff;border:1px solid #E0DDD8;border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .18s,box-shadow .18s;display:block}
+.case-card:hover{transform:translateY(-4px);box-shadow:0 10px 36px rgba(0,0,0,.12)}
+.card-inner{display:flex;align-items:stretch}
+.card-left{width:280px;flex-shrink:0;padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between}
+.card-num{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:10px}
+.card-title{font-family:'Lora',serif;font-size:17px;font-weight:600;color:#fff;line-height:1.3;margin-bottom:8px}
+.card-theory{font-size:11px;color:rgba(255,255,255,.7);font-weight:600;letter-spacing:.05em}
+.card-right{flex:1;padding:22px 24px;border-left:1px solid #E0DDD8}
+.card-chars{display:flex;gap:12px;margin-bottom:14px}
+.char-chip{flex:1;background:#F5F5F3;border-radius:8px;padding:9px 11px}
+.char-age{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:2px}
+.char-name-s{font-size:13px;font-weight:600;margin-bottom:2px}
+.char-desc{font-size:11px;color:#5A5A5A;line-height:1.4}
+.card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.card-tag{font-size:10px;padding:3px 9px;border-radius:10px;font-weight:500}
+.card-cta{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;border-radius:9px;font-size:13px;font-weight:600}
+footer{border-top:1px solid #E0DDD8;background:#fff;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#AAA;flex-wrap:wrap;gap:10px}
+@media(max-width:700px){.hero{padding:44px 20px 36px}.hero h1{font-size:26px}.main{padding:24px 16px 60px}.card-inner{flex-direction:column}.card-left{width:100%}.cards{grid-template-columns:1fr}.phases{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="hero" style="background:linear-gradient(140deg,#100820 0%,#201840 40%,#301858 75%,#0A2818 100%)">
+  <div class="hero-eyebrow">Set A - 5 Cases - Universitat Jena</div>
+  <h1>Bildung von Erwachsenen<br>mit Lernbehinderungen</h1>
+  <p class="hero-sub">Funf interaktive Fallstudien - je eine Lernbehinderungsform pro Case. Kognitive, affektive und motivationale Komponenten.</p>
+  <div class="hero-pills">
+    <span class="pill">LRS / Legasthenie</span>
+    <span class="pill">Dyskalkulie</span>
+    <span class="pill">Kognitive Einschr&#228;nkung</span>
+    <span class="pill">ADHS</span>
+    <span class="pill">Sprachst&#246;rung</span>
+  </div>
+</div>
+<div class="main">
+  <div class="structure">
+    <div class="structure-title">Reflexionsstruktur: What / So What / Now What</div>
+    <div class="phases">
+      <div class="phase-block w"><div class="phase-name">What</div><div class="phase-desc">Was haben Sie beobachtet?</div></div>
+      <div class="phase-block s"><div class="phase-name">So What</div><div class="phase-desc">Welche Bedeutung hat das?</div></div>
+      <div class="phase-block n"><div class="phase-name">Now What</div><div class="phase-desc">Was tun Sie in Zukunft?</div></div>
+    </div>
+  </div>
+  <div class="section-label">Set A - Eine Lernbehinderungsform pro Fallstudie</div>
+  <div class="cards"><a href="lernA1_lrs.html" class="case-card">
+  <div class="card-inner">
+    <div class="card-left" style="background:linear-gradient(135deg,#1A0A30,#4A1870)">
+      <div><div class="card-num">Case A1</div><div class="card-title">Ich kann denken - aber nicht lesen wie die anderen.</div></div>
+      <div class="card-theory">LRS / Legasthenie</div>
+    </div>
+    <div class="card-right">
+      <div class="card-chars">
+        <div class="char-chip"><div class="char-age" style="color:#4A1870">38 J.</div><div class="char-name-s">Sandra K.</div><div class="char-desc">Nie diagnostiziert, versteckt LRS</div></div>
+        <div class="char-chip"><div class="char-age" style="color:#555">42 J.</div><div class="char-name-s">Robert F.</div><div class="char-desc">Spatdiagnose, Strategien entwickelt</div></div>
+      </div>
+      <div class="card-tags"><span class="card-tag" style="background:#F2E8FF;color:#4A1870">LRS Erwachsene</span><span class="card-tag" style="background:#F2E8FF;color:#4A1870">Nachteilsausgleich</span><span class="card-tag" style="background:#F2E8FF;color:#4A1870">UDL</span><span class="card-tag" style="background:#F2E8FF;color:#4A1870">Kompensationsstrategien</span></div>
+      <div class="card-cta" style="background:#F2E8FF;color:#4A1870"><span>Fallstudie &#246;ffnen</span><span>&#8594;</span></div>
+    </div>
+  </div>
+</a><a href="lernA2_dyskalkulie.html" class="case-card">
+  <div class="card-inner">
+    <div class="card-left" style="background:linear-gradient(135deg,#002A18,#006040)">
+      <div><div class="card-num">Case A2</div><div class="card-title">Zahlen bedeuten mir nichts - aber ich bin kein Versager.</div></div>
+      <div class="card-theory">Dyskalkulie / Rechenschwache</div>
+    </div>
+    <div class="card-right">
+      <div class="card-chars">
+        <div class="char-chip"><div class="char-age" style="color:#006040">33 J.</div><div class="char-name-s">Monika T.</div><div class="char-desc">Erzieherin, Abbruchgedanken</div></div>
+        <div class="char-chip"><div class="char-age" style="color:#555">45 J.</div><div class="char-name-s">Frank N.</div><div class="char-desc">Handwerker, praktisch vs. formal</div></div>
+      </div>
+      <div class="card-tags"><span class="card-tag" style="background:#E0F5EC;color:#006040">Dyskalkulie</span><span class="card-tag" style="background:#E0F5EC;color:#006040">Kontextualisiertes Rechnen</span><span class="card-tag" style="background:#E0F5EC;color:#006040">UDL Mathematik</span></div>
+      <div class="card-cta" style="background:#E0F5EC;color:#006040"><span>Fallstudie &#246;ffnen</span><span>&#8594;</span></div>
+    </div>
+  </div>
+</a><a href="lernA3_kognitiv.html" class="case-card">
+  <div class="card-inner">
+    <div class="card-left" style="background:linear-gradient(135deg,#001A30,#004878)">
+      <div><div class="card-num">Case A3</div><div class="card-title">Langsamer, aber nicht weniger.</div></div>
+      <div class="card-theory">Leichte kognitive Einschrankung</div>
+    </div>
+    <div class="card-right">
+      <div class="card-chars">
+        <div class="char-chip"><div class="char-age" style="color:#004878">29 J.</div><div class="char-name-s">Birgit W.</div><div class="char-desc">Schweigt aus Schutzangst</div></div>
+        <div class="char-chip"><div class="char-age" style="color:#555">35 J.</div><div class="char-name-s">Thorsten A.</div><div class="char-desc">Fragt offen, kommt weiter</div></div>
+      </div>
+      <div class="card-tags"><span class="card-tag" style="background:#E0F0F8;color:#004878">Selbstwirksamkeit</span><span class="card-tag" style="background:#E0F0F8;color:#004878">Inklusive Bildung</span><span class="card-tag" style="background:#E0F0F8;color:#004878">Leichte Sprache</span><span class="card-tag" style="background:#E0F0F8;color:#004878">Fragen-Kultur</span></div>
+      <div class="card-cta" style="background:#E0F0F8;color:#004878"><span>Fallstudie &#246;ffnen</span><span>&#8594;</span></div>
+    </div>
+  </div>
+</a><a href="lernA4_adhs.html" class="case-card">
+  <div class="card-inner">
+    <div class="card-left" style="background:linear-gradient(135deg,#1A0A00,#602010)">
+      <div><div class="card-num">Case A4</div><div class="card-title">Ich weiss alles - aber nicht in der Reihenfolge.</div></div>
+      <div class="card-theory">ADHS im Erwachsenenalter</div>
+    </div>
+    <div class="card-right">
+      <div class="card-chars">
+        <div class="char-chip"><div class="char-age" style="color:#602010">31 J.</div><div class="char-name-s">Amelie D.</div><div class="char-desc">ADHS diagnostiziert, Strategien</div></div>
+        <div class="char-chip"><div class="char-age" style="color:#555">44 J.</div><div class="char-name-s">Kai B.</div><div class="char-desc">ADHS undiagnostiziert, kein Verstehen</div></div>
+      </div>
+      <div class="card-tags"><span class="card-tag" style="background:#FEF5EC;color:#602010">ADHS Erwachsene</span><span class="card-tag" style="background:#FEF5EC;color:#602010">Hyperfokus</span><span class="card-tag" style="background:#FEF5EC;color:#602010">Bewegtes Lernen</span><span class="card-tag" style="background:#FEF5EC;color:#602010">Diagnose als Befreiung</span></div>
+      <div class="card-cta" style="background:#FEF5EC;color:#602010"><span>Fallstudie &#246;ffnen</span><span>&#8594;</span></div>
+    </div>
+  </div>
+</a><a href="lernA5_sprache.html" class="case-card">
+  <div class="card-inner">
+    <div class="card-left" style="background:linear-gradient(135deg,#001828,#004868)">
+      <div><div class="card-num">Case A5</div><div class="card-title">Ich denke laut - aber meine Worte kommen anders an.</div></div>
+      <div class="card-theory">Sprachstorung / Aphasie</div>
+    </div>
+    <div class="card-right">
+      <div class="card-chars">
+        <div class="char-chip"><div class="char-age" style="color:#004868">27 J.</div><div class="char-name-s">Nina H.</div><div class="char-desc">Stottern, wird unterbrochen</div></div>
+        <div class="char-chip"><div class="char-age" style="color:#555">52 J.</div><div class="char-name-s">Georg S.</div><div class="char-desc">Aphasie nach Schlaganfall</div></div>
+      </div>
+      <div class="card-tags"><span class="card-tag" style="background:#E0F2F8;color:#004868">Stottern</span><span class="card-tag" style="background:#E0F2F8;color:#004868">Aphasie</span><span class="card-tag" style="background:#E0F2F8;color:#004868">Wartezeit</span><span class="card-tag" style="background:#E0F2F8;color:#004868">Kommunikationsbias</span></div>
+      <div class="card-cta" style="background:#E0F2F8;color:#004868"><span>Fallstudie &#246;ffnen</span><span>&#8594;</span></div>
+    </div>
+  </div>
+</a></div>
+</div>
+<footer>
+  <span>Bildung mit Lernbehinderungen &#183; Reflective Writing &#183; Universit&#228;t Jena</span>
+  <span>amine.merve.ercan@uni-jena.de</span>
+</footer>
+</body>
+</html>

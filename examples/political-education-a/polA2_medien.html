@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case A2 - Medienkompetenz & politische Information</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#F7F6F3;color:#1C1C1C;font-size:15px;line-height:1.72}
+.topnav{background:#fff;border-bottom:1px solid #E0DDD8;padding:0 32px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'Lora',serif;font-size:14px;color:#5A5A5A;padding:14px 0;margin-right:24px;white-space:nowrap}
+.nav-tabs{display:flex;overflow-x:auto}
+.nav-tab{padding:14px 18px;font-size:12.5px;font-weight:500;color:#5A5A5A;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
+.nav-tab:hover{color:#1C1C1C}
+.main{max-width:860px;margin:0 auto;padding:36px 32px 72px}
+.section-title{font-family:'Lora',serif;font-size:20px;font-weight:600;color:#1C1C1C;margin-bottom:6px}
+.section-sub{font-size:13px;color:#5A5A5A;margin-bottom:24px}
+.panel{display:none}.panel.active{display:block}
+.scenario-box{background:#fff;border:1px solid #E0DDD8;border-radius:12px;padding:20px 22px;margin-bottom:28px}
+.scenario-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5A5A5A;margin-bottom:10px}
+.diff-table{width:100%;border-collapse:collapse;margin-bottom:28px;font-size:13px}
+.diff-table th{padding:10px 14px;background:#F5F5F3;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-align:left;border-bottom:2px solid #E0DDD8}
+.diff-table td{padding:12px 14px;border-bottom:1px solid #E0DDD8;vertical-align:top;line-height:1.6}
+.diff-table tr:last-child td{border-bottom:none}
+.diff-table tr:hover td{background:#FAFAF8}
+.hint-box{background:#FFFBF0;border:1px solid #D4A820;border-radius:12px;overflow:hidden;margin-bottom:32px}
+.hint-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
+.hint-icon{width:28px;height:28px;border-radius:50%;background:#D4A820;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hint-title{font-size:13.5px;font-weight:600;color:#7A5500;flex:1}
+.hint-chevron{font-size:12px;color:#9A7000}
+.hint-body{padding:0 20px 20px;display:none;border-top:1px solid #F0D860}
+.hint-body.open{display:block;padding-top:16px}
+.res-item{display:flex;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #F5E890}
+.res-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.res-badge{background:#7A5500;color:#fff;font-size:9px;padding:3px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:3px;letter-spacing:.05em}
+.res-info strong{font-size:13px;display:block;margin-bottom:3px;color:#3A2800}
+.res-info span{font-size:12px;color:#7A5500;line-height:1.55}
+.res-url{font-size:11px;color:#3A80D0;margin-top:4px;word-break:break-all}
+.aspect-block{background:#fff;border:1px solid #E0DDD8;border-radius:14px;overflow:hidden;margin-bottom:16px}
+.asp-head{display:flex;align-items:center;gap:12px;padding:15px 20px;cursor:pointer;user-select:none;transition:background .15s}
+.asp-head:hover{background:#F5F5F3}
+.asp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.asp-title{font-size:14px;font-weight:600}
+.asp-sub{font-size:12px;color:#5A5A5A;flex:1}
+.asp-chev{font-size:12px;color:#5A5A5A}
+.asp-body{padding:20px 24px;display:none}
+.asp-body.open{display:block}
+.phase{margin-bottom:22px}.phase:last-child{margin-bottom:0}
+.phase-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #E0DDD8}
+.p-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.p-dot.w{background:#7060D0}.p-dot.s{background:#C84030}.p-dot.n{background:#1A8060}
+.phase-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5A5A5A}
+.q-item{background:#F5F5F3;border-radius:8px;padding:13px 16px 13px 30px;margin-bottom:10px;font-size:13.5px;line-height:1.65;position:relative}
+.q-item::before{content:'›';position:absolute;left:14px;top:13px;color:#AAA;font-size:16px;font-weight:700}
+.write-area{width:100%;min-height:72px;margin-top:8px;padding:11px 13px;border:1.5px dashed #D0CEC8;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:#1C1C1C;background:#fff;resize:vertical;outline:none;line-height:1.65;transition:border-color .15s}
+.write-area::placeholder{color:#C0BDB8}
+.char-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.char-card{border-radius:14px;padding:22px;border:1px solid}
+.char-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.char-name{font-family:'Lora',serif;font-size:18px;font-weight:600;margin-bottom:12px}
+.char-text{font-size:13px;line-height:1.7;color:#333}
+.char-text em{color:#555;font-style:italic}
+.char-text strong{color:#111;font-style:normal}
+footer{background:#fff;border-top:1px solid #E0DDD8;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#AAA;flex-wrap:wrap;gap:10px}
+@media(max-width:640px){.char-grid{grid-template-columns:1fr}.main{padding:24px 16px 60px}.topnav{padding:0 12px}}
+
+.nav-tab.active{color:#005A80;border-bottom-color:#005A80}
+.write-area:focus{border-color:#005A80;border-style:solid}
+.asp-head.kog{border-left:4px solid #005A80}
+.asp-head.aff{border-left:4px solid #C84030}
+.asp-head.mot{border-left:4px solid #1A7050}
+.asp-head.kog .asp-dot{background:#005A80}
+.asp-head.aff .asp-dot{background:#C84030}
+.asp-head.mot .asp-dot{background:#1A7050}
+.asp-head.kog .asp-title{color:#005A80}
+.asp-head.aff .asp-title{color:#C84030}
+.asp-head.mot .asp-title{color:#1A7050}
+.char-card.p1{background:#E0F0F8;border-color:#80C0E0}
+.char-card.p1 .char-tag{color:#005A80}
+.char-card.p2{background:#FEF3EC;border-color:#F0C0A0}
+.char-card.p2 .char-tag{color:#B85A10}
+.case-cta{background:#E0F0F8;color:#005A80;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600}
+.hero{background:linear-gradient(140deg,#002A40 0%,#005A80 55%,#0080A8 100%);color:#fff;padding:52px 48px 44px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-family:'Lora',serif;font-size:30px;font-weight:600;line-height:1.22;margin-bottom:10px;position:relative;z-index:1;max-width:600px}
+.hero-sub{font-size:15px;opacity:.78;font-weight:300;max-width:540px;position:relative;z-index:1}
+.hero-meta{margin-top:24px;display:flex;flex-wrap:wrap;gap:16px;font-size:12px;opacity:.6;position:relative;z-index:1}
+.scenario-text{font-size:13.5px;line-height:1.75;color:#2A2A2A;font-style:italic;border-left:3px solid #005A80;padding-left:14px}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <span class="nav-brand">Reflective Writing</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('case')">📋 Case</button>
+    <button class="nav-tab" onclick="switchTab('kog')">🧠 Kognitiv</button>
+    <button class="nav-tab" onclick="switchTab('aff')">💛 Affektiv</button>
+    <button class="nav-tab" onclick="switchTab('mot')">🎯 Motivational</button>
+  </div>
+</nav>
+<div class="hero">
+  <a href="polbild_setA_index.html" style="display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;font-size:12px;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-weight:500;position:relative;z-index:2;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.13)'">&#8592; Zur Startseite</a>
+  <div class="hero-badge">Politische Bildung - Set A - Case 2 von 5</div>
+  <h1>Wer liest was -<br>und glaubt was?</h1>
+  <p class="hero-sub">Medienkompetenz und politische Information im Generationenvergleich</p>
+  <div class="hero-meta"><span>Kognitiv</span><span>Affektiv</span><span>Motivational</span></div>
+</div>
+<div class="main">
+
+<div id="tab-case" class="panel active">
+  <div class="section-title">Die Personen</div>
+  <p class="section-sub">Lesen Sie beide Porträts vollständig, bevor Sie zu den Reflexionsfragen übergehen.</p>
+  <div class="char-grid">
+    <div class="char-card p1">
+      <div class="char-tag">Lernende - 24 Jahre - Studentin</div>
+      <div class="char-name">Yara T.</div>
+      <div class="char-text">Yara studiert Politikwissenschaft und informiert sich ausschliesslich uber Social Media - Instagram, TikTok, Twitter/X. <strong>Sie verfolgt politische Themen intensiv, aber ausschliesslich in kurzen, algorithmisch kuratierten Formaten.</strong> Sie kennt viele politische Positionen, aber kaum Quellen oder Hintergrunde. Wenn sie auf eine Meinung stosst, die ihrer widerspricht, scrollt sie weiter. <em>Ich folge Leuten, die gut recherchieren - die machen das fur mich.</em> Sie halt sich fur gut informiert. Der Gedanke, dass ihr Algorithmus ihr Weltbild formt, ist ihr unbequem.</div>
+    </div>
+    <div class="char-card p2">
+      <div class="char-tag">Lernender - 63 Jahre - Rentner</div>
+      <div class="char-name">Gerhard W.</div>
+      <div class="char-text">Gerhard liest taglich Zeitung - zwei verschiedene - und schaut Tagesschau und ZDF heute journal. <strong>Er vertraut etablierten Medien grundsatzlich, hinterfragt sie kaum.</strong> Online-Quellen sind fur ihn unzuverlassig. Er nimmt an einem VHS-Kurs zu Medienkompetenz teil, weil sein Sohn ihn bat, kritischer zu sein. <em>Die Tagesschau lugt doch nicht.</em> Er ist gut informiert uber klassische Politikformate - aber wenig vertraut mit digitalen Informationsraumen, in denen seine Enkel leben.</div>
+    </div>
+  </div>
+  <div class="scenario-box">
+    <div class="scenario-label">Gemeinsame Lernsituation</div>
+    <p class="scenario-text">Beide nehmen an einem Abendkurs teil: Nachrichten verstehen - Medien kritisch lesen. Die Dozentin bringt ein aktuelles politisches Ereignis mit - ein Thema, das sowohl in klassischen Medien als auch in sozialen Netzwerken prasent ist, aber unterschiedlich dargestellt wird. Yara und Gerhard haben beide die Nachrichten gelesen - aber aus vollstandig verschiedenen Quellen. Sie sind sich in der Runde einig, dass das andere falsch liegt.</p>
+  </div>
+  <div class="section-title" style="margin-bottom:12px">Auffällige Unterschiede im Lernverhalten</div>
+<table class="diff-table">
+<tr><th>Aspekt</th><th>Yara T.</th><th>Gerhard W.</th></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#E0F0F8;color:#005A80">Kognitiv</span></td><td style="color:#005A80">Informationsverarbeitung: schnell, visuell, fragmentiert. Starke Meinungsbildung, schwache Quellenpruning. Filterblasenrisiko hoch.</td><td style="color:#555">Informationsverarbeitung: langsam, textbasiert, linear. Starke Quelltreue, schwache digitale Quellenkritik. Autoritatsglaube-Risiko hoch.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#FEF0EC;color:#C84030">Affektiv</span></td><td style="color:#005A80">Unbehagen bei der Idee, algorithmisch beeinflusst zu sein. Identitat eng mit Medienkonsum verknupft.</td><td style="color:#555">Unbehagen bei der Idee, dass etablierte Medien Agenda setzen. Vertrauen in Institutionen als emotionaler Anker.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#E6F5EF;color:#1A7050">Motivational</span></td><td style="color:#005A80">Nimmt am Kurs aus Pflichtgefuhl teil. Lernziel: bestatigt werden, nicht herausgefordert.</td><td style="color:#555">Nimmt am Kurs auf externen Anstoss teil. Lernziel: digitale Welt verstehen, ohne eigenes Weltbild zu gefahrden.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#F0F0EC;color:#555">Mediennutzung</span></td><td style="color:#005A80">Digital native: Social Media als primare Nachrichtenquelle. Hohes Tempo, geringe Tiefe, hohe emotionale Aktivierung.</td><td style="color:#555">Analog sozialisiert: Print und TV als Hauptquellen. Geringe Geschwindigkeit, mittlere Tiefe, institutionelles Vertrauen.</td></tr>
+</table>
+
+  <div class="hint-box">
+    <div class="hint-head" onclick="toggleHint(this)">
+      <div class="hint-icon">💡</div>
+      <div class="hint-title">Theorie-Hinweise &amp; Lernressourcen – zum besseren Verstehen des Cases</div>
+      <div class="hint-chevron">▼</div>
+    </div>
+    <div class="hint-body"><div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Filterblasen & Echokammern (Pariser, 2011)</strong><span>Algorithmen zeigen uns, was wir sehen wollen - nicht was wir wissen mussen. Yaras Medienkonsum ist hochgradig kuriert. Gerhards Konsum ist weniger algorithmisch, aber ebenfalls selektiv.</span><div class="res-url">Pariser, E. (2011). The Filter Bubble. Penguin.</div></div></div>
+<div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Medienkompetenz nach Baacke (1996)</strong><span>Medienkompetenz umfasst: Medienkunde, Mediennutzung, Mediengestaltung und Medienkritik. Yara und Gerhard sind in verschiedenen Dimensionen stark und schwach.</span><div class="res-url">Baacke, D. (1996). Medienkompetenz als Netzwerk. medien praktisch, 2/96.</div></div></div>
+<div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Confirmation Bias (Nickerson, 1998)</strong><span>Beide Lernenden selektieren unbewusst Informationen, die ihre bestehenden Uberzeugungen bestatigen - Yara algorithmisch, Gerhard institutionell.</span><div class="res-url">Nickerson, R. S. (1998). Confirmation bias. Review of General Psychology, 2(2).</div></div></div>
+<div class="res-item"><span class="res-badge">VIDEO</span><div class="res-info"><strong>How Filter Bubbles Isolate You - TED-Ed (YouTube)</strong><span>Erklart algorithmische Filterblasen visuell und zuganglich - ideal als Einstieg fur Yara UND Gerhard.</span><div class="res-url"><a href="https://www.youtube.com/watch?v=B8ofWFx525s" target="_blank">https://www.youtube.com/watch?v=B8ofWFx525s</a></div></div></div>
+<div class="res-item"><span class="res-badge">KONZEPT</span><div class="res-info"><strong>Laterales Lesen (Stanford History Education Group, 2021)</strong><span>Statt einem Artikel von oben nach unten zu lesen: zunachst andere Quellen uber die Quelle lesen. Bewahnte Methode zur Quellenpruning fur beide Lernenden.</span><div class="res-url"><a href="https://cor.stanford.edu/curriculum/collections/teaching-lateral-reading" target="_blank">https://cor.stanford.edu/curriculum/collections/teaching-lateral-reading</a></div></div></div>
+</div>
+  </div>
+  <div style="text-align:center;padding:8px 0">
+    <button onclick="switchTab('kog')" style="background:#005A80;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer">Weiter zu den Reflexionsfragen →</button>
+  </div>
+</div>
+
+<div id="tab-kog" class="panel">
+  <div class="section-title">Kognitive Aspekte</div>
+  <p class="section-sub">Filterblasen - Confirmation Bias - Medienkompetenz - Quellenpruning</p>
+  <div class="aspect-block">
+    <div class="asp-head kog" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Kognitive Aspekte</span><span class="asp-sub">Filterblasen - Confirmation Bias - Medienkompetenz - Quellenpruning</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Beschreiben Sie, wie Yara und Gerhard zum selben Ereignis zu unterschiedlichen Einschatzungen kommen. Was passiert kognitiv in beiden Informationsverarbeitungsprozessen?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#005A80"></textarea></div>
+<div class="q-item">Yara halt sich fur gut informiert. Gerhard auch. Beide liegen in bestimmten Bereichen falsch. Was sagt das uber das Verhaltnis von Meinungssicherheit und Wissenstiefe aus?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#005A80"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was ist der Unterschied zwischen Filterblasen bei Yara (algorithmisch) und bei Gerhard (institutionell)? Welche Form ist padagogisch schwerer zu adressieren - und warum?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#005A80"></textarea></div>
+<div class="q-item">Was bedeutet Medienkompetenz konkret fur jede Person - und warum reicht es nicht, einfach mehr Quellen zu lesen?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#005A80"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie gestalten Sie eine Ubung, in der Yara und Gerhard gegenseitig von ihrer Medienwelt lernen - ohne dass eine als uberlegen gilt?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#005A80"></textarea></div>
+<div class="q-item">Welche eine Methode der Medienkritik wurden Sie in Ihrem nachsten Kurs einsetzen - und warum?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#005A80"></textarea></div>
+</div>
+</div>
+  </div>
+</div>
+
+<div id="tab-aff" class="panel">
+  <div class="section-title">Affektive Aspekte</div>
+  <p class="section-sub">Medienidentitat - Informationssicherheit als Emotion - defensives Lernen</p>
+  <div class="aspect-block">
+    <div class="asp-head aff" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Affektive Aspekte</span><span class="asp-sub">Medienidentitat - Informationssicherheit als Emotion - defensives Lernen</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Was passiert affektiv bei Yara, wenn ihr gesagt wird, ihr Algorithmus forme ihr Weltbild? Und bei Gerhard, wenn etablierte Medien als parteiisch beschrieben werden?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Wie hangen Identitat und Medienkonsum zusammen - und warum ist Medienkritik oft so emotional aufgeladen?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was bedeutet es fur den Lernraum, wenn beide Lernenden sich gegenseitig fur falsch informiert halten - ohne bose Absicht?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Wie gehen Sie als Lehrperson damit um, wenn ein Lernender etablierte Medien verteidigt und ein anderer Social-Media-Quellen - und beide emotional investiert sind?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie schaffen Sie in einem Medienkompetenz-Kurs einen Raum, in dem Selbstkritik moglich ist, ohne dass sich jemand angegriffen fuhlt?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Was nehmen Sie fur Ihre eigene Medienkritikkompetenz aus dieser Reflexion mit?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+</div>
+  </div>
+</div>
+
+<div id="tab-mot" class="panel">
+  <div class="section-title">Motivationale Aspekte</div>
+  <p class="section-sub">Medienidentitat als Lernhurde - gegenseitiges Erkunden - Motivationsstruktur</p>
+  <div class="aspect-block">
+    <div class="asp-head mot" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Motivationale Aspekte</span><span class="asp-sub">Medienidentitat als Lernhurde - gegenseitiges Erkunden - Motivationsstruktur</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Was motiviert Yara zur Teilnahme - und was Gerhard? Wo unterscheiden sich die Lernziele fundamental?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Yara mochte bestatigt, Gerhard mochte die digitale Welt verstehen. Was passiert mit ihrer Motivation, wenn der Kurs das Gegenteil tut?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Inwiefern ist Medienkompetenzbildung motivational besonders heikel, weil sie das eigene Informationsverhalten herausfordert?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Was brauchen beide, damit Medienkritik motivierend statt bedrohlich wirkt?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie formulieren Sie einen Kursauftakt, der Yara und Gerhard gleichzeitig neugierig macht - auf die jeweils fremde Medienwelt?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Welche Veranderung in Ihrem Umgang mit Medienthemen in der politischen Bildung nehmen Sie vor?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+</div>
+  </div>
+  <div style="background:#fff;border-top:1px solid #E0DDD8;border-radius:0 0 14px 14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:4px">
+    <span style="font-size:12px;color:#888">Alle drei Aspekte ausgefüllt? Dann einreichen.</span>
+    <button onclick="openSubmitModal()" style="background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px">📧 An Dozentin senden</button>
+  </div>
+</div>
+
+</div>
+<footer><span>Case A2 - Medienkompetenz & politische Information</span><span>What / So What / Now What</span></footer>
+<div id="submit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:32px 28px;max-width:440px;width:100%;position:relative">
+    <button onclick="closeSubmitModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1">×</button>
+    <div style="font-family:'Lora',serif;font-size:19px;font-weight:600;margin-bottom:6px">Antworten einreichen</div>
+    <p style="font-size:12.5px;color:#777;margin-bottom:22px;line-height:1.55">Ihre Reflexionsantworten werden als E-Mail an die Dozentin gesendet.</p>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Vorname</label><input id="s-name" type="text" placeholder="z. B. Anna" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Nachname</label><input id="s-surname" type="text" placeholder="z. B. Müller" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:20px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Matrikelnummer</label><input id="s-matrikel" type="text" placeholder="z. B. 123456" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div id="submit-error" style="display:none;background:#FEF0EC;border:1px solid #F5C0B0;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#B84020;margin-bottom:14px">Bitte alle Felder ausfüllen.</div>
+    <button onclick="sendToInstructor('Case A2 - Medienkompetenz und politische Information')" style="width:100%;background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer">📧 An Dozentin senden</button>
+    <p style="font-size:11px;color:#AAA;text-align:center;margin-top:12px;line-height:1.5">Es öffnet sich Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht.</p>
+  </div>
+</div>
+<script>
+function switchTab(id){
+  const ids=['case','kog','aff','mot'];
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleHint(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.hint-chevron');
+  body.classList.toggle('open');
+  chev.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function toggleAsp(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.asp-chev');
+  const open=body.classList.toggle('open');
+  chev.textContent=open?'▲':'▼';
+}
+function openSubmitModal(){document.getElementById('submit-modal').style.display='flex';}
+function closeSubmitModal(){document.getElementById('submit-modal').style.display='none';}
+function sendToInstructor(caseLabel){
+  const name=document.getElementById('s-name').value.trim();
+  const surname=document.getElementById('s-surname').value.trim();
+  const matrikel=document.getElementById('s-matrikel').value.trim();
+  if(!name||!surname||!matrikel){document.getElementById('submit-error').style.display='block';return;}
+  document.getElementById('submit-error').style.display='none';
+  const tabs=['Kognitiv','Affektiv','Motivational'];
+  const tabIds=['tab-kog','tab-aff','tab-mot'];
+  const phases=['WHAT','SO WHAT','NOW WHAT'];
+  let answers='';
+  tabIds.forEach((tid,tIdx)=>{
+    answers+='\n'+'='.repeat(50)+'\n'+tabs[tIdx].toUpperCase()+'\n'+'='.repeat(50)+'\n';
+    document.querySelectorAll('#'+tid+' .write-area').forEach((ta,i)=>{
+      answers+='\n['+phases[Math.floor(i/2)]+' · Frage '+(i%2+1)+']\n'+(ta.value.trim()||'[keine Antwort]')+'\n';
+    });
+  });
+  const subject=encodeURIComponent('Reflective Writing – '+caseLabel+' – '+surname+', '+name+' – Matrikel: '+matrikel);
+  const body=encodeURIComponent('Eingereicht von:\nName: '+name+' '+surname+'\nMatrikelnummer: '+matrikel+'\nCase: '+caseLabel+'\n\n'+answers);
+  window.location.href='mailto:amine.merve.ercan@uni-jena.de?subject='+subject+'&body='+body;
+  closeSubmitModal();
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case B2 · Erfahrung & Transformation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#F7F6F3;color:#1C1C1C;font-size:15px;line-height:1.72}
+.topnav{background:#fff;border-bottom:1px solid #E0DDD8;padding:0 32px;display:flex;align-items:center;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'Lora',serif;font-size:14px;color:#5A5A5A;padding:14px 0;margin-right:24px;white-space:nowrap}
+.nav-tabs{display:flex;overflow-x:auto}
+.nav-tab{padding:14px 18px;font-size:12.5px;font-weight:500;color:#5A5A5A;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
+.nav-tab:hover{color:#1C1C1C}
+.main{max-width:860px;margin:0 auto;padding:36px 32px 72px}
+.section-title{font-family:'Lora',serif;font-size:20px;font-weight:600;color:#1C1C1C;margin-bottom:6px}
+.section-sub{font-size:13px;color:#5A5A5A;margin-bottom:24px}
+.panel{display:none}.panel.active{display:block}
+.scenario-box{background:#fff;border:1px solid #E0DDD8;border-radius:12px;padding:20px 22px;margin-bottom:28px}
+.scenario-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5A5A5A;margin-bottom:10px}
+.diff-table{width:100%;border-collapse:collapse;margin-bottom:28px;font-size:13px}
+.diff-table th{padding:10px 14px;background:#F5F5F3;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-align:left;border-bottom:2px solid #E0DDD8}
+.diff-table td{padding:12px 14px;border-bottom:1px solid #E0DDD8;vertical-align:top;line-height:1.6}
+.diff-table tr:last-child td{border-bottom:none}
+.diff-table tr:hover td{background:#FAFAF8}
+.hint-box{background:#FFFBF0;border:1px solid #D4A820;border-radius:12px;overflow:hidden;margin-bottom:32px}
+.hint-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
+.hint-icon{width:28px;height:28px;border-radius:50%;background:#D4A820;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.hint-title{font-size:13.5px;font-weight:600;color:#7A5500;flex:1}
+.hint-chevron{font-size:12px;color:#9A7000}
+.hint-body{padding:0 20px 20px;display:none;border-top:1px solid #F0D860}
+.hint-body.open{display:block;padding-top:16px}
+.res-item{display:flex;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #F5E890}
+.res-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.res-badge{background:#7A5500;color:#fff;font-size:9px;padding:3px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:3px;letter-spacing:.05em}
+.res-info strong{font-size:13px;display:block;margin-bottom:3px;color:#3A2800}
+.res-info span{font-size:12px;color:#7A5500;line-height:1.55}
+.res-url{font-size:11px;color:#3A80D0;margin-top:4px;word-break:break-all}
+.aspect-block{background:#fff;border:1px solid #E0DDD8;border-radius:14px;overflow:hidden;margin-bottom:16px}
+.asp-head{display:flex;align-items:center;gap:12px;padding:15px 20px;cursor:pointer;user-select:none;transition:background .15s}
+.asp-head:hover{background:#F5F5F3}
+.asp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.asp-title{font-size:14px;font-weight:600}
+.asp-sub{font-size:12px;color:#5A5A5A;flex:1}
+.asp-chev{font-size:12px;color:#5A5A5A}
+.asp-body{padding:20px 24px;display:none}
+.asp-body.open{display:block}
+.phase{margin-bottom:22px}.phase:last-child{margin-bottom:0}
+.phase-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #E0DDD8}
+.p-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.p-dot.w{background:#7060D0}.p-dot.s{background:#C84030}.p-dot.n{background:#1A8060}
+.phase-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5A5A5A}
+.q-item{background:#F5F5F3;border-radius:8px;padding:13px 16px 13px 30px;margin-bottom:10px;font-size:13.5px;line-height:1.65;position:relative}
+.q-item::before{content:'›';position:absolute;left:14px;top:13px;color:#AAA;font-size:16px;font-weight:700}
+.write-area{width:100%;min-height:72px;margin-top:8px;padding:11px 13px;border:1.5px dashed #D0CEC8;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:#1C1C1C;background:#fff;resize:vertical;outline:none;line-height:1.65;transition:border-color .15s}
+.write-area::placeholder{color:#C0BDB8}
+.char-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.char-card{border-radius:14px;padding:22px;border:1px solid}
+.char-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.char-name{font-family:'Lora',serif;font-size:18px;font-weight:600;margin-bottom:12px}
+.char-text{font-size:13px;line-height:1.7;color:#333}
+.char-text em{color:#555;font-style:italic}
+.char-text strong{color:#111;font-style:normal}
+footer{background:#fff;border-top:1px solid #E0DDD8;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#AAA;flex-wrap:wrap;gap:10px}
+@media(max-width:640px){.char-grid{grid-template-columns:1fr}.main{padding:24px 16px 60px}.topnav{padding:0 12px}}
+
+.nav-tab.active{color:#5A2880;border-bottom-color:#5A2880}
+.write-area:focus{border-color:#5A2880;border-style:solid}
+.asp-head.kog{border-left:4px solid #5A2880}
+.asp-head.aff{border-left:4px solid #C84030}
+.asp-head.mot{border-left:4px solid #1A7050}
+.asp-head.kog .asp-dot{background:#5A2880}
+.asp-head.aff .asp-dot{background:#C84030}
+.asp-head.mot .asp-dot{background:#1A7050}
+.asp-head.kog .asp-title{color:#5A2880}
+.asp-head.aff .asp-title{color:#C84030}
+.asp-head.mot .asp-title{color:#1A7050}
+.char-card.p1{background:#F2EAFF;border-color:#C0A0E0}
+.char-card.p1 .char-tag{color:#5A2880}
+.char-card.p2{background:#FEF3EC;border-color:#F0C0A0}
+.char-card.p2 .char-tag{color:#B85A10}
+.case-cta{background:#F2EAFF;color:#5A2880;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600}
+.hero{background:linear-gradient(140deg,#1A0A30 0%,#5A2880 55%,#7A4898 100%);color:#fff;padding:52px 48px 44px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-family:'Lora',serif;font-size:30px;font-weight:600;line-height:1.22;margin-bottom:10px;position:relative;z-index:1;max-width:600px}
+.hero-sub{font-size:15px;opacity:.78;font-weight:300;max-width:540px;position:relative;z-index:1}
+.hero-meta{margin-top:24px;display:flex;flex-wrap:wrap;gap:16px;font-size:12px;opacity:.6;position:relative;z-index:1}
+.scenario-text{font-size:13.5px;line-height:1.75;color:#2A2A2A;font-style:italic;border-left:3px solid #5A2880;padding-left:14px}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <span class="nav-brand">Reflective Writing</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('case')">📋 Case</button>
+    <button class="nav-tab" onclick="switchTab('kog')">🧠 Kognitiv</button>
+    <button class="nav-tab" onclick="switchTab('aff')">💛 Affektiv</button>
+    <button class="nav-tab" onclick="switchTab('mot')">🎯 Motivational</button>
+  </div>
+</nav>
+<div class="hero">
+  <a href="set_b_index.html" style="display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;font-size:12px;color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-weight:500;position:relative;z-index:2;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.13)'">← Ana sayfaya dön</a>
+  <div class="hero-badge">Set B · Case 2 von 3 · Erfahrungslernen + Transformatives Lernen</div>
+  <h1>Was Erfahrung trägt –<br>und was sie nicht loslässt.</h1>
+  <p class="hero-sub">Wenn Biografie zum Lernmotor wird – oder zur Mauer</p>
+  <div class="hero-meta"><span>🧠 Kognitiv</span><span>💛 Affektiv</span><span>🎯 Motivational</span></div>
+</div>
+<div class="main">
+
+<div id="tab-case" class="panel active">
+  <div class="section-title">Die Personen</div>
+  <p class="section-sub">Lesen Sie beide Porträts vollständig, bevor Sie zu den Reflexionsfragen übergehen.</p>
+  <div class="char-grid">
+    <div class="char-card p1">
+      <div class="char-tag">Lernende · 49 Jahre · Pflegedienstleiterin</div>
+      <div class="char-name">Renate S.</div>
+      <div class="char-text">Renate leitet seit 22 Jahren einen Pflegedienst und nimmt an einer Weiterbildung zu Diversity-Kompetenz in der Pflege teil. Ihre Erfahrung ist immens – aber sie filtert jedes neue Konzept durch sie. Am dritten Tag, in einer Übung zu unbewussten Vorurteilen, hält sie inne: <em>Ich dachte, das betrifft andere.</em> <strong>Ein echter Deutungsrahmen-Bruch.</strong> Sie ist aufgewühlt, aber neugierig. Zum ersten Mal lernt sie nicht durch Bestätigung, sondern durch Erschütterung – und es verändert sie.</div>
+    </div>
+    <div class="char-card p2">
+      <div class="char-tag">Lernender · 27 Jahre · Pflegeassistent</div>
+      <div class="char-name">Kerem A.</div>
+      <div class="char-text">Kerem hat drei Jahre Berufserfahrung und nimmt an derselben Weiterbildung teil. Er nimmt alles auf, was gesagt wird – <strong>ohne Widerstand, aber auch ohne Tiefe.</strong> Wenn die Dozentin nach persönlichen Beispielen fragt, schweigt er: <em>Ich habe noch nicht so viel erlebt.</em> Konzepte versteht er, aber er kann nicht prüfen, ob er sie wirklich braucht oder wo sie in seiner Praxis zutreffen. Transformation setzt bei ihm noch nicht ein – weil die Erfahrungsbasis fehlt, an der sich Neues brechen könnte.</div>
+    </div>
+  </div>
+  <div class="scenario-box">
+    <div class="scenario-label">Gemeinsame Lernsituation</div>
+    <p class="scenario-text">Beide nehmen an einer dreitägigen Weiterbildung teil: Diversity-Kompetenz in der professionellen Pflege. Die Dozentin arbeitet mit biographischen Reflexionsmethoden, Fallvignetten und strukturierten Provokationen. Ziel ist nicht nur Wissensvermittlung, sondern das Hinterfragen eigener Haltungen. Renate und Kerem begegnen denselben Inhalten – aber mit grundlegend verschiedenem Erfahrungshintergrund, der Lernen ermöglicht oder blockiert.</p>
+  </div>
+  <div class="section-title" style="margin-bottom:12px">Auffällige Unterschiede im Lernverhalten</div>
+<table class="diff-table">
+<tr><th>Aspekt</th><th>Renate S.</th><th>Kerem A.</th></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#F2EAFF;color:#5A2880">Erfahrung</span></td><td style="color:#5A2880">22 Jahre Berufserfahrung: Lernressource und Filter. Kann Transformation einleiten, wenn sie erschüttert wird.</td><td style="color:#555">3 Jahre Berufserfahrung: offen, aber ohne Substanz. Kein Widerstand, aber auch keine Verankerungspunkte.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#FEF0EC;color:#C84030">Kognitiv</span></td><td style="color:#5A2880">Erfahrung als Referenzrahmen: filtert, vergleicht, bewertet. Transformation entsteht durch Riss im Rahmen.</td><td style="color:#555">Theoretisches Aufnehmen ohne Prüfung. Fehlt die Erfahrung, an der sich Konzepte bewähren müssten.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#E6F5EF;color:#1A7050">Affektiv</span></td><td style="color:#5A2880">Erschütterung als Lerntrigger. Aufgewühlt, aber produktiv. Emotionaler Wendepunkt ist sichtbar.</td><td style="color:#555">Kein emotionaler Eintritt. Lernen bleibt kognitiv-neutral. Kein Schmerz, keine Tiefe – noch.</td></tr>
+<tr><td><span style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:#F0F0EC;color:#555">Transformation</span></td><td style="color:#5A2880">Durchläuft Mezirows Zyklus: Dissonanz → Reflexion → neue Haltung. Erfahrung macht Transformation möglich.</td><td style="color:#555">Transformation setzt noch nicht ein: kein disorienting dilemma, weil kein festes Deutungsmuster vorhanden.</td></tr>
+</table>
+
+  <div class="hint-box">
+    <div class="hint-head" onclick="toggleHint(this)">
+      <div class="hint-icon">💡</div>
+      <div class="hint-title">Theorie-Hinweise &amp; Lernressourcen – zum besseren Verstehen des Cases</div>
+      <div class="hint-chevron">▼</div>
+    </div>
+    <div class="hint-body"><div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Erfahrungslernen nach Kolb + Transformatives Lernen nach Mezirow</strong><span>Beide Theorien greifen ineinander: Erfahrung liefert das Material, das transformatives Lernen erschüttern kann. Ohne Erfahrung – kein Deutungsmuster. Ohne Deutungsmuster – keine Transformation.</span><div class="res-url">Mezirow, J. (1991). Transformative Dimensions of Adult Learning. Jossey-Bass. / Kolb, D. A. (1984). Experiential Learning. Prentice Hall.</div></div></div>
+<div class="res-item"><span class="res-badge">THEORIE</span><div class="res-info"><strong>Biographisches Lernen (Alheit & Dausien, 2002)</strong><span>Erwachsene lernen immer biographisch – das heißt, Neues wird an die eigene Lebensgeschichte angebunden. Renate kann das. Kerem sammelt erst die Biographie.</span><div class="res-url">Alheit, P. & Dausien, B. (2002). Bildungsprozesse über die Lebensspanne.</div></div></div>
+<div class="res-item"><span class="res-badge">VIDEO</span><div class="res-info"><strong>Mezirow Transformative Learning Theory (YouTube)</strong><span>Erklärt das Konzept des disorienting dilemma und Deutungsrahmenwechsels.</span><div class="res-url"><a href="https://www.youtube.com/watch?v=8T3X2FMVNLA" target="_blank">https://www.youtube.com/watch?v=8T3X2FMVNLA</a></div></div></div>
+<div class="res-item"><span class="res-badge">KONZEPT</span><div class="res-info"><strong>Deutungsmuster als Lernmaterial</strong><span>Renates Ich dachte, das betrifft andere ist kein Fehler – es ist ihr Deutungsmuster. Und das ist das produktivste Lernmaterial in der Fortbildung. Wie nutzt man es?</span><div class="res-url">Mezirow, J. (1991). Transformative Dimensions of Adult Learning. Jossey-Bass.</div></div></div>
+</div>
+  </div>
+  <div style="text-align:center;padding:8px 0">
+    <button onclick="switchTab('kog')" style="background:#5A2880;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer">Weiter zu den Reflexionsfragen →</button>
+  </div>
+</div>
+
+<div id="tab-kog" class="panel">
+  <div class="section-title">Kognitive Aspekte</div>
+  <p class="section-sub">Deutungsrahmenwechsel · Erfahrung als Transformationsvoraussetzung · biographisches Lernen</p>
+  <div class="aspect-block">
+    <div class="asp-head kog" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Kognitive Aspekte</span><span class="asp-sub">Deutungsrahmenwechsel · Erfahrung als Transformationsvoraussetzung · biographisches Lernen</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Beschreiben Sie den kognitiven Unterschied zwischen Renate und Kerem. Was passiert bei Renate, das bei Kerem noch nicht passieren kann?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#5A2880"></textarea></div>
+<div class="q-item">Renates Deutungsrahmen bricht in der Übung auf. Was ist kognitiv in diesem Moment passiert – und warum ist das kein Versagen, sondern Lernen?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#5A2880"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Warum ist Erfahrung eine Voraussetzung für Transformation – und nicht nur für Erfahrungslernen? Was fehlt Kerem noch?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#5A2880"></textarea></div>
+<div class="q-item">Was bedeutet es pädagogisch, wenn Lernende wie Kerem alles aufnehmen – aber nichts prüfen können? Was ist Ihre Verantwortung?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#5A2880"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie gestalten Sie eine Lerneinheit, die Renates Erschütterung als Ressource nutzt und Kerem gleichzeitig einlädt, erste eigene Anker zu setzen?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#5A2880"></textarea></div>
+<div class="q-item">Welche Methode aus dem biographischen Lernen würden Sie einsetzen – und warum?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#5A2880"></textarea></div>
+</div>
+</div>
+  </div>
+</div>
+
+<div id="tab-aff" class="panel">
+  <div class="section-title">Affektive Aspekte</div>
+  <p class="section-sub">Emotionaler Wendepunkt · Erschütterung als Ressource · Containment · Differenzierung</p>
+  <div class="aspect-block">
+    <div class="asp-head aff" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Affektive Aspekte</span><span class="asp-sub">Emotionaler Wendepunkt · Erschütterung als Ressource · Containment · Differenzierung</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Was passiert affektiv bei Renate, als sie sagt: Ich dachte, das betrifft andere? Beschreiben Sie diesen Moment so konkret wie möglich.<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Kerem bleibt emotional neutral. Was fehlt ihm affektiv – und ist das ein Problem oder eine Phase?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was bedeutet es für Sie als Lehrperson, wenn ein Lernender wie Renate mitten in einer Übung erschüttert ist – und ein anderer wie Kerem unberührt daneben sitzt?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Wie halten Sie den Raum für Renates Emotionalität, ohne Kerem das Gefühl zu geben, er müsse dasselbe empfinden?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie gestalten Sie den Abschluss eines solchen Seminartages, der sowohl Renates Erschütterung würdigt als auch Kerem einen Einstieg in Selbstreflexion ermöglicht?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+<div class="q-item">Was nehmen Sie für Ihre eigene emotionale Haltung als Lehrperson mit, wenn Transformation sichtbar wird?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#C84030"></textarea></div>
+</div>
+</div>
+  </div>
+</div>
+
+<div id="tab-mot" class="panel">
+  <div class="section-title">Motivationale Aspekte</div>
+  <p class="section-sub">Erschütterungsmotivation · Erfahrungslosigkeit als Lernphase · transformative Didaktik</p>
+  <div class="aspect-block">
+    <div class="asp-head mot" onclick="toggleAsp(this)"><span class="asp-dot"></span><span class="asp-title">Motivationale Aspekte</span><span class="asp-sub">Erschütterungsmotivation · Erfahrungslosigkeit als Lernphase · transformative Didaktik</span><span class="asp-chev open">▲</span></div>
+    <div class="asp-body open"><div class="phase"><div class="phase-head"><span class="p-dot w"></span><span class="phase-label">WHAT · Was haben Sie beobachtet / erlebt?</span></div>
+<div class="q-item">Was motiviert Renate in diesem Seminar – und was motiviert Kerem? Beschreiben Sie die unterschiedlichen Motivationsgrundlagen.<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Renate wird durch Erschütterung motiviert. Kerem hat noch keinen eigenen Grund zur Veränderung. Was folgt daraus für die Kursgestaltung?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot s"></span><span class="phase-label">SO WHAT · Welche Bedeutung hat das?</span></div>
+<div class="q-item">Was wäre nötig, damit auch Kerem einen eigenen emotionalen Bezug zu den Inhalten entwickelt – einen Anlass zur Transformation?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Inwiefern ist transformatives Lernen motivational voraussetzungsreich – und was bedeutet das für inklusive Kursgestaltung?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+<div class="phase"><div class="phase-head"><span class="p-dot n"></span><span class="phase-label">NOW WHAT · Was tun Sie jetzt?</span></div>
+<div class="q-item">Wie formulieren Sie einen Seminarauftakt, der sowohl Renates Erfahrungstiefe als auch Kerems Offenheit als Ausgangspunkt nutzt?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+<div class="q-item">Was verändert sich in Ihrer didaktischen Haltung durch diese Reflexion?<textarea class="write-area" placeholder="Ihre Notizen..." style="border-color-focus:#1A7050"></textarea></div>
+</div>
+</div>
+  </div>
+  <div style="background:#fff;border-top:1px solid #E0DDD8;border-radius:0 0 14px 14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:4px">
+    <span style="font-size:12px;color:#888">Alle drei Aspekte ausgefüllt? Dann einreichen.</span>
+    <button onclick="openSubmitModal()" style="background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px">📧 An Dozentin senden</button>
+  </div>
+</div>
+
+</div>
+<footer><span>Case B2 · Erfahrung & Transformation</span><span>What / So What / Now What</span></footer>
+<div id="submit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:32px 28px;max-width:440px;width:100%;position:relative">
+    <button onclick="closeSubmitModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#888;line-height:1">×</button>
+    <div style="font-family:'Lora',serif;font-size:19px;font-weight:600;margin-bottom:6px">Antworten einreichen</div>
+    <p style="font-size:12.5px;color:#777;margin-bottom:22px;line-height:1.55">Ihre Reflexionsantworten werden als E-Mail an die Dozentin gesendet.</p>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Vorname</label><input id="s-name" type="text" placeholder="z. B. Anna" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:14px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Nachname</label><input id="s-surname" type="text" placeholder="z. B. Müller" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div style="margin-bottom:20px"><label style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#555;display:block;margin-bottom:5px">Matrikelnummer</label><input id="s-matrikel" type="text" placeholder="z. B. 123456" style="width:100%;padding:10px 12px;border:1.5px solid #DDD;border-radius:8px;font-family:inherit;font-size:14px;outline:none"></div>
+    <div id="submit-error" style="display:none;background:#FEF0EC;border:1px solid #F5C0B0;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#B84020;margin-bottom:14px">Bitte alle Felder ausfüllen.</div>
+    <button onclick="sendToInstructor('Case B2 – Erfahrungslernen & Transformatives Lernen')" style="width:100%;background:#1C1C1C;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer">📧 An Dozentin senden</button>
+    <p style="font-size:11px;color:#AAA;text-align:center;margin-top:12px;line-height:1.5">Es öffnet sich Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht.</p>
+  </div>
+</div>
+<script>
+function switchTab(id){
+  const ids=['case','kog','aff','mot'];
+  document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleHint(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.hint-chevron');
+  body.classList.toggle('open');
+  chev.textContent=body.classList.contains('open')?'▲':'▼';
+}
+function toggleAsp(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.asp-chev');
+  const open=body.classList.toggle('open');
+  chev.textContent=open?'▲':'▼';
+}
+function openSubmitModal(){document.getElementById('submit-modal').style.display='flex';}
+function closeSubmitModal(){document.getElementById('submit-modal').style.display='none';}
+function sendToInstructor(caseLabel){
+  const name=document.getElementById('s-name').value.trim();
+  const surname=document.getElementById('s-surname').value.trim();
+  const matrikel=document.getElementById('s-matrikel').value.trim();
+  if(!name||!surname||!matrikel){document.getElementById('submit-error').style.display='block';return;}
+  document.getElementById('submit-error').style.display='none';
+  const tabs=['Kognitiv','Affektiv','Motivational'];
+  const tabIds=['tab-kog','tab-aff','tab-mot'];
+  const phases=['WHAT','SO WHAT','NOW WHAT'];
+  let answers='';
+  tabIds.forEach((tid,tIdx)=>{
+    answers+='\n'+'='.repeat(50)+'\n'+tabs[tIdx].toUpperCase()+'\n'+'='.repeat(50)+'\n';
+    document.querySelectorAll('#'+tid+' .write-area').forEach((ta,i)=>{
+      answers+='\n['+phases[Math.floor(i/2)]+' · Frage '+(i%2+1)+']\n'+(ta.value.trim()||'[keine Antwort]')+'\n';
+    });
+  });
+  const subject=encodeURIComponent('Reflective Writing – '+caseLabel+' – '+surname+', '+name+' – Matrikel: '+matrikel);
+  const body=encodeURIComponent('Eingereicht von:\nName: '+name+' '+surname+'\nMatrikelnummer: '+matrikel+'\nCase: '+caseLabel+'\n\n'+answers);
+  window.location.href='mailto:amine.merve.ercan@uni-jena.de?subject='+subject+'&body='+body;
+  closeSubmitModal();
+}
+
+</script>
+</body>
+</html>

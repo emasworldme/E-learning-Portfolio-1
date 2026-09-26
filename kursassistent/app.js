@@ -1,0 +1,12 @@
+const docs=window.KURS_CORPUS||[],m=document.getElementById('messages'),form=document.getElementById('form'),field=document.getElementById('question');
+const stop=new Set('der die das den dem des ein eine einer einem und oder ist sind für mit von im in zu zum zur auf aus bei als auch was wie welche welcher welchen ich du sie es kurs jena bitte mir gib alle'.split(' '));
+function tok(s){return (s.toLowerCase().replace(/behaviour/g,'behavior').match(/[a-zäöüß0-9]{3,}/g)||[]).filter(t=>!stop.has(t))}
+const vectors=docs.map(x=>{const count={};for(const t of tok(x.title+' '+x.text))count[t]=(count[t]||0)+1;return count});const df={};for(const v of vectors)for(const t of Object.keys(v))df[t]=(df[t]||0)+1;
+function retrieve(q){const terms=[...new Set(tok(q))],need=Math.max(1,Math.ceil(terms.length*.5));return docs.map((x,i)=>{const hits=terms.filter(t=>vectors[i][t]);let score=hits.reduce((a,t)=>a+(1+Math.log(1+vectors[i][t]))*Math.log(1+(docs.length+1)/((df[t]||0)+1)),0);if(/^(Handout_|Syllabus|1\. Woche)/.test(x.title))score*=1.2;return{x,score,hits:hits.length}}).filter(v=>v.hits>=need&&v.score>0).sort((a,b)=>b.score-a.score).slice(0,4).map(v=>v.x)}
+function bubble(text,role){const el=document.createElement('div');el.className='bubble '+role;el.textContent=text;m.append(el);m.scrollTop=m.scrollHeight;return el}
+function scormComplete(){try{let w=window;for(let i=0;i<8;i++,w=w.parent){if(w.API){w.API.LMSInitialize('');w.API.LMSSetValue('cmi.core.lesson_status','completed');w.API.LMSCommit('');return}}}catch(e){}}
+document.getElementById('status').textContent=docs.length+' Textabschnitte · Offline Quellenmodus';document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{field.value=b.dataset.q;field.focus()});
+form.onsubmit=e=>{e.preventDefault();const q=field.value.trim();if(!q)return;field.value='';bubble(q,'user');let results=[];
+if(!/\b(mensa|speiseplan|passcode|kenncode|meeting.?id|telefonnummer|benotung)\b/i.test(q))results=retrieve(q);
+if(!results.length){bubble('Dazu finde ich keine ausreichende Grundlage in den ausgewählten Kursmaterialien. Bitte prüfe die Originalmaterialien oder frage die Lehrperson.','assistant');return}
+const el=bubble('Passende Originalstellen:','assistant');for(const s of results){const div=document.createElement('div');div.className='excerpt';div.textContent=`[${s.id}] ${s.title} · ${s.location}\n${s.text.slice(0,650)}`;el.append(div)}scormComplete();m.scrollTop=m.scrollHeight};
