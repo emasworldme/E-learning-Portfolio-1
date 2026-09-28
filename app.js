@@ -80,35 +80,34 @@
   const canvas=document.getElementById('network'), stage=canvas.parentElement, tooltip=document.getElementById('stage-tooltip');
   const ctx=canvas.getContext('2d',{alpha:true}); if(!ctx)return;
   const nodes=[
-    {label:'RISE 360',id:'project-rise',color:'#b9f67c',p:[-1.35,.45,-.1]},
-    {label:'RISE COURSE 02',id:'project-rise-new',color:'#f5b985',p:[.25,1.45,-.55]},
-    {label:'STORYLINE TUTORIAL',id:'project-storyline',color:'#8ee9e1',p:[-1.45,-.15,.8]},
-    {label:'COURSE AGENT',id:'project-agent',color:'#72dce1',p:[1.1,.95,.7]},
-    {label:'FEMALEPRENEURSHIP',id:'project-game',color:'#d0a9f6',p:[-.75,-1.05,1.05]},
-    {label:'MR PILOT',id:'project-mr',color:'#e7df9a',p:[1.35,-.7,-.35]},
-    {label:'NOTION / SERVICE',id:'project-notion',color:'#b9f67c',p:[.2,-1.45,-.7]},
-    {label:'CAPABILITIES',id:'capabilities',color:'#f5b985',p:[1.55,.05,-.95]}
+    {label:'RISE 360',id:'project-rise',color:'#b9f67c',p:[-1.05,.36,-.08]},
+    {label:'RISE COURSE 02',id:'project-rise-new',color:'#f5b985',p:[.18,1.08,-.40]},
+    {label:'STORYLINE TUTORIAL',id:'project-storyline',color:'#8ee9e1',p:[-1.02,-.12,.56]},
+    {label:'COURSE AGENT',id:'project-agent',color:'#72dce1',p:[.82,.72,.52]},
+    {label:'FEMALEPRENEURSHIP',id:'project-game',color:'#d0a9f6',p:[-.55,-.78,.76]},
+    {label:'MR PILOT',id:'project-mr',color:'#e7df9a',p:[1.00,-.52,-.26]},
+    {label:'NOTION / SERVICE',id:'project-notion',color:'#b9f67c',p:[.14,-1.05,-.50]},
+    {label:'CAPABILITIES',id:'capabilities',color:'#f5b985',p:[1.00,.04,-.60]}
   ];
   const dots=[];for(let i=0;i<110;i++){const a=i*2.39996323,y=1-(i/(109))*2,r=Math.sqrt(Math.max(0,1-y*y));dots.push([Math.cos(a)*r*1.4,y*1.4,Math.sin(a)*r*1.4])}
   const edges=[];for(let i=0;i<dots.length;i++)for(let j=i+1;j<dots.length;j++){const a=dots[i],b=dots[j],d=(a[0]-b[0])**2+(a[1]-b[1])**2+(a[2]-b[2])**2;if(d<.35&&edges.length<300)edges.push([i,j])}
-  let w=0,h=0,dpr=1,rx=-.19,ry=.35,targetRX=rx,targetRY=ry,drag=false,moved=false,lastX=0,lastY=0,hover=-1,screenNodes=[],running=true,visible=true;
+  let w=0,h=0,dpr=1,rx=-.19,ry=.35,targetRX=rx,targetRY=ry,drag=false,moved=false,lastX=0,lastY=0,hover=-1,screenNodes=[],pointerX=-999,pointerY=-999,pointerInside=false;
   function resize(){const r=canvas.getBoundingClientRect();w=r.width;h=r.height;dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
   new ResizeObserver(resize).observe(canvas);resize();
-  const visibility=new IntersectionObserver(e=>{visible=e[0].isIntersecting;if(visible&&running)requestAnimationFrame(frame)},{threshold:0});visibility.observe(stage);
   function project(p){let [x,y,z]=p;let c=Math.cos(ry),s=Math.sin(ry);[x,z]=[x*c+z*s,-x*s+z*c];c=Math.cos(rx);s=Math.sin(rx);[y,z]=[y*c-z*s,y*s+z*c];const scale=Math.min(w,h)*.22;const perspective=3.8/(3.8-z);return{x:w/2+x*scale*perspective,y:h/2+y*scale*perspective,z,depth:perspective}}
-  function frame(){if(!visible){running=false;return}running=true;ctx.clearRect(0,0,w,h);if(!reduce){if(!drag)targetRY+=.0015;rx+=(targetRX-rx)*.06;ry+=(targetRY-ry)*.06}const ps=dots.map(project);
+  function frame(){ctx.clearRect(0,0,w,h);if(!reduce){if(!drag)targetRY+=.0015;rx+=(targetRX-rx)*.06;ry+=(targetRY-ry)*.06}const ps=dots.map(project);
     ctx.lineWidth=1;for(const [i,j] of edges){const a=ps[i],b=ps[j],alpha=Math.max(.045,Math.min(.15,(a.z+b.z+4)*.028));ctx.strokeStyle=`rgba(112,216,221,${alpha})`;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
     const sorted=ps.map((p,i)=>({...p,i})).sort((a,b)=>a.z-b.z);for(const p of sorted){ctx.fillStyle=`rgba(142,221,216,${Math.max(.15,Math.min(.52,(p.z+2)*.16))})`;ctx.beginPath();ctx.arc(p.x,p.y,Math.max(.7,p.depth*1.3),0,Math.PI*2);ctx.fill()}
-    screenNodes=nodes.map((n,i)=>({...project(n.p),i}));const order=[...screenNodes].sort((a,b)=>a.z-b.z);for(const p of order){const n=nodes[p.i],active=p.i===hover,r=active?10:7;ctx.shadowBlur=active?28:15;ctx.shadowColor=n.color;ctx.fillStyle=n.color;ctx.beginPath();ctx.arc(p.x,p.y,r*p.depth,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle=n.color;ctx.globalAlpha=active?.65:.3;ctx.beginPath();ctx.arc(p.x,p.y,(r+9)*p.depth,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;ctx.fillStyle='#d9eeee';ctx.font='600 10px Space Grotesk, sans-serif';ctx.textAlign='center';ctx.fillText(n.label,p.x,p.y-23*p.depth)}
+    screenNodes=nodes.map((n,i)=>({...project(n.p),i}));if(pointerInside&&!drag){hover=-1;let best=Infinity;screenNodes.forEach(n=>{const d=Math.hypot(n.x-pointerX,n.y-pointerY);if(d<24*n.depth&&d<best){best=d;hover=n.i}});canvas.style.cursor=hover>=0?'pointer':'grab';if(hover>=0){tooltip.textContent=nodes[hover].label+' ↗';tooltip.style.left=Math.min(w-155,pointerX+14)+'px';tooltip.style.top=Math.max(55,pointerY-34)+'px';tooltip.hidden=false}else tooltip.hidden=true}const order=[...screenNodes].sort((a,b)=>a.z-b.z);for(const p of order){const n=nodes[p.i],active=p.i===hover,r=active?10:7;ctx.shadowBlur=active?28:15;ctx.shadowColor=n.color;ctx.fillStyle=n.color;ctx.beginPath();ctx.arc(p.x,p.y,r*p.depth,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle=n.color;ctx.globalAlpha=active?.65:.3;ctx.beginPath();ctx.arc(p.x,p.y,(r+9)*p.depth,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;ctx.fillStyle='#d9eeee';ctx.font='600 10px Space Grotesk, sans-serif';ctx.textAlign='center';ctx.fillText(n.label,p.x,p.y-23*p.depth)}
     if(!reduce)requestAnimationFrame(frame)
   }
   requestAnimationFrame(frame);
   const coords=e=>{const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}};
   canvas.addEventListener('pointerdown',e=>{drag=true;moved=false;lastX=e.clientX;lastY=e.clientY;canvas.setPointerCapture(e.pointerId)});
-  canvas.addEventListener('pointermove',e=>{const p=coords(e);if(drag){let dx=e.clientX-lastX,dy=e.clientY-lastY;if(Math.abs(dx)+Math.abs(dy)>2)moved=true;targetRY+=dx*.008;targetRX=Math.max(-1.2,Math.min(1.2,targetRX+dy*.008));lastX=e.clientX;lastY=e.clientY;hover=-1;tooltip.hidden=true;return}hover=-1;screenNodes.forEach(n=>{if(Math.hypot(n.x-p.x,n.y-p.y)<24*n.depth)hover=n.i});canvas.style.cursor=hover>=0?'pointer':'grab';if(hover>=0){tooltip.textContent=nodes[hover].label+' ↗';tooltip.style.left=Math.min(w-155,p.x+14)+'px';tooltip.style.top=Math.max(55,p.y-34)+'px';tooltip.hidden=false}else tooltip.hidden=true},{passive:true});
+  canvas.addEventListener('pointermove',e=>{const p=coords(e);pointerX=p.x;pointerY=p.y;pointerInside=true;if(drag){let dx=e.clientX-lastX,dy=e.clientY-lastY;if(Math.abs(dx)+Math.abs(dy)>2)moved=true;targetRY+=dx*.008;targetRX=Math.max(-1.2,Math.min(1.2,targetRX+dy*.008));lastX=e.clientX;lastY=e.clientY;hover=-1;tooltip.hidden=true;}},{passive:true});
   canvas.addEventListener('pointerup',e=>{drag=false;if(!moved&&hover>=0)document.getElementById(nodes[hover].id)?.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});try{canvas.releasePointerCapture(e.pointerId)}catch{}});
-  canvas.addEventListener('pointerleave',()=>{if(!drag){hover=-1;tooltip.hidden=true}});
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!running&&!reduce){running=true;requestAnimationFrame(frame)}});
+  canvas.addEventListener('pointerenter',e=>{const p=coords(e);pointerX=p.x;pointerY=p.y;pointerInside=true});
+  canvas.addEventListener('pointerleave',()=>{pointerInside=false;if(!drag){hover=-1;tooltip.hidden=true}});
 })();
 
 // Contents, Find and voice assistant
