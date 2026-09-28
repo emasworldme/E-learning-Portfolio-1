@@ -19,8 +19,9 @@
   addEventListener('resize', updateScroll, {passive:true}); updateScroll();
 
   const trackerItems = [...document.querySelectorAll('.tracker-item')];
-  const targets = ['top','work','lab','about','project-notion','cv','capabilities','contact']
+  const targets = ['top','work','lab','about','cv','management-evidence','capabilities','contact']
     .map(id => document.getElementById(id)).filter(Boolean);
+  const trackerAlias = { 'management-evidence':'project-notion' };
   function updateActiveSection(){
     const marker = Math.min(innerHeight * .38, 360);
     let active = targets[0];
@@ -29,7 +30,8 @@
       else break;
     }
     trackerItems.forEach(item => {
-      const on = item.dataset.track === active.id;
+      const activeTrack = trackerAlias[active.id] || active.id;
+      const on = item.dataset.track === activeTrack;
       item.classList.toggle('active', on);
       if(on) item.setAttribute('aria-current','location');
       else item.removeAttribute('aria-current');
