@@ -19,9 +19,9 @@
   addEventListener('resize', updateScroll, {passive:true}); updateScroll();
 
   const trackerItems = [...document.querySelectorAll('.tracker-item')];
-  const targets = ['top','work','lab','about','cv','management-evidence','capabilities','contact']
+  const targets = ['top','work','lab','project-notion','about','cv','capabilities','contact']
     .map(id => document.getElementById(id)).filter(Boolean);
-  const trackerAlias = { 'management-evidence':'project-notion' };
+  const trackerAlias = {};
   function updateActiveSection(){
     const marker = Math.min(innerHeight * .38, 360);
     let active = targets[0];
