@@ -19,7 +19,7 @@
   addEventListener('resize', updateScroll, {passive:true}); updateScroll();
 
   const trackerItems = [...document.querySelectorAll('.tracker-item')];
-  const targets = ['top','work','lab','project-notion','about','cv','capabilities','contact']
+  const targets = ['top','work','lab','about','management-evidence','cv','capabilities','contact']
     .map(id => document.getElementById(id)).filter(Boolean);
   const trackerAlias = {};
   function updateActiveSection(){
@@ -101,14 +101,14 @@
   const canvas=document.getElementById('network'), stage=canvas.parentElement, tooltip=document.getElementById('stage-tooltip');
   const ctx=canvas.getContext('2d',{alpha:true}); if(!ctx)return;
   const nodes=[
-    {label:'RISE 360',id:'project-rise',color:'#b9f67c',p:[-1.05,.36,-.08]},
-    {label:'RISE COURSE 02',id:'project-rise-new',color:'#f5b985',p:[.18,1.08,-.40]},
-    {label:'STORYLINE TUTORIAL',id:'project-storyline',color:'#8ee9e1',p:[-1.02,-.12,.56]},
-    {label:'COURSE AGENT',id:'project-agent',color:'#72dce1',p:[.82,.72,.52]},
-    {label:'FEMALEPRENEURSHIP',id:'project-game',color:'#d0a9f6',p:[-.55,-.78,.76]},
-    {label:'MR PILOT',id:'project-mr',color:'#e7df9a',p:[1.00,-.52,-.26]},
+    {label:'RISE 360',id:'project-rise',color:'#b9f67c',p:[-1.05,.36,-.08],icon:'rise'},
+    {label:'RISE COURSE 02',id:'project-rise-new',color:'#f5b985',p:[.18,1.08,-.40],icon:'rise'},
+    {label:'STORYLINE TUTORIAL',id:'project-storyline',color:'#8ee9e1',p:[-1.02,-.12,.56],icon:'storyline'},
+    {label:'COURSE AGENT',id:'project-agent',color:'#72dce1',p:[.82,.72,.52],icon:'agent'},
+    {label:'FEMALEPRENEURSHIP',id:'project-game',color:'#d0a9f6',p:[-.55,-.78,.76],icon:'game'},
+    {label:'MR PILOT',id:'project-mr',color:'#e7df9a',p:[1.00,-.52,-.26],icon:'mr'},
     {label:'NOTION / SERVICE',id:'project-notion',color:'#f5f5f0',p:[.14,-1.05,-.50],icon:'notion'},
-    {label:'CAPABILITIES',id:'capabilities',color:'#f5b985',p:[1.00,.04,-.60]}
+    {label:'CAPABILITIES',id:'capabilities',color:'#f5b985',p:[1.00,.04,-.60],icon:'skills'}
   ];
   const dots=[];for(let i=0;i<110;i++){const a=i*2.39996323,y=1-(i/(109))*2,r=Math.sqrt(Math.max(0,1-y*y));dots.push([Math.cos(a)*r*1.4,y*1.4,Math.sin(a)*r*1.4])}
   const edges=[];for(let i=0;i<dots.length;i++)for(let j=i+1;j<dots.length;j++){const a=dots[i],b=dots[j],d=(a[0]-b[0])**2+(a[1]-b[1])**2+(a[2]-b[2])**2;if(d<.35&&edges.length<300)edges.push([i,j])}
@@ -134,6 +134,21 @@
         ctx.lineWidth=Math.max(1,1.5*p.depth);
         ctx.beginPath();ctx.moveTo(x-z*.58,y-z*.58);ctx.lineTo(x+z*.58,y-z*.58);ctx.stroke();
         ctx.restore();ctx.strokeStyle='#f5f5f0';ctx.globalAlpha=active?.82:.45;ctx.lineWidth=Math.max(1.2,1.7*p.depth);ctx.beginPath();ctx.arc(x,y,(z+10*p.depth),0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
+      }else if(n.icon){
+        const z=(active?15:12)*p.depth,x=p.x,y=p.y;
+        ctx.save();ctx.shadowBlur=active?26:14;ctx.shadowColor=n.color;
+        ctx.fillStyle=n.color;ctx.globalAlpha=.96;
+        ctx.beginPath();ctx.roundRect(x-z,y-z,z*2,z*2,Math.max(3,4*p.depth));ctx.fill();
+        ctx.globalAlpha=.55;ctx.fillStyle='#dff6f3';ctx.beginPath();ctx.moveTo(x-z,y-z);ctx.lineTo(x-z*.55,y-z-z*.38);ctx.lineTo(x+z*1.45,y-z-z*.38);ctx.lineTo(x+z,y-z);ctx.closePath();ctx.fill();
+        ctx.globalAlpha=.38;ctx.fillStyle='#061626';ctx.beginPath();ctx.moveTo(x+z,y-z);ctx.lineTo(x+z+z*.42,y-z*.62);ctx.lineTo(x+z+z*.42,y+z*.78);ctx.lineTo(x+z,y+z);ctx.closePath();ctx.fill();
+        ctx.globalAlpha=1;ctx.shadowBlur=0;ctx.fillStyle='#071522';ctx.strokeStyle='#071522';ctx.lineWidth=Math.max(1.5,2*p.depth);
+        if(n.icon==='rise'){ctx.font=`900 ${Math.max(11,17*p.depth)}px Space Grotesk,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('R',x,y+1);}
+        else if(n.icon==='storyline'){ctx.font=`900 ${Math.max(11,17*p.depth)}px Space Grotesk,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('S',x,y+1);ctx.beginPath();ctx.arc(x,y,z*.62,0,Math.PI*2);ctx.stroke();}
+        else if(n.icon==='agent'){ctx.beginPath();ctx.roundRect(x-z*.62,y-z*.42,z*1.24,z*.9,3);ctx.stroke();ctx.beginPath();ctx.arc(x-z*.25,y-z*.02,1.8*p.depth,0,Math.PI*2);ctx.arc(x+z*.25,y-z*.02,1.8*p.depth,0,Math.PI*2);ctx.fill();ctx.moveTo(x,y-z*.42);ctx.lineTo(x,y-z*.72);ctx.stroke();}
+        else if(n.icon==='game'){ctx.beginPath();ctx.roundRect(x-z*.72,y-z*.35,z*1.44,z*.7,z*.28);ctx.stroke();ctx.beginPath();ctx.moveTo(x-z*.42,y);ctx.lineTo(x-z*.15,y);ctx.moveTo(x-z*.285,y-z*.135);ctx.lineTo(x-z*.285,y+z*.135);ctx.stroke();ctx.beginPath();ctx.arc(x+z*.3,y-z*.06,1.8*p.depth,0,Math.PI*2);ctx.arc(x+z*.48,y+z*.09,1.8*p.depth,0,Math.PI*2);ctx.fill();}
+        else if(n.icon==='mr'){ctx.beginPath();ctx.roundRect(x-z*.7,y-z*.28,z*1.4,z*.58,z*.22);ctx.stroke();ctx.beginPath();ctx.arc(x-z*.3,y,2.2*p.depth,0,Math.PI*2);ctx.arc(x+z*.3,y,2.2*p.depth,0,Math.PI*2);ctx.stroke();}
+        else if(n.icon==='skills'){ctx.font=`900 ${Math.max(10,15*p.depth)}px Space Grotesk,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('✦',x,y);}
+        ctx.restore();ctx.strokeStyle=n.color;ctx.globalAlpha=active?.75:.35;ctx.beginPath();ctx.arc(x,y,z+9*p.depth,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
       }else{
         ctx.shadowBlur=active?28:15;ctx.shadowColor=n.color;ctx.fillStyle=n.color;ctx.beginPath();ctx.arc(p.x,p.y,r*p.depth,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle=n.color;ctx.globalAlpha=active?.65:.3;ctx.beginPath();ctx.arc(p.x,p.y,(r+9)*p.depth,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
       }
