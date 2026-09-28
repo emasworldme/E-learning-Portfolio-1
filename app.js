@@ -19,12 +19,31 @@
   addEventListener('resize', updateScroll, {passive:true}); updateScroll();
 
   const trackerItems = [...document.querySelectorAll('.tracker-item')];
-  const targets = [document.getElementById('top'), ...['work','lab','about','cv','project-notion','capabilities','contact'].map(x => document.getElementById(x))];
-  const sectionObserver = new IntersectionObserver(entries => {
-    const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (visible) trackerItems.forEach(x => {const active=x.dataset.track===visible.target.id; x.classList.toggle('active',active); if(active)x.setAttribute('aria-current','location');else x.removeAttribute('aria-current')});
-  }, {rootMargin:'-22% 0px -42% 0px',threshold:[0,.1,.3,.6]});
-  targets.forEach(t => t && sectionObserver.observe(t));
+  const targets = ['top','work','lab','about','cv','management-evidence','capabilities','contact']
+    .map(id => document.getElementById(id)).filter(Boolean);
+  function updateActiveSection(){
+    const marker = Math.min(innerHeight * .38, 360);
+    let active = targets[0];
+    for(const target of targets){
+      if(target.getBoundingClientRect().top <= marker) active = target;
+      else break;
+    }
+    trackerItems.forEach(item => {
+      const on = item.dataset.track === active.id;
+      item.classList.toggle('active', on);
+      if(on) item.setAttribute('aria-current','location');
+      else item.removeAttribute('aria-current');
+    });
+  }
+  let sectionQueued=false;
+  function queueActiveSection(){
+    if(sectionQueued)return;
+    sectionQueued=true;
+    requestAnimationFrame(()=>{updateActiveSection();sectionQueued=false});
+  }
+  addEventListener('scroll',queueActiveSection,{passive:true});
+  addEventListener('resize',queueActiveSection,{passive:true});
+  updateActiveSection();
 
   const revealObserver = new IntersectionObserver(entries => {for(const e of entries) if(e.isIntersecting){e.target.classList.add('visible');revealObserver.unobserve(e.target)}}, {threshold:.08,rootMargin:'0px 0px -45px 0px'});
   document.querySelectorAll('.reveal').forEach(el => reduce ? el.classList.add('visible') : revealObserver.observe(el));
